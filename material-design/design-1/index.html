@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio - Material Design</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
+        <div class="nav-brand">
+          <h2>Portfolio</h2>
+        </div>
+        <div class="nav-menu" id="nav-menu">
+          <a href="#home" class="nav-link">Home</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="#skills" class="nav-link">Skills</a>
+          <a href="#projects" class="nav-link">Projects</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </div>
+        <div class="nav-toggle" id="nav-toggle">
+          <span class="material-icons">menu</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="hero-container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1 class="hero-title">
+              Hi, Saya <span class="text-primary">John Doe</span>
+            </h1>
+            <p class="hero-subtitle">Full Stack Developer & UI/UX Designer</p>
+            <p class="hero-description">
+              Passionate developer yang mencintai teknologi modern dan design
+              yang elegan. Berpengalaman dalam mengembangkan aplikasi web dan
+              mobile.
+            </p>
+            <div class="hero-buttons">
+              <button
+                class="btn btn-primary ripple"
+                onclick="scrollToSection('projects')"
+              >
+                <span class="material-icons">work</span>
+                Lihat Karya
+              </button>
+              <button
+                class="btn btn-secondary ripple"
+                onclick="scrollToSection('contact')"
+              >
+                <span class="material-icons">contact_mail</span>
+                Hubungi Saya
+              </button>
+            </div>
+          </div>
+          <div class="hero-image">
+            <div class="avatar-container">
+              <img
+                src="https://placeholder-image-service.onrender.com/image/300x300?prompt=Professional headshot of a friendly software developer with warm lighting and modern background&id=7ecedd17-5a03-4306-a2bb-7b60f212a2e4&customer_id=cus_SZOmLuajy19nfC"
+                alt="Professional headshot of a friendly software developer with modern lighting"
+                class="avatar"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="floating-elements">
+        <div class="floating-card card-1">
+          <span class="material-icons">code</span>
+        </div>
+        <div class="floating-card card-2">
+          <span class="material-icons">design_services</span>
+        </div>
+        <div class="floating-card card-3">
+          <span class="material-icons">smartphone</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+      <div class="container">
+        <h2 class="section-title">Tentang Saya</h2>
+        <div class="about-content">
+          <div class="about-text">
+            <div class="card">
+              <div class="card-content">
+                <h3>Passion for Technology</h3>
+                <p>
+                  Saya adalah seorang developer yang passionate dengan teknologi
+                  terbaru. Dengan pengalaman 5+ tahun di industri IT, saya telah
+                  mengembangkan berbagai aplikasi web dan mobile yang inovatif.
+                </p>
+                <p>
+                  Keahlian saya meliputi frontend development dengan React,
+                  Vue.js, dan backend development dengan Laravel, Node.js. Saya
+                  juga memiliki pengalaman dalam UI/UX design dan mobile
+                  development.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="about-stats">
+            <div class="stat-card card ripple">
+              <div class="stat-number">50+</div>
+              <div class="stat-label">Projects</div>
+            </div>
+            <div class="stat-card card ripple">
+              <div class="stat-number">30+</div>
+              <div class="stat-label">Happy Clients</div>
+            </div>
+            <div class="stat-card card ripple">
+              <div class="stat-number">5+</div>
+              <div class="stat-label">Years Experience</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section section-bg">
+      <div class="container">
+        <h2 class="section-title">Keahlian</h2>
+        <div class="skills-grid">
+          <div class="skill-category card">
+            <div class="skill-header">
+              <span class="material-icons">web</span>
+              <h3>Frontend Development</h3>
+            </div>
+            <div class="skills-list">
+              <div class="skill-item">
+                <span>HTML/CSS/JavaScript</span>
+                <div class="skill-progress">
+                  <div class="progress-bar" data-width="95"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <span>React.js</span>
+                <div class="skill-progress">
+                  <div class="progress-bar" data-width="90"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <span>Vue.js</span>
+                <div class="skill-progress">
+                  <div class="progress-bar" data-width="85"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category card">
+            <div class="skill-header">
+              <span class="material-icons">storage</span>
+              <h3>Backend Development</h3>
+            </div>
+            <div class="skills-list">
+              <div class="skill-item">
+                <span>Laravel/PHP</span>
+                <div class="skill-progress">
+                  <div class="progress-bar" data-width="92"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <span>Node.js</span>
+                <div class="skill-progress">
+                  <div class="progress-bar" data-width="88"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <span>MySQL/PostgreSQL</span>
+                <div class="skill-progress">
+                  <div class="progress-bar" data-width="85"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category card">
+            <div class="skill-header">
+              <span class="material-icons">design_services</span>
+              <h3>Design & Tools</h3>
+            </div>
+            <div class="skills-list">
+              <div class="skill-item">
+                <span>UI/UX Design</span>
+                <div class="skill-progress">
+                  <div class="progress-bar" data-width="87"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <span>Figma/Adobe XD</span>
+                <div class="skill-progress">
+                  <div class="progress-bar" data-width="90"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <span>Git/GitHub</span>
+                <div class="skill-progress">
+                  <div class="progress-bar" data-width="93"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="section-title">Portfolio Projects</h2>
+        <div class="projects-grid">
+          <div class="project-card card ripple">
+            <div class="project-image">
+              <img
+                src="https://placeholder-image-service.onrender.com/image/400x250?prompt=Modern e-commerce website interface with clean design and product showcase&id=7ecedd17-5a03-4306-a2bb-7b60f212a2e4&customer_id=cus_SZOmLuajy19nfC"
+                alt="Modern e-commerce website interface with clean design and product showcase"
+              />
+              <div class="project-overlay">
+                <button class="btn btn-primary btn-icon ripple">
+                  <span class="material-icons">launch</span>
+                </button>
+                <button class="btn btn-secondary btn-icon ripple">
+                  <span class="material-icons">code</span>
+                </button>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3>E-Commerce Platform</h3>
+              <p>
+                Modern e-commerce platform dengan Laravel backend dan React
+                frontend. Fitur lengkap termasuk payment gateway dan admin
+                dashboard.
+              </p>
+              <div class="project-tags">
+                <span class="tag">Laravel</span>
+                <span class="tag">React</span>
+                <span class="tag">MySQL</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card card ripple">
+            <div class="project-image">
+              <img
+                src="https://placeholder-image-service.onrender.com/image/400x250?prompt=Mobile task management app interface with clean material design and colorful elements&id=7ecedd17-5a03-4306-a2bb-7b60f212a2e4&customer_id=cus_SZOmLuajy19nfC"
+                alt="Mobile task management app interface with clean material design and colorful elements"
+              />
+              <div class="project-overlay">
+                <button class="btn btn-primary btn-icon ripple">
+                  <span class="material-icons">launch</span>
+                </button>
+                <button class="btn btn-secondary btn-icon ripple">
+                  <span class="material-icons">code</span>
+                </button>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3>Task Management App</h3>
+              <p>
+                Aplikasi mobile untuk manajemen tugas dengan real-time sync.
+                Dibuat menggunakan React Native dengan backend Node.js.
+              </p>
+              <div class="project-tags">
+                <span class="tag">React Native</span>
+                <span class="tag">Node.js</span>
+                <span class="tag">MongoDB</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card card ripple">
+            <div class="project-image">
+              <img
+                src="https://placeholder-image-service.onrender.com/image/400x250?prompt=Corporate dashboard interface with charts, graphs and analytics in modern design&id=7ecedd17-5a03-4306-a2bb-7b60f212a2e4&customer_id=cus_SZOmLuajy19nfC"
+                alt="Corporate dashboard interface with charts, graphs and analytics in modern design"
+              />
+              <div class="project-overlay">
+                <button class="btn btn-primary btn-icon ripple">
+                  <span class="material-icons">launch</span>
+                </button>
+                <button class="btn btn-secondary btn-icon ripple">
+                  <span class="material-icons">code</span>
+                </button>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3>Analytics Dashboard</h3>
+              <p>
+                Dashboard analytics untuk perusahaan dengan visualisasi data
+                real-time. Menggunakan Vue.js dan Chart.js untuk visualisasi.
+              </p>
+              <div class="project-tags">
+                <span class="tag">Vue.js</span>
+                <span class="tag">Chart.js</span>
+                <span class="tag">PHP</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card card ripple">
+            <div class="project-image">
+              <img
+                src="https://placeholder-image-service.onrender.com/image/400x250?prompt=Social media platform interface with posts, comments and user profiles in modern design&id=7ecedd17-5a03-4306-a2bb-7b60f212a2e4&customer_id=cus_SZOmLuajy19nfC"
+                alt="Social media platform interface with posts, comments and user profiles in modern design"
+              />
+              <div class="project-overlay">
+                <button class="btn btn-primary btn-icon ripple">
+                  <span class="material-icons">launch</span>
+                </button>
+                <button class="btn btn-secondary btn-icon ripple">
+                  <span class="material-icons">code</span>
+                </button>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3>Social Platform</h3>
+              <p>
+                Platform media sosial dengan fitur real-time messaging, post
+                sharing, dan community features. Full-stack dengan Laravel dan
+                React.
+              </p>
+              <div class="project-tags">
+                <span class="tag">Laravel</span>
+                <span class="tag">React</span>
+                <span class="tag">WebSocket</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section section-bg">
+      <div class="container">
+        <h2 class="section-title">Hubungi Saya</h2>
+        <div class="contact-content">
+          <div class="contact-info">
+            <div class="contact-card card">
+              <div class="contact-icon">
+                <span class="material-icons">email</span>
+              </div>
+              <div class="contact-details">
+                <h3>Email</h3>
+                <p>john.doe@example.com</p>
+              </div>
+            </div>
+            <div class="contact-card card">
+              <div class="contact-icon">
+                <span class="material-icons">phone</span>
+              </div>
+              <div class="contact-details">
+                <h3>Phone</h3>
+                <p>+62 812-3456-7890</p>
+              </div>
+            </div>
+            <div class="contact-card card">
+              <div class="contact-icon">
+                <span class="material-icons">location_on</span>
+              </div>
+              <div class="contact-details">
+                <h3>Location</h3>
+                <p>Jakarta, Indonesia</p>
+              </div>
+            </div>
+          </div>
+          <div class="contact-form">
+            <div class="card">
+              <form id="contact-form">
+                <div class="form-group">
+                  <label for="name">Nama</label>
+                  <input type="text" id="name" name="name" required />
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" required />
+                </div>
+                <div class="form-group">
+                  <label for="subject">Subject</label>
+                  <input type="text" id="subject" name="subject" required />
+                </div>
+                <div class="form-group">
+                  <label for="message">Message</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="5"
+                    required
+                  ></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full ripple">
+                  <span class="material-icons">send</span>
+                  Kirim Pesan
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-text">
+            <p>&copy; 2024 Portfolio. Made with ❤️ using Material Design</p>
+          </div>
+          <div class="social-links">
+            <a href="#" class="social-link ripple">
+              <span class="material-icons">facebook</span>
+            </a>
+            <a href="#" class="social-link ripple">
+              <span class="material-icons">twitter</span>
+            </a>
+            <a href="#" class="social-link ripple">
+              <span class="material-icons">linkedin</span>
+            </a>
+            <a href="#" class="social-link ripple">
+              <span class="material-icons">github</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="main.js"></script>
+  </body>
+</html>
