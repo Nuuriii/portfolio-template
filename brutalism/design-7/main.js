@@ -1,17 +1,17 @@
-// Mobile Navigation Toggle
+// Mobile Navigation
 const hamburger = document.querySelector(".hamburger");
-const navMenu = document.querySelector(".nav-menu");
+const navLinks = document.querySelector(".nav-links");
 
 hamburger.addEventListener("click", () => {
   hamburger.classList.toggle("active");
-  navMenu.classList.toggle("active");
+  navLinks.classList.toggle("active");
 });
 
-// Close mobile menu when clicking on a link
-document.querySelectorAll(".nav-item a").forEach((link) => {
+// Close mobile menu when clicking a link
+document.querySelectorAll(".nav-links a").forEach((link) => {
   link.addEventListener("click", () => {
     hamburger.classList.remove("active");
-    navMenu.classList.remove("active");
+    navLinks.classList.remove("active");
   });
 });
 
@@ -21,9 +21,10 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     e.preventDefault();
     const target = document.querySelector(this.getAttribute("href"));
     if (target) {
-      target.scrollIntoView({
+      const offsetTop = target.offsetTop - 80; // Account for fixed nav
+      window.scrollTo({
+        top: offsetTop,
         behavior: "smooth",
-        block: "start",
       });
     }
   });
@@ -38,14 +39,45 @@ const observerOptions = {
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
+      entry.target.classList.add("fade-in-up");
     }
   });
 }, observerOptions);
 
-// Observe all fade-in elements
-document.querySelectorAll(".fade-in").forEach((el) => {
-  observer.observe(el);
+// Observe all sections and cards
+document
+  .querySelectorAll("section, .skill-card, .project-card")
+  .forEach((el) => {
+    observer.observe(el);
+  });
+
+// Active navigation highlighting
+window.addEventListener("scroll", () => {
+  const sections = document.querySelectorAll("section");
+  const navLinks = document.querySelectorAll(".nav-links a");
+  let current = "";
+
+  sections.forEach((section) => {
+    const sectionTop = section.offsetTop - 100;
+    const sectionHeight = section.offsetHeight;
+    if (
+      window.scrollY >= sectionTop &&
+      window.scrollY < sectionTop + sectionHeight
+    ) {
+      current = section.getAttribute("id");
+    }
+  });
+
+  navLinks.forEach((link) => {
+    link.style.borderColor = "transparent";
+    link.style.background = "transparent";
+    link.style.color = "var(--ethereum-dark)";
+    if (link.getAttribute("href") === `#${current}`) {
+      link.style.borderColor = "var(--ethereum-dark)";
+      link.style.background = "var(--ethereum-blue)";
+      link.style.color = "var(--ethereum-white)";
+    }
+  });
 });
 
 // Form submission
@@ -56,129 +88,75 @@ document
 
     // Get form data
     const formData = new FormData(this);
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const subject = formData.get("subject");
-    const message = formData.get("message");
-
-    // Simple validation
-    if (!name || !email || !subject || !message) {
-      alert("Please fill in all fields");
-      return;
-    }
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      subject: formData.get("subject"),
+      message: formData.get("message"),
+    };
 
     // Simulate form submission
-    alert("Thank you for your message! I'll get back to you soon.");
-    this.reset();
+    const submitBtn = this.querySelector("button");
+    const originalText = submitBtn.textContent;
+
+    submitBtn.textContent = "Mengirim...";
+    submitBtn.disabled = true;
+
+    setTimeout(() => {
+      alert("Message berhasil dikirim! Terima kasih sudah menghubungi saya.");
+      this.reset();
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+    }, 2000);
   });
 
-// Add some interactive effects
-document.querySelectorAll(".project-card").forEach((card) => {
-  card.addEventListener("mouseenter", function () {
-    this.style.transform = "translate(-8px, -8px)";
-  });
-
-  card.addEventListener("mouseleave", function () {
-    this.style.transform = "translate(0, 0)";
+// Add some dynamic effects
+document.addEventListener("DOMContentLoaded", () => {
+  // Add geometric background elements
+  const sections = document.querySelectorAll("section");
+  sections.forEach((section, index) => {
+    if (index % 2 === 0) {
+      const geometric = document.createElement("div");
+      geometric.className = "geometric-bg";
+      geometric.style.top = `${Math.random() * 50 + 20}%`;
+      geometric.style.left = `${Math.random() * 50 + 40}%`;
+      section.style.position = "relative";
+      section.appendChild(geometric);
+    }
   });
 });
 
-// Navbar background change on scroll
-window.addEventListener("scroll", () => {
-  const navbar = document.querySelector(".navbar");
-  if (window.scrollY > 50) {
-    navbar.style.backgroundColor = "rgba(13, 17, 23, 0.95)";
-    navbar.style.backdropFilter = "blur(10px)";
-  } else {
-    navbar.style.backgroundColor = "var(--firebase-darker)";
-    navbar.style.backdropFilter = "none";
-  }
-});
-
-// Dynamic typing effect for hero subtitle
-const subtitle = document.querySelector(".subtitle");
-const originalText = subtitle.textContent;
-const roles = [
-  "Full Stack Developer & Firebase Expert",
-  "React Specialist & UI/UX Enthusiast",
-  "Firebase Expert & Cloud Architect",
-  "JavaScript Developer & Problem Solver",
-];
-
-let currentRole = 0;
-let currentChar = 0;
-let isDeleting = false;
-
-function typeEffect() {
-  const current = roles[currentRole];
-
-  if (isDeleting) {
-    subtitle.textContent = current.substring(0, currentChar - 1);
-    currentChar--;
-  } else {
-    subtitle.textContent = current.substring(0, currentChar + 1);
-    currentChar++;
-  }
-
-  let typeSpeed = 100;
-
-  if (isDeleting) {
-    typeSpeed = 50;
-  }
-
-  if (!isDeleting && currentChar === current.length) {
-    typeSpeed = 2000;
-    isDeleting = true;
-  } else if (isDeleting && currentChar === 0) {
-    isDeleting = false;
-    currentRole = (currentRole + 1) % roles.length;
-    typeSpeed = 500;
-  }
-
-  setTimeout(typeEffect, typeSpeed);
-}
-
-// Start typing effect after page load
-setTimeout(typeEffect, 2000);
-
-// Add parallax effect to hero section
+// Parallax effect for hero section
 window.addEventListener("scroll", () => {
   const scrolled = window.pageYOffset;
   const hero = document.querySelector(".hero");
-  const rate = scrolled * -0.5;
+  const heroContent = document.querySelector(".hero-content");
 
-  if (hero) {
-    hero.style.transform = `translateY(${rate}px)`;
+  if (hero && heroContent) {
+    heroContent.style.transform = `translateY(${scrolled * 0.1}px)`;
   }
 });
 
-// Add glitch effect to title on hover
-const heroTitle = document.querySelector(".hero h1");
-if (heroTitle) {
-  heroTitle.addEventListener("mouseenter", function () {
-    this.style.textShadow = `
-                    2px 2px var(--firebase-orange),
-                    -2px -2px var(--firebase-amber),
-                    4px 4px var(--firebase-yellow)
-                `;
-    this.style.animation = "glitch 0.3s ease-in-out";
+// Interactive skill cards
+document.querySelectorAll(".skill-card").forEach((card) => {
+  card.addEventListener("mouseenter", function () {
+    this.style.transform = "translate(-4px, -4px) scale(1.02)";
   });
 
-  heroTitle.addEventListener("mouseleave", function () {
-    this.style.textShadow = "var(--shadow-brutal) var(--firebase-orange)";
-    this.style.animation = "none";
+  card.addEventListener("mouseleave", function () {
+    this.style.transform = "translate(-2px, -2px) scale(1)";
   });
-}
+});
 
-// Add CSS for glitch animation
-const style = document.createElement("style");
-style.textContent = `
-            @keyframes glitch {
-                0%, 100% { transform: translate(0); }
-                20% { transform: translate(-2px, 2px); }
-                40% { transform: translate(-2px, -2px); }
-                60% { transform: translate(2px, 2px); }
-                80% { transform: translate(2px, -2px); }
-            }
-        `;
-document.head.appendChild(style);
+// Project card interactions
+document.querySelectorAll(".project-card").forEach((card) => {
+  card.addEventListener("mouseenter", function () {
+    this.style.transform = "translate(-6px, -6px)";
+    this.style.boxShadow = "16px 16px 0px var(--ethereum-dark)";
+  });
+
+  card.addEventListener("mouseleave", function () {
+    this.style.transform = "translate(-4px, -4px)";
+    this.style.boxShadow = "12px 12px 0px var(--ethereum-dark)";
+  });
+});
