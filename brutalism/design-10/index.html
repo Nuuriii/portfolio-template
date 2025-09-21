@@ -2,146 +2,321 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio - Brutalist Design</title>
-    <link rel="stylesheet" href="styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Brutalism Portfolio - Vue Theme</title>
+    <style>
+      /* Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Courier New", Courier, monospace;
+        background: #f5f5f5;
+        color: #2c3e50;
+        line-height: 1.5;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        font-size: 16px;
+      }
+
+      a {
+        color: #42b883;
+        text-decoration: none;
+        border-bottom: 3px solid transparent;
+        transition: border-color 0.3s ease;
+      }
+
+      a:hover {
+        border-color: #35495e;
+      }
+
+      header {
+        border-bottom: 6px solid #35495e;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #fff;
+        box-shadow: 6px 6px 0 #42b883;
+      }
+
+      header h1 {
+        font-weight: 700;
+        font-size: 1.8rem;
+        color: #35495e;
+        letter-spacing: 2px;
+      }
+
+      nav a {
+        margin-left: 2rem;
+        font-weight: 700;
+        font-size: 1rem;
+        text-transform: uppercase;
+        border: 3px solid #42b883;
+        padding: 0.3rem 0.8rem;
+        box-shadow: 6px 6px 0 #35495e;
+        display: inline-block;
+      }
+
+      nav a:hover {
+        background: #42b883;
+        color: #fff;
+        box-shadow: none;
+        border-color: #2c3e50;
+      }
+
+      main {
+        flex: 1;
+        padding: 2rem;
+        max-width: 900px;
+        margin: 2rem auto;
+        background: #fff;
+        border: 6px solid #42b883;
+        box-shadow: 8px 8px 0 #35495e;
+      }
+
+      section {
+        margin-bottom: 3rem;
+      }
+
+      section h2 {
+        font-size: 1.6rem;
+        border-bottom: 4px solid #42b883;
+        padding-bottom: 0.3rem;
+        margin-bottom: 1rem;
+        color: #35495e;
+        letter-spacing: 1.5px;
+      }
+
+      /* About */
+      #about p {
+        font-size: 1.1rem;
+        max-width: 600px;
+      }
+
+      /* Projects grid */
+      #projects {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .project-card {
+        border: 4px solid #35495e;
+        padding: 1rem;
+        box-shadow: 6px 6px 0 #42b883;
+        background: #f0f9f4;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.3s ease;
+      }
+
+      .project-card:hover {
+        transform: translate(6px, -6px);
+        box-shadow: none;
+      }
+
+      .project-card h3 {
+        margin-bottom: 0.5rem;
+        color: #2c3e50;
+        font-weight: 700;
+        font-size: 1.2rem;
+      }
+
+      .project-card p {
+        flex-grow: 1;
+        font-size: 1rem;
+        color: #35495e;
+        margin-bottom: 1rem;
+      }
+
+      .project-card a {
+        align-self: flex-start;
+        border: 3px solid #2c3e50;
+        padding: 0.3rem 0.6rem;
+        font-weight: 700;
+        color: #2c3e50;
+        box-shadow: 4px 4px 0 #42b883;
+        transition: background 0.3s ease, color 0.3s ease;
+      }
+
+      .project-card a:hover {
+        background: #2c3e50;
+        color: #fff;
+        box-shadow: none;
+      }
+
+      /* Contact */
+      #contact form {
+        max-width: 500px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      #contact label {
+        font-weight: 700;
+        margin-bottom: 0.3rem;
+        color: #35495e;
+      }
+
+      #contact input,
+      #contact textarea {
+        border: 4px solid #42b883;
+        padding: 0.5rem;
+        font-family: monospace;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        resize: vertical;
+        box-shadow: 4px 4px 0 #35495e;
+        background: #f0f9f4;
+        color: #2c3e50;
+      }
+
+      #contact button {
+        border: 4px solid #35495e;
+        background: #42b883;
+        color: #fff;
+        font-weight: 700;
+        padding: 0.7rem;
+        cursor: pointer;
+        box-shadow: 6px 6px 0 #2c3e50;
+        transition: background 0.3s ease;
+      }
+
+      #contact button:hover {
+        background: #2c3e50;
+        box-shadow: none;
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        padding: 1rem 2rem;
+        border-top: 6px solid #35495e;
+        background: #fff;
+        box-shadow: -6px -6px 0 #42b883;
+        font-size: 0.9rem;
+        color: #35495e;
+        font-weight: 700;
+        letter-spacing: 1px;
+      }
+
+      /* Responsive */
+      @media (max-width: 600px) {
+        header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        nav {
+          margin-top: 1rem;
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+        }
+
+        nav a {
+          margin: 0.3rem 0.5rem 0 0;
+          flex: 1 1 45%;
+          text-align: center;
+        }
+
+        main {
+          margin: 1rem;
+          padding: 1rem;
+          border-width: 4px;
+          box-shadow: 6px 6px 0 #35495e;
+        }
+
+        #projects {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
   </head>
   <body>
-    <!-- Navigation -->
-    <nav class="nav">
-      <button class="nav-btn" id="navToggle">MENU</button>
-      <div class="nav-menu" id="navMenu">
-        <a href="#home" class="nav-link">HOME</a>
-        <a href="#about" class="nav-link">ABOUT</a>
-        <a href="#projects" class="nav-link">PROJECTS</a>
-        <a href="#contact" class="nav-link">CONTACT</a>
-      </div>
-    </nav>
+    <header>
+      <h1>MY PORTFOLIO</h1>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
 
-    <!-- Header Section -->
-    <section id="home" class="header">
-      <div class="brutal-shape shape-1"></div>
-      <div class="brutal-shape shape-2"></div>
-      <div class="header-content">
-        <h1 class="name">JOHN DOE</h1>
-        <div class="title">
-          <h2>CREATIVE DEVELOPER</h2>
+    <main>
+      <section id="about">
+        <h2>About Me</h2>
+        <p>
+          Hello! I'm a passionate developer who loves brutalism design and
+          Vue.js. I build modern, responsive web applications with clean and
+          bold aesthetics.
+        </p>
+      </section>
+
+      <section id="projects">
+        <h2>Projects</h2>
+        <div class="project-card">
+          <h3>Vue Blog</h3>
+          <p>A minimalistic blog platform built with Vue.js and vanilla CSS.</p>
+          <a href="#" target="_blank" rel="noopener">View Project</a>
         </div>
-      </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section about">
-      <div class="container">
-        <h2 class="fade-in">ABOUT ME</h2>
-        <div class="fade-in">
-          <p style="font-size: 1.2rem; margin-top: 2rem; line-height: 1.6">
-            I'M A PASSIONATE DEVELOPER WHO BELIEVES IN BOLD, UNCONVENTIONAL
-            DESIGN. MY WORK COMBINES FUNCTIONALITY WITH ARTISTIC EXPRESSION,
-            CREATING DIGITAL EXPERIENCES THAT STAND OUT FROM THE CROWD.
+        <div class="project-card">
+          <h3>Task Manager</h3>
+          <p>
+            A brutalism-styled task manager app with drag & drop functionality.
           </p>
-
-          <h3 style="margin: 3rem 0 2rem 0; color: #ff3e00">SKILLS</h3>
-          <div class="skills-grid fade-in">
-            <div class="skill-item">HTML/CSS</div>
-            <div class="skill-item">JAVASCRIPT</div>
-            <div class="skill-item">SVELTE</div>
-            <div class="skill-item">REACT</div>
-            <div class="skill-item">NODE.JS</div>
-            <div class="skill-item">DESIGN</div>
-            <div class="skill-item">UI/UX</div>
-            <div class="skill-item">FIGMA</div>
-          </div>
+          <a href="#" target="_blank" rel="noopener">View Project</a>
         </div>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="section projects">
-      <div class="container">
-        <h2 class="fade-in">MY PROJECTS</h2>
-        <div class="project-grid">
-          <div class="project-card fade-in">
-            <h3 class="project-title">BRUTAL WEBAPP</h3>
-            <p class="project-desc">
-              A BOLD WEB APPLICATION THAT CHALLENGES CONVENTIONAL UI PATTERNS
-              WITH RAW, UNFILTERED DESIGN ELEMENTS.
-            </p>
-            <a href="#" class="project-link">VIEW PROJECT</a>
-          </div>
-
-          <div class="project-card fade-in">
-            <h3 class="project-title">SVELTE PORTFOLIO</h3>
-            <p class="project-desc">
-              MODERN PORTFOLIO BUILT WITH SVELTE, FEATURING SMOOTH ANIMATIONS
-              AND RESPONSIVE BRUTALIST AESTHETICS.
-            </p>
-            <a href="#" class="project-link">VIEW PROJECT</a>
-          </div>
-
-          <div class="project-card fade-in">
-            <h3 class="project-title">DESIGN SYSTEM</h3>
-            <p class="project-desc">
-              COMPREHENSIVE DESIGN SYSTEM THAT BREAKS THE RULES WHILE
-              MAINTAINING CONSISTENCY AND USABILITY.
-            </p>
-            <a href="#" class="project-link">VIEW PROJECT</a>
-          </div>
-
-          <div class="project-card fade-in">
-            <h3 class="project-title">EXPERIMENTAL UI</h3>
-            <p class="project-desc">
-              PUSHING THE BOUNDARIES OF USER INTERFACE DESIGN WITH
-              UNCONVENTIONAL LAYOUTS AND INTERACTIONS.
-            </p>
-            <a href="#" class="project-link">VIEW PROJECT</a>
-          </div>
+        <div class="project-card">
+          <h3>Portfolio Site</h3>
+          <p>My personal portfolio showcasing my projects and skills.</p>
+          <a href="#" target="_blank" rel="noopener">View Project</a>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section contact">
-      <div class="container">
-        <h2 class="fade-in">GET IN TOUCH</h2>
-        <form class="contact-form fade-in">
-          <div class="form-group">
-            <label for="name" class="form-label">NAME</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              class="form-input"
-              required
-            />
-          </div>
+      <section id="contact">
+        <h2>Contact Me</h2>
+        <form id="contactForm" onsubmit="return handleSubmit(event)">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required />
 
-          <div class="form-group">
-            <label for="email" class="form-label">EMAIL</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              class="form-input"
-              required
-            />
-          </div>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
 
-          <div class="form-group">
-            <label for="message" class="form-label">MESSAGE</label>
-            <textarea
-              id="message"
-              name="message"
-              class="form-textarea"
-              required
-            ></textarea>
-          </div>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
 
-          <button type="submit" class="form-submit">SEND MESSAGE</button>
+          <button type="submit">Send</button>
         </form>
-      </div>
-    </section>
+      </section>
+    </main>
 
-    <script src="main.js"></script>
+    <footer>
+      &copy; 2024 My Portfolio. Built with Brutalism & Vue.js colors.
+    </footer>
+
+    <script>
+      function handleSubmit(event) {
+        event.preventDefault();
+        const name = event.target.name.value.trim();
+        const email = event.target.email.value.trim();
+        const message = event.target.message.value.trim();
+
+        if (!name || !email || !message) {
+          alert("Please fill in all fields.");
+          return false;
+        }
+
+        alert(`Thank you, ${name}! Your message has been sent.`);
+        event.target.reset();
+        return false;
+      }
+    </script>
   </body>
 </html>
