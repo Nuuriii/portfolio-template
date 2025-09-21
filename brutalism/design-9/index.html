@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio - Brutalist Design</title>
+    <style>
+      /* Reset and Base Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Courier New", monospace;
+        background-color: #ff3e00;
+        color: #ffffff;
+        line-height: 1.4;
+        overflow-x: hidden;
+      }
+
+      /* Brutalist Typography */
+      h1,
+      h2,
+      h3 {
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 8vw, 6rem);
+        text-shadow: 4px 4px 0px #000000;
+      }
+
+      h2 {
+        font-size: clamp(1.5rem, 5vw, 3rem);
+        text-shadow: 3px 3px 0px #000000;
+      }
+
+      h3 {
+        font-size: clamp(1.2rem, 3vw, 2rem);
+        text-shadow: 2px 2px 0px #000000;
+      }
+
+      /* Header Section */
+      .header {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 2rem;
+        background: linear-gradient(45deg, #ff3e00, #ff6b35);
+        position: relative;
+      }
+
+      .header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 10px,
+          rgba(0, 0, 0, 0.1) 10px,
+          rgba(0, 0, 0, 0.1) 20px
+        );
+      }
+
+      .header-content {
+        z-index: 2;
+        position: relative;
+      }
+
+      .name {
+        margin-bottom: 1rem;
+        transform: rotate(-2deg);
+      }
+
+      .title {
+        background-color: #000000;
+        color: #ff3e00;
+        padding: 1rem 2rem;
+        border: 4px solid #ffffff;
+        transform: rotate(1deg);
+        box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Navigation */
+      .nav {
+        position: fixed;
+        top: 2rem;
+        right: 2rem;
+        z-index: 1000;
+      }
+
+      .nav-btn {
+        background: #000000;
+        color: #ff3e00;
+        border: 3px solid #ffffff;
+        padding: 1rem;
+        font-family: "Courier New", monospace;
+        font-weight: bold;
+        cursor: pointer;
+        text-transform: uppercase;
+        box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.5);
+        transition: all 0.2s ease;
+      }
+
+      .nav-btn:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.5);
+      }
+
+      .nav-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: #000000;
+        border: 3px solid #ffffff;
+        min-width: 200px;
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s ease;
+      }
+
+      .nav-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      .nav-link {
+        display: block;
+        padding: 1rem;
+        color: #ff3e00;
+        text-decoration: none;
+        font-weight: bold;
+        text-transform: uppercase;
+        border-bottom: 2px solid #ff3e00;
+        transition: all 0.2s ease;
+      }
+
+      .nav-link:hover {
+        background: #ff3e00;
+        color: #000000;
+      }
+
+      /* Section Styles */
+      .section {
+        padding: 4rem 2rem;
+        min-height: 50vh;
+      }
+
+      .about {
+        background: #000000;
+        color: #ff3e00;
+        border-top: 8px solid #ffffff;
+        border-bottom: 8px solid #ffffff;
+      }
+
+      .projects {
+        background: #ffffff;
+        color: #000000;
+      }
+
+      .contact {
+        background: #ff6b35;
+        color: #ffffff;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      /* Project Grid */
+      .project-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .project-card {
+        background: #000000;
+        color: #ffffff;
+        border: 4px solid #ff3e00;
+        padding: 2rem;
+        transform: rotate(-1deg);
+        box-shadow: 8px 8px 0px rgba(255, 62, 0, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .project-card:nth-child(even) {
+        transform: rotate(1deg);
+      }
+
+      .project-card:hover {
+        transform: rotate(0deg) scale(1.05);
+        box-shadow: 12px 12px 0px rgba(255, 62, 0, 0.5);
+      }
+
+      .project-title {
+        color: #ff3e00;
+        margin-bottom: 1rem;
+      }
+
+      .project-desc {
+        margin-bottom: 1.5rem;
+        font-size: 1rem;
+      }
+
+      .project-link {
+        background: #ff3e00;
+        color: #000000;
+        padding: 0.8rem 1.5rem;
+        text-decoration: none;
+        font-weight: bold;
+        text-transform: uppercase;
+        border: 2px solid #ffffff;
+        display: inline-block;
+        box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
+        transition: all 0.2s ease;
+      }
+
+      .project-link:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Skills Section */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .skill-item {
+        background: #ff3e00;
+        color: #ffffff;
+        padding: 1.5rem 1rem;
+        text-align: center;
+        font-weight: bold;
+        text-transform: uppercase;
+        border: 3px solid #000000;
+        transform: skew(-5deg);
+        box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .skill-item:hover {
+        transform: skew(0deg) scale(1.1);
+      }
+
+      /* Contact Form */
+      .contact-form {
+        max-width: 600px;
+        margin: 2rem auto;
+      }
+
+      .form-group {
+        margin-bottom: 2rem;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 1.2rem;
+      }
+
+      .form-input,
+      .form-textarea {
+        width: 100%;
+        padding: 1rem;
+        font-family: "Courier New", monospace;
+        font-size: 1rem;
+        border: 4px solid #000000;
+        background: #ffffff;
+        color: #000000;
+        box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
+      }
+
+      .form-textarea {
+        height: 150px;
+        resize: vertical;
+      }
+
+      .form-submit {
+        background: #000000;
+        color: #ff3e00;
+        padding: 1rem 2rem;
+        border: 3px solid #ffffff;
+        font-family: "Courier New", monospace;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.5);
+        transition: all 0.2s ease;
+      }
+
+      .form-submit:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Brutalist Decorative Elements */
+      .brutal-shape {
+        position: absolute;
+        background: rgba(0, 0, 0, 0.1);
+        transform: rotate(45deg);
+      }
+
+      .shape-1 {
+        width: 100px;
+        height: 100px;
+        top: 20%;
+        left: 10%;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .shape-2 {
+        width: 80px;
+        height: 80px;
+        top: 60%;
+        right: 15%;
+        animation: float 8s ease-in-out infinite reverse;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: rotate(45deg) translateY(0px);
+        }
+        50% {
+          transform: rotate(45deg) translateY(-20px);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .nav {
+          top: 1rem;
+          right: 1rem;
+        }
+
+        .section {
+          padding: 2rem 1rem;
+        }
+
+        .project-grid {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+
+        .project-card {
+          transform: rotate(0deg);
+          padding: 1.5rem;
+        }
+
+        .skills-grid {
+          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        }
+
+        .skill-item {
+          padding: 1rem 0.5rem;
+          transform: skew(0deg);
+        }
+
+        h1 {
+          font-size: 2.5rem;
+        }
+
+        h2 {
+          font-size: 2rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .header {
+          padding: 1rem;
+        }
+
+        .title {
+          padding: 0.8rem 1rem;
+          font-size: 1rem;
+        }
+
+        .project-card,
+        .skill-item,
+        .form-submit,
+        .nav-btn {
+          box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-link {
+          padding: 0.6rem 1rem;
+          font-size: 0.9rem;
+        }
+      }
+
+      /* Scroll animations */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.6s ease;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="nav">
+      <button class="nav-btn" id="navToggle">MENU</button>
+      <div class="nav-menu" id="navMenu">
+        <a href="#home" class="nav-link">HOME</a>
+        <a href="#about" class="nav-link">ABOUT</a>
+        <a href="#projects" class="nav-link">PROJECTS</a>
+        <a href="#contact" class="nav-link">CONTACT</a>
+      </div>
+    </nav>
+
+    <!-- Header Section -->
+    <section id="home" class="header">
+      <div class="brutal-shape shape-1"></div>
+      <div class="brutal-shape shape-2"></div>
+      <div class="header-content">
+        <h1 class="name">JOHN DOE</h1>
+        <div class="title">
+          <h2>CREATIVE DEVELOPER</h2>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+      <div class="container">
+        <h2 class="fade-in">ABOUT ME</h2>
+        <div class="fade-in">
+          <p style="font-size: 1.2rem; margin-top: 2rem; line-height: 1.6">
+            I'M A PASSIONATE DEVELOPER WHO BELIEVES IN BOLD, UNCONVENTIONAL
+            DESIGN. MY WORK COMBINES FUNCTIONALITY WITH ARTISTIC EXPRESSION,
+            CREATING DIGITAL EXPERIENCES THAT STAND OUT FROM THE CROWD.
+          </p>
+
+          <h3 style="margin: 3rem 0 2rem 0; color: #ff3e00">SKILLS</h3>
+          <div class="skills-grid fade-in">
+            <div class="skill-item">HTML/CSS</div>
+            <div class="skill-item">JAVASCRIPT</div>
+            <div class="skill-item">SVELTE</div>
+            <div class="skill-item">REACT</div>
+            <div class="skill-item">NODE.JS</div>
+            <div class="skill-item">DESIGN</div>
+            <div class="skill-item">UI/UX</div>
+            <div class="skill-item">FIGMA</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section projects">
+      <div class="container">
+        <h2 class="fade-in">MY PROJECTS</h2>
+        <div class="project-grid">
+          <div class="project-card fade-in">
+            <h3 class="project-title">BRUTAL WEBAPP</h3>
+            <p class="project-desc">
+              A BOLD WEB APPLICATION THAT CHALLENGES CONVENTIONAL UI PATTERNS
+              WITH RAW, UNFILTERED DESIGN ELEMENTS.
+            </p>
+            <a href="#" class="project-link">VIEW PROJECT</a>
+          </div>
+
+          <div class="project-card fade-in">
+            <h3 class="project-title">SVELTE PORTFOLIO</h3>
+            <p class="project-desc">
+              MODERN PORTFOLIO BUILT WITH SVELTE, FEATURING SMOOTH ANIMATIONS
+              AND RESPONSIVE BRUTALIST AESTHETICS.
+            </p>
+            <a href="#" class="project-link">VIEW PROJECT</a>
+          </div>
+
+          <div class="project-card fade-in">
+            <h3 class="project-title">DESIGN SYSTEM</h3>
+            <p class="project-desc">
+              COMPREHENSIVE DESIGN SYSTEM THAT BREAKS THE RULES WHILE
+              MAINTAINING CONSISTENCY AND USABILITY.
+            </p>
+            <a href="#" class="project-link">VIEW PROJECT</a>
+          </div>
+
+          <div class="project-card fade-in">
+            <h3 class="project-title">EXPERIMENTAL UI</h3>
+            <p class="project-desc">
+              PUSHING THE BOUNDARIES OF USER INTERFACE DESIGN WITH
+              UNCONVENTIONAL LAYOUTS AND INTERACTIONS.
+            </p>
+            <a href="#" class="project-link">VIEW PROJECT</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+      <div class="container">
+        <h2 class="fade-in">GET IN TOUCH</h2>
+        <form class="contact-form fade-in">
+          <div class="form-group">
+            <label for="name" class="form-label">NAME</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="form-input"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">EMAIL</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-input"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="message" class="form-label">MESSAGE</label>
+            <textarea
+              id="message"
+              name="message"
+              class="form-textarea"
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" class="form-submit">SEND MESSAGE</button>
+        </form>
+      </div>
+    </section>
+
+    <script>
+      // Navigation Toggle
+      const navToggle = document.getElementById("navToggle");
+      const navMenu = document.getElementById("navMenu");
+
+      navToggle.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener("click", (e) => {
+        if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+          navMenu.classList.remove("active");
+        }
+      });
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll(".nav-link").forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute("href");
+          const targetSection = document.querySelector(targetId);
+
+          if (targetSection) {
+            targetSection.scrollIntoView({
+              behavior: "smooth",
+            });
+            navMenu.classList.remove("active");
+          }
+        });
+      });
+
+      // Scroll animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      // Observe all fade-in elements
+      document.querySelectorAll(".fade-in").forEach((el) => {
+        observer.observe(el);
+      });
+
+      // Form submission
+      document
+        .querySelector(".contact-form")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          // Get form data
+          const formData = new FormData(e.target);
+          const name = formData.get("name");
+          const email = formData.get("email");
+          const message = formData.get("message");
+
+          // Simple validation
+          if (name && email && message) {
+            alert("MESSAGE SENT! I'LL GET BACK TO YOU SOON.");
+            e.target.reset();
+          } else {
+            alert("PLEASE FILL IN ALL FIELDS!");
+          }
+        });
+
+      // Add some interactive brutalist effects
+      document.addEventListener("mousemove", (e) => {
+        const shapes = document.querySelectorAll(".brutal-shape");
+        const x = e.clientX / window.innerWidth;
+        const y = e.clientY / window.innerHeight;
+
+        shapes.forEach((shape, index) => {
+          const speed = (index + 1) * 0.5;
+          const xOffset = (x - 0.5) * speed * 20;
+          const yOffset = (y - 0.5) * speed * 20;
+
+          shape.style.transform = `rotate(45deg) translate(${xOffset}px, ${yOffset}px)`;
+        });
+      });
+
+      // Keyboard navigation
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          navMenu.classList.remove("active");
+        }
+      });
+
+      // Add random glitch effect to title
+      const glitchTitle = () => {
+        const title = document.querySelector(".name");
+        if (title && Math.random() < 0.1) {
+          title.style.transform = `rotate(${Math.random() * 4 - 2}deg)`;
+          setTimeout(() => {
+            title.style.transform = "rotate(-2deg)";
+          }, 100);
+        }
+      };
+
+      setInterval(glitchTitle, 3000);
+
+      // Performance optimization for mobile
+      let ticking = false;
+      const updateAnimations = () => {
+        // Only update animations if not already updating
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            ticking = false;
+          });
+          ticking = true;
+        }
+      };
+
+      window.addEventListener("scroll", updateAnimations);
+      window.addEventListener("resize", updateAnimations);
+    </script>
+  </body>
+</html>
