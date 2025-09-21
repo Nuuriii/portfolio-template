@@ -1,30 +1,30 @@
-// Mobile Navigation Toggle
-const hamburger = document.querySelector(".hamburger");
-const navMenu = document.querySelector(".nav-menu");
+// Navigation Toggle
+const navToggle = document.getElementById("navToggle");
+const navMenu = document.getElementById("navMenu");
 
-hamburger.addEventListener("click", () => {
-  hamburger.classList.toggle("active");
+navToggle.addEventListener("click", () => {
   navMenu.classList.toggle("active");
 });
 
-// Close mobile menu when clicking on a link
-document.querySelectorAll(".nav-item a").forEach((link) => {
-  link.addEventListener("click", () => {
-    hamburger.classList.remove("active");
+// Close menu when clicking outside
+document.addEventListener("click", (e) => {
+  if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
     navMenu.classList.remove("active");
-  });
+  }
 });
 
 // Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener("click", function (e) {
+document.querySelectorAll(".nav-link").forEach((link) => {
+  link.addEventListener("click", (e) => {
     e.preventDefault();
-    const target = document.querySelector(this.getAttribute("href"));
-    if (target) {
-      target.scrollIntoView({
+    const targetId = link.getAttribute("href");
+    const targetSection = document.querySelector(targetId);
+
+    if (targetSection) {
+      targetSection.scrollIntoView({
         behavior: "smooth",
-        block: "start",
       });
+      navMenu.classList.remove("active");
     }
   });
 });
@@ -49,136 +49,70 @@ document.querySelectorAll(".fade-in").forEach((el) => {
 });
 
 // Form submission
-document
-  .querySelector(".contact-form")
-  .addEventListener("submit", function (e) {
-    e.preventDefault();
+document.querySelector(".contact-form").addEventListener("submit", (e) => {
+  e.preventDefault();
 
-    // Get form data
-    const formData = new FormData(this);
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const subject = formData.get("subject");
-    const message = formData.get("message");
+  // Get form data
+  const formData = new FormData(e.target);
+  const name = formData.get("name");
+  const email = formData.get("email");
+  const message = formData.get("message");
 
-    // Simple validation
-    if (!name || !email || !subject || !message) {
-      alert("Please fill in all fields");
-      return;
-    }
-
-    // Simulate form submission
-    alert("Thank you for your message! I'll get back to you soon.");
-    this.reset();
-  });
-
-// Add some interactive effects
-document.querySelectorAll(".project-card").forEach((card) => {
-  card.addEventListener("mouseenter", function () {
-    this.style.transform = "translate(-8px, -8px)";
-  });
-
-  card.addEventListener("mouseleave", function () {
-    this.style.transform = "translate(0, 0)";
-  });
-});
-
-// Navbar background change on scroll
-window.addEventListener("scroll", () => {
-  const navbar = document.querySelector(".navbar");
-  if (window.scrollY > 50) {
-    navbar.style.backgroundColor = "rgba(13, 17, 23, 0.95)";
-    navbar.style.backdropFilter = "blur(10px)";
+  // Simple validation
+  if (name && email && message) {
+    alert("MESSAGE SENT! I'LL GET BACK TO YOU SOON.");
+    e.target.reset();
   } else {
-    navbar.style.backgroundColor = "var(--firebase-darker)";
-    navbar.style.backdropFilter = "none";
+    alert("PLEASE FILL IN ALL FIELDS!");
   }
 });
 
-// Dynamic typing effect for hero subtitle
-const subtitle = document.querySelector(".subtitle");
-const originalText = subtitle.textContent;
-const roles = [
-  "Full Stack Developer & Firebase Expert",
-  "React Specialist & UI/UX Enthusiast",
-  "Firebase Expert & Cloud Architect",
-  "JavaScript Developer & Problem Solver",
-];
+// Add some interactive brutalist effects
+document.addEventListener("mousemove", (e) => {
+  const shapes = document.querySelectorAll(".brutal-shape");
+  const x = e.clientX / window.innerWidth;
+  const y = e.clientY / window.innerHeight;
 
-let currentRole = 0;
-let currentChar = 0;
-let isDeleting = false;
+  shapes.forEach((shape, index) => {
+    const speed = (index + 1) * 0.5;
+    const xOffset = (x - 0.5) * speed * 20;
+    const yOffset = (y - 0.5) * speed * 20;
 
-function typeEffect() {
-  const current = roles[currentRole];
+    shape.style.transform = `rotate(45deg) translate(${xOffset}px, ${yOffset}px)`;
+  });
+});
 
-  if (isDeleting) {
-    subtitle.textContent = current.substring(0, currentChar - 1);
-    currentChar--;
-  } else {
-    subtitle.textContent = current.substring(0, currentChar + 1);
-    currentChar++;
-  }
-
-  let typeSpeed = 100;
-
-  if (isDeleting) {
-    typeSpeed = 50;
-  }
-
-  if (!isDeleting && currentChar === current.length) {
-    typeSpeed = 2000;
-    isDeleting = true;
-  } else if (isDeleting && currentChar === 0) {
-    isDeleting = false;
-    currentRole = (currentRole + 1) % roles.length;
-    typeSpeed = 500;
-  }
-
-  setTimeout(typeEffect, typeSpeed);
-}
-
-// Start typing effect after page load
-setTimeout(typeEffect, 2000);
-
-// Add parallax effect to hero section
-window.addEventListener("scroll", () => {
-  const scrolled = window.pageYOffset;
-  const hero = document.querySelector(".hero");
-  const rate = scrolled * -0.5;
-
-  if (hero) {
-    hero.style.transform = `translateY(${rate}px)`;
+// Keyboard navigation
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    navMenu.classList.remove("active");
   }
 });
 
-// Add glitch effect to title on hover
-const heroTitle = document.querySelector(".hero h1");
-if (heroTitle) {
-  heroTitle.addEventListener("mouseenter", function () {
-    this.style.textShadow = `
-                    2px 2px var(--firebase-orange),
-                    -2px -2px var(--firebase-amber),
-                    4px 4px var(--firebase-yellow)
-                `;
-    this.style.animation = "glitch 0.3s ease-in-out";
-  });
+// Add random glitch effect to title
+const glitchTitle = () => {
+  const title = document.querySelector(".name");
+  if (title && Math.random() < 0.1) {
+    title.style.transform = `rotate(${Math.random() * 4 - 2}deg)`;
+    setTimeout(() => {
+      title.style.transform = "rotate(-2deg)";
+    }, 100);
+  }
+};
 
-  heroTitle.addEventListener("mouseleave", function () {
-    this.style.textShadow = "var(--shadow-brutal) var(--firebase-orange)";
-    this.style.animation = "none";
-  });
-}
+setInterval(glitchTitle, 3000);
 
-// Add CSS for glitch animation
-const style = document.createElement("style");
-style.textContent = `
-            @keyframes glitch {
-                0%, 100% { transform: translate(0); }
-                20% { transform: translate(-2px, 2px); }
-                40% { transform: translate(-2px, -2px); }
-                60% { transform: translate(2px, 2px); }
-                80% { transform: translate(2px, -2px); }
-            }
-        `;
-document.head.appendChild(style);
+// Performance optimization for mobile
+let ticking = false;
+const updateAnimations = () => {
+  // Only update animations if not already updating
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      ticking = false;
+    });
+    ticking = true;
+  }
+};
+
+window.addEventListener("scroll", updateAnimations);
+window.addEventListener("resize", updateAnimations);
