@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio - Brutalist Design</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="nav">
+      <button class="nav-btn" id="navToggle">MENU</button>
+      <div class="nav-menu" id="navMenu">
+        <a href="#home" class="nav-link">HOME</a>
+        <a href="#about" class="nav-link">ABOUT</a>
+        <a href="#projects" class="nav-link">PROJECTS</a>
+        <a href="#contact" class="nav-link">CONTACT</a>
+      </div>
+    </nav>
+
+    <!-- Header Section -->
+    <section id="home" class="header">
+      <div class="brutal-shape shape-1"></div>
+      <div class="brutal-shape shape-2"></div>
+      <div class="header-content">
+        <h1 class="name">JOHN DOE</h1>
+        <div class="title">
+          <h2>CREATIVE DEVELOPER</h2>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+      <div class="container">
+        <h2 class="fade-in">ABOUT ME</h2>
+        <div class="fade-in">
+          <p style="font-size: 1.2rem; margin-top: 2rem; line-height: 1.6">
+            I'M A PASSIONATE DEVELOPER WHO BELIEVES IN BOLD, UNCONVENTIONAL
+            DESIGN. MY WORK COMBINES FUNCTIONALITY WITH ARTISTIC EXPRESSION,
+            CREATING DIGITAL EXPERIENCES THAT STAND OUT FROM THE CROWD.
+          </p>
+
+          <h3 style="margin: 3rem 0 2rem 0; color: #ff3e00">SKILLS</h3>
+          <div class="skills-grid fade-in">
+            <div class="skill-item">HTML/CSS</div>
+            <div class="skill-item">JAVASCRIPT</div>
+            <div class="skill-item">SVELTE</div>
+            <div class="skill-item">REACT</div>
+            <div class="skill-item">NODE.JS</div>
+            <div class="skill-item">DESIGN</div>
+            <div class="skill-item">UI/UX</div>
+            <div class="skill-item">FIGMA</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section projects">
+      <div class="container">
+        <h2 class="fade-in">MY PROJECTS</h2>
+        <div class="project-grid">
+          <div class="project-card fade-in">
+            <h3 class="project-title">BRUTAL WEBAPP</h3>
+            <p class="project-desc">
+              A BOLD WEB APPLICATION THAT CHALLENGES CONVENTIONAL UI PATTERNS
+              WITH RAW, UNFILTERED DESIGN ELEMENTS.
+            </p>
+            <a href="#" class="project-link">VIEW PROJECT</a>
+          </div>
+
+          <div class="project-card fade-in">
+            <h3 class="project-title">SVELTE PORTFOLIO</h3>
+            <p class="project-desc">
+              MODERN PORTFOLIO BUILT WITH SVELTE, FEATURING SMOOTH ANIMATIONS
+              AND RESPONSIVE BRUTALIST AESTHETICS.
+            </p>
+            <a href="#" class="project-link">VIEW PROJECT</a>
+          </div>
+
+          <div class="project-card fade-in">
+            <h3 class="project-title">DESIGN SYSTEM</h3>
+            <p class="project-desc">
+              COMPREHENSIVE DESIGN SYSTEM THAT BREAKS THE RULES WHILE
+              MAINTAINING CONSISTENCY AND USABILITY.
+            </p>
+            <a href="#" class="project-link">VIEW PROJECT</a>
+          </div>
+
+          <div class="project-card fade-in">
+            <h3 class="project-title">EXPERIMENTAL UI</h3>
+            <p class="project-desc">
+              PUSHING THE BOUNDARIES OF USER INTERFACE DESIGN WITH
+              UNCONVENTIONAL LAYOUTS AND INTERACTIONS.
+            </p>
+            <a href="#" class="project-link">VIEW PROJECT</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+      <div class="container">
+        <h2 class="fade-in">GET IN TOUCH</h2>
+        <form class="contact-form fade-in">
+          <div class="form-group">
+            <label for="name" class="form-label">NAME</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="form-input"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">EMAIL</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-input"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="message" class="form-label">MESSAGE</label>
+            <textarea
+              id="message"
+              name="message"
+              class="form-textarea"
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" class="form-submit">SEND MESSAGE</button>
+        </form>
+      </div>
+    </section>
+
+    <script src="main.js"></script>
+  </body>
+</html>
