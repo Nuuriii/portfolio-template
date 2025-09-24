@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BRUTAL PORTFOLIO</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --solana-purple: #9945ff;
+        --solana-cyan: #14f195;
+        --solana-dark: #1a1a2e;
+        --solana-light: #ffffff;
+        --brutalist-shadow: 4px 4px 0px;
+        --brutalist-border: 3px solid;
+      }
+
+      body {
+        font-family: "Space Grotesk", sans-serif;
+        background: var(--solana-dark);
+        color: var(--solana-light);
+        overflow-x: hidden;
+        line-height: 1.4;
+      }
+
+      .cursor {
+        position: fixed;
+        width: 20px;
+        height: 20px;
+        background: linear-gradient(
+          45deg,
+          var(--solana-purple),
+          var(--solana-cyan)
+        );
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        mix-blend-mode: difference;
+        transition: transform 0.2s ease;
+      }
+
+      .noise-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.03;
+        z-index: 1;
+        pointer-events: none;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="noise" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="white"/><circle cx="80" cy="40" r="0.5" fill="white"/><circle cx="40" cy="80" r="1.5" fill="white"/><circle cx="90" cy="90" r="1" fill="white"/><circle cx="10" cy="60" r="0.5" fill="white"/></pattern></defs><rect width="100" height="100" fill="url(%23noise)"/></svg>');
+      }
+
+      /* Navigation */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        background: rgba(26, 26, 46, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: var(--brutalist-border) var(--solana-cyan);
+        padding: 1rem 2rem;
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        background: linear-gradient(
+          45deg,
+          var(--solana-purple),
+          var(--solana-cyan)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-transform: uppercase;
+        letter-spacing: -1px;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        color: var(--solana-light);
+        text-decoration: none;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .nav-links a:hover {
+        color: var(--solana-cyan);
+        text-shadow: var(--brutalist-shadow) var(--solana-purple);
+      }
+
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 4px;
+      }
+
+      .menu-toggle span {
+        width: 25px;
+        height: 3px;
+        background: var(--solana-cyan);
+        transition: 0.3s;
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        padding: 0 2rem;
+        background: linear-gradient(
+          135deg,
+          var(--solana-dark) 0%,
+          #16213e 100%
+        );
+      }
+
+      .hero-content {
+        text-align: center;
+        max-width: 1000px;
+        z-index: 2;
+      }
+
+      .hero-title {
+        font-size: clamp(3rem, 8vw, 8rem);
+        font-weight: 700;
+        line-height: 0.9;
+        margin-bottom: 2rem;
+        text-transform: uppercase;
+        letter-spacing: -3px;
+        position: relative;
+      }
+
+      .hero-title .gradient-text {
+        background: linear-gradient(
+          45deg,
+          var(--solana-purple),
+          var(--solana-cyan)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        display: inline-block;
+        text-shadow: none;
+      }
+
+      .hero-title .outline-text {
+        color: transparent;
+        -webkit-text-stroke: 2px var(--solana-light);
+        display: inline-block;
+      }
+
+      .hero-subtitle {
+        font-size: clamp(1.2rem, 3vw, 2rem);
+        font-weight: 500;
+        margin-bottom: 3rem;
+        color: #a0a0a0;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .hero-cta {
+        display: inline-block;
+        padding: 1rem 3rem;
+        background: linear-gradient(
+          45deg,
+          var(--solana-purple),
+          var(--solana-cyan)
+        );
+        color: var(--solana-dark);
+        text-decoration: none;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border: var(--brutalist-border) var(--solana-light);
+        box-shadow: var(--brutalist-shadow) var(--solana-light);
+        transition: all 0.3s ease;
+      }
+
+      .hero-cta:hover {
+        transform: translate(4px, 4px);
+        box-shadow: none;
+      }
+
+      /* Geometric Elements */
+      .geometric-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .geometric-shape {
+        position: absolute;
+        border: 2px solid var(--solana-cyan);
+      }
+
+      .shape-1 {
+        width: 200px;
+        height: 200px;
+        top: 20%;
+        left: 10%;
+        transform: rotate(45deg);
+        opacity: 0.3;
+      }
+
+      .shape-2 {
+        width: 150px;
+        height: 150px;
+        top: 60%;
+        right: 15%;
+        border-radius: 50%;
+        opacity: 0.2;
+      }
+
+      .shape-3 {
+        width: 100px;
+        height: 300px;
+        top: 10%;
+        right: 5%;
+        opacity: 0.1;
+      }
+
+      /* Sections */
+      .section {
+        padding: 6rem 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .section-title {
+        font-size: clamp(3rem, 6vw, 5rem);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: -2px;
+        margin-bottom: 4rem;
+        position: relative;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 100px;
+        height: 4px;
+        background: linear-gradient(
+          45deg,
+          var(--solana-purple),
+          var(--solana-cyan)
+        );
+      }
+
+      /* About Section */
+      .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      .about-text {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        color: #c0c0c0;
+      }
+
+      .about-text p {
+        margin-bottom: 1.5rem;
+      }
+
+      .about-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+
+      .stat-item {
+        background: rgba(153, 69, 255, 0.1);
+        border: var(--brutalist-border) var(--solana-purple);
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .stat-number {
+        font-size: 3rem;
+        font-weight: 700;
+        color: var(--solana-cyan);
+        display: block;
+      }
+
+      .stat-label {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #a0a0a0;
+      }
+
+      /* Projects Section */
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 3rem;
+      }
+
+      .project-card {
+        background: rgba(20, 241, 149, 0.05);
+        border: var(--brutalist-border) var(--solana-cyan);
+        box-shadow: var(--brutalist-shadow) var(--solana-cyan);
+        padding: 2rem;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .project-card:hover {
+        transform: translate(-4px, -4px);
+        box-shadow: 8px 8px 0px var(--solana-cyan);
+      }
+
+      .project-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0;
+        height: 0;
+        border-left: 40px solid transparent;
+        border-top: 40px solid var(--solana-purple);
+        opacity: 0.7;
+      }
+
+      .project-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        color: var(--solana-light);
+      }
+
+      .project-description {
+        color: #c0c0c0;
+        margin-bottom: 2rem;
+        line-height: 1.5;
+      }
+
+      .project-tech {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .tech-tag {
+        background: var(--solana-purple);
+        color: var(--solana-light);
+        padding: 0.3rem 0.8rem;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+
+      .project-links {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .project-link {
+        color: var(--solana-cyan);
+        text-decoration: none;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 0.9rem;
+        border-bottom: 2px solid var(--solana-cyan);
+        transition: all 0.3s ease;
+      }
+
+      .project-link:hover {
+        color: var(--solana-light);
+        border-bottom-color: var(--solana-light);
+      }
+
+      /* Contact Section */
+      .contact-content {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .contact-text {
+        font-size: 1.5rem;
+        margin-bottom: 3rem;
+        color: #c0c0c0;
+      }
+
+      .contact-info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .contact-item {
+        background: rgba(153, 69, 255, 0.1);
+        border: var(--brutalist-border) var(--solana-purple);
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .contact-label {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--solana-cyan);
+        margin-bottom: 1rem;
+      }
+
+      .contact-value {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--solana-light);
+      }
+
+      .contact-value a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .contact-value a:hover {
+        color: var(--solana-cyan);
+      }
+
+      /* Footer */
+      footer {
+        background: var(--solana-dark);
+        border-top: var(--brutalist-border) var(--solana-purple);
+        padding: 3rem 2rem;
+        text-align: center;
+      }
+
+      .footer-content {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .footer-text {
+        font-size: 1rem;
+        color: #a0a0a0;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* Animations */
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-10px) rotate(5deg);
+        }
+      }
+
+      .floating {
+        animation: float 6s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 0.3;
+        }
+        50% {
+          opacity: 0.7;
+        }
+      }
+
+      .pulsing {
+        animation: pulse 3s ease-in-out infinite;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background: var(--solana-dark);
+          flex-direction: column;
+          padding: 2rem;
+          border-top: var(--brutalist-border) var(--solana-cyan);
+        }
+
+        .nav-links.active {
+          display: flex;
+        }
+
+        .menu-toggle {
+          display: flex;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+          transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+          opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+          transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        .about-content {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .about-stats {
+          grid-template-columns: 1fr;
+        }
+
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .contact-info {
+          grid-template-columns: 1fr;
+        }
+
+        .section {
+          padding: 4rem 1rem;
+        }
+
+        .hero {
+          padding: 0 1rem;
+        }
+
+        nav {
+          padding: 1rem;
+        }
+
+        .geometric-shape {
+          display: none;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero-title {
+          font-size: 2.5rem;
+          letter-spacing: -1px;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .project-card,
+        .stat-item,
+        .contact-item {
+          padding: 1.5rem;
+        }
+      }
+
+      /* Scroll animations */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+
+    <!-- Noise Overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- Navigation -->
+    <nav>
+      <div class="nav-container">
+        <div class="logo">BRUTAL.DEV</div>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="geometric-bg">
+        <div class="geometric-shape shape-1 floating"></div>
+        <div class="geometric-shape shape-2 pulsing"></div>
+        <div class="geometric-shape shape-3 floating"></div>
+      </div>
+      <div class="hero-content">
+        <h1 class="hero-title">
+          <span class="gradient-text">BRUTAL</span><br />
+          <span class="outline-text">DEVELOPER</span>
+        </h1>
+        <p class="hero-subtitle">Full Stack Developer & UI/UX Designer</p>
+        <a href="#projects" class="hero-cta">VIEW WORK</a>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section fade-in">
+      <h2 class="section-title">ABOUT</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>
+            I'm a passionate developer who believes in creating bold, impactful
+            digital experiences. My approach combines technical expertise with
+            brutalist design principles to deliver solutions that stand out.
+          </p>
+          <p>
+            Specializing in modern web technologies, I bring ideas to life
+            through clean code and striking visual design. Every project is an
+            opportunity to push boundaries and challenge conventions.
+          </p>
+          <p>
+            When I'm not coding, you'll find me exploring new technologies,
+            contributing to open source projects, or sketching out the next big
+            idea.
+          </p>
+        </div>
+        <div class="about-stats">
+          <div class="stat-item">
+            <span class="stat-number">50+</span>
+            <span class="stat-label">Projects Completed</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">3+</span>
+            <span class="stat-label">Years Experience</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">25+</span>
+            <span class="stat-label">Happy Clients</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Dedication</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section fade-in">
+      <h2 class="section-title">PROJECTS</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3 class="project-title">DeFi Dashboard</h3>
+          <p class="project-description">
+            A comprehensive dashboard for tracking DeFi investments with
+            real-time data visualization and portfolio management features.
+          </p>
+          <div class="project-tech">
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">Web3.js</span>
+            <span class="tech-tag">Solana</span>
+            <span class="tech-tag">TypeScript</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link">Live Demo</a>
+            <a href="#" class="project-link">GitHub</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3 class="project-title">NFT Marketplace</h3>
+          <p class="project-description">
+            A modern NFT marketplace built on Solana blockchain with advanced
+            filtering, bidding system, and artist profiles.
+          </p>
+          <div class="project-tech">
+            <span class="tech-tag">Next.js</span>
+            <span class="tech-tag">Rust</span>
+            <span class="tech-tag">Solana</span>
+            <span class="tech-tag">IPFS</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link">Live Demo</a>
+            <a href="#" class="project-link">GitHub</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3 class="project-title">Task Management App</h3>
+          <p class="project-description">
+            A brutalist-designed task management application with team
+            collaboration features and real-time updates.
+          </p>
+          <div class="project-tech">
+            <span class="tech-tag">Vue.js</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">Socket.io</span>
+            <span class="tech-tag">MongoDB</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link">Live Demo</a>
+            <a href="#" class="project-link">GitHub</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3 class="project-title">Portfolio Website</h3>
+          <p class="project-description">
+            A responsive portfolio website showcasing modern web development
+            techniques with stunning animations and interactions.
+          </p>
+          <div class="project-tech">
+            <span class="tech-tag">HTML5</span>
+            <span class="tech-tag">CSS3</span>
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">GSAP</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link">Live Demo</a>
+            <a href="#" class="project-link">GitHub</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3 class="project-title">E-Commerce Platform</h3>
+          <p class="project-description">
+            A full-featured e-commerce platform with payment integration,
+            inventory management, and analytics dashboard.
+          </p>
+          <div class="project-tech">
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">Express.js</span>
+            <span class="tech-tag">PostgreSQL</span>
+            <span class="tech-tag">Stripe</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link">Live Demo</a>
+            <a href="#" class="project-link">GitHub</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3 class="project-title">Mobile App UI Kit</h3>
+          <p class="project-description">
+            A comprehensive UI kit for mobile applications featuring brutalist
+            design elements and reusable components.
+          </p>
+          <div class="project-tech">
+            <span class="tech-tag">Figma</span>
+            <span class="tech-tag">React Native</span>
+            <span class="tech-tag">Styled Components</span>
+            <span class="tech-tag">Expo</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link">Live Demo</a>
+            <a href="#" class="project-link">Download</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section fade-in">
+      <h2 class="section-title">CONTACT</h2>
+      <div class="contact-content">
+        <p class="contact-text">
+          Ready to create something amazing together? Let's talk about your next
+          project and bring your vision to life.
+        </p>
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-label">Email</div>
+            <div class="contact-value">
+              <a href="mailto:hello@brutaldeveloper.com"
+                >hello@brutaldeveloper.com</a
+              >
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-label">Phone</div>
+            <div class="contact-value">
+              <a href="tel:+1234567890">+1 (234) 567-890</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-label">Location</div>
+            <div class="contact-value">Jakarta, Indonesia</div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-value">
+              <a href="https://linkedin.com" target="_blank"
+                >@brutaldeveloper</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <p class="footer-text">© 2024 BRUTAL DEVELOPER. ALL RIGHTS RESERVED.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Custom Cursor
+      const cursor = document.querySelector(".cursor");
+      let mouseX = 0,
+        mouseY = 0;
+      let cursorX = 0,
+        cursorY = 0;
+
+      document.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      function animateCursor() {
+        cursorX += (mouseX - cursorX) * 0.1;
+        cursorY += (mouseY - cursorY) * 0.1;
+
+        cursor.style.left = cursorX - 10 + "px";
+        cursor.style.top = cursorY - 10 + "px";
+
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+
+      // Mobile Menu Toggle
+      const menuToggle = document.querySelector(".menu-toggle");
+      const navLinks = document.querySelector(".nav-links");
+
+      menuToggle.addEventListener("click", () => {
+        menuToggle.classList.toggle("active");
+        navLinks.classList.toggle("active");
+      });
+
+      // Smooth Scrolling
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+
+            // Close mobile menu if open
+            menuToggle.classList.remove("active");
+            navLinks.classList.remove("active");
+          }
+        });
+      });
+
+      // Scroll Animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      // Observe all fade-in elements
+      document.querySelectorAll(".fade-in").forEach((el) => {
+        observer.observe(el);
+      });
+
+      // Counter Animation
+      function animateCounter(element, start, end, duration) {
+        let startTimestamp = null;
+
+        const step = (timestamp) => {
+          if (!startTimestamp) startTimestamp = timestamp;
+          const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+          const current = Math.floor(progress * (end - start) + start);
+
+          element.textContent =
+            current +
+            (end.toString().includes("+") ? "+" : "") +
+            (end.toString().includes("%") ? "%" : "");
+
+          if (progress < 1) {
+            window.requestAnimationFrame(step);
+          }
+        };
+
+        window.requestAnimationFrame(step);
+      }
+
+      // Trigger counter animations when stats section is visible
+      const statsObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const counters = entry.target.querySelectorAll(".stat-number");
+              counters.forEach((counter) => {
+                const text = counter.textContent;
+                const number = parseInt(text.replace(/\D/g, ""));
+                animateCounter(counter, 0, number, 2000);
+              });
+              statsObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+
+      const aboutSection = document.querySelector("#about");
+      if (aboutSection) {
+        statsObserver.observe(aboutSection);
+      }
+
+      // Parallax Effect for Geometric Shapes
+      window.addEventListener("scroll", () => {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * -0.5;
+
+        document
+          .querySelectorAll(".geometric-shape")
+          .forEach((shape, index) => {
+            const speed = (index + 1) * 0.3;
+            shape.style.transform = `translate3d(0, ${
+              scrolled * speed
+            }px, 0) rotate(${scrolled * 0.1}deg)`;
+          });
+      });
+
+      // Hover Effects for Project Cards
+      document.querySelectorAll(".project-card").forEach((card) => {
+        card.addEventListener("mouseenter", () => {
+          card.style.transform = "translate(-8px, -8px) scale(1.02)";
+          card.style.boxShadow = "12px 12px 0px var(--solana-cyan)";
+        });
+
+        card.addEventListener("mouseleave", () => {
+          card.style.transform = "translate(0, 0) scale(1)";
+          card.style.boxShadow = "4px 4px 0px var(--solana-cyan)";
+        });
+      });
+
+      // Add some random movement to floating elements
+      function randomFloat(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      document.querySelectorAll(".floating").forEach((element) => {
+        const delay = randomFloat(0, 2000);
+        const duration = randomFloat(4000, 8000);
+
+        setTimeout(() => {
+          element.style.animation = `float ${duration}ms ease-in-out infinite`;
+        }, delay);
+      });
+
+      // Keyboard Navigation
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          menuToggle.classList.remove("active");
+          navLinks.classList.remove("active");
+        }
+      });
+
+      // Performance optimization: Throttle scroll events
+      function throttle(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+          const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+          };
+          clearTimeout(timeout);
+          timeout = setTimeout(later, wait);
+        };
+      }
+
+      // Apply throttling to scroll events
+      window.addEventListener(
+        "scroll",
+        throttle(() => {
+          const scrolled = window.pageYOffset;
+
+          // Update navbar background opacity based on scroll
+          const nav = document.querySelector("nav");
+          const opacity = Math.min(scrolled / 100, 0.95);
+          nav.style.background = `rgba(26, 26, 46, ${opacity})`;
+        }, 16)
+      );
+
+      console.log("🚀 BRUTAL PORTFOLIO LOADED - Ready to make an impact!");
+    </script>
+  </body>
+</html>
