@@ -1,71 +1,12 @@
-// DOM Elements
-const navToggle = document.getElementById("nav-toggle");
-const navMenu = document.getElementById("nav-menu");
-const navbar = document.getElementById("navbar");
-const contactForm = document.getElementById("contact-form");
-
-// Navigation Toggle
-navToggle?.addEventListener("click", () => {
-  navMenu.classList.toggle("active");
-});
-
-// Close mobile menu when clicking on a link
-document.querySelectorAll(".nav-link").forEach((link) => {
-  link.addEventListener("click", () => {
-    navMenu.classList.remove("active");
-  });
-});
-
-// Navbar scroll effect
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 50) {
-    navbar.style.background = "rgba(255, 255, 255, 0.95)";
-    navbar.style.backdropFilter = "blur(10px)";
-  } else {
-    navbar.style.background = "#FFFFFF";
-    navbar.style.backdropFilter = "none";
-  }
-});
-
-// Active navigation link
-function updateActiveNavLink() {
-  const sections = document.querySelectorAll("section");
-  const navLinks = document.querySelectorAll(".nav-link");
-
-  let current = "";
-
-  sections.forEach((section) => {
-    const sectionTop = section.offsetTop;
-    const sectionHeight = section.clientHeight;
-
-    if (window.pageYOffset >= sectionTop - 200) {
-      current = section.getAttribute("id");
-    }
-  });
-
-  navLinks.forEach((link) => {
-    link.classList.remove("active");
-    if (link.getAttribute("href").substring(1) === current) {
-      link.classList.add("active");
-    }
-  });
-}
-
-window.addEventListener("scroll", updateActiveNavLink);
-
-// Smooth scroll to section
-function scrollToSection(sectionId) {
-  const section = document.getElementById(sectionId);
-  if (section) {
-    const navbarHeight = navbar.offsetHeight;
-    const sectionTop = section.offsetTop - navbarHeight;
-
-    window.scrollTo({
-      top: sectionTop,
+// Smooth scroll for internal links
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", function (e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute("href")).scrollIntoView({
       behavior: "smooth",
     });
-  }
-}
+  });
+});
 
 // Intersection Observer for animations
 const observerOptions = {
@@ -76,181 +17,99 @@ const observerOptions = {
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      entry.target.classList.add("fade-in");
-
-      // Animate skill progress bars
-      if (entry.target.classList.contains("skill-category")) {
-        const progressBars = entry.target.querySelectorAll(".progress-bar");
-        progressBars.forEach((bar) => {
-          const width = bar.getAttribute("data-width");
-          setTimeout(() => {
-            bar.style.width = width + "%";
-          }, 200);
-        });
-      }
-
-      // Animate stat numbers
-      if (entry.target.classList.contains("stat-card")) {
-        const number = entry.target.querySelector(".stat-number");
-        const finalNumber = parseInt(number.textContent);
-        animateNumber(number, finalNumber);
-      }
+      entry.target.style.opacity = "1";
+      entry.target.style.transform = "translateY(0)";
     }
   });
 }, observerOptions);
 
-// Observe elements for animation
-document
-  .querySelectorAll(".card, .section-title, .hero-text, .hero-image")
-  .forEach((el) => {
-    observer.observe(el);
-  });
-
-// Animate numbers
-function animateNumber(element, target) {
-  const duration = 2000;
-  const start = 0;
-  const increment = target / (duration / 16);
-  let current = start;
-
-  const timer = setInterval(() => {
-    current += increment;
-    if (current >= target) {
-      current = target;
-      clearInterval(timer);
-    }
-    element.textContent = Math.floor(current) + "+";
-  }, 16);
-}
-
-// Contact form handling
-contactForm?.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const formData = new FormData(contactForm);
-  const data = Object.fromEntries(formData);
-
-  // Show loading state
-  const submitBtn = contactForm.querySelector('button[type="submit"]');
-  const originalText = submitBtn.innerHTML;
-  submitBtn.innerHTML =
-    '<span class="material-icons">hourglass_empty</span> Mengirim...';
-  submitBtn.disabled = true;
-
-  try {
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    // Show success message
-    showNotification("Pesan berhasil dikirim! Terima kasih.", "success");
-    contactForm.reset();
-  } catch (error) {
-    // Show error message
-    showNotification("Terjadi kesalahan. Silakan coba lagi.", "error");
-  } finally {
-    // Restore button
-    submitBtn.innerHTML = originalText;
-    submitBtn.disabled = false;
-  }
+// Observe all bento items
+document.querySelectorAll(".bento-item").forEach((item) => {
+  observer.observe(item);
 });
 
-// Notification system
-function showNotification(message, type = "info") {
-  const notification = document.createElement("div");
-  notification.className = `notification notification-${type}`;
-  notification.innerHTML = `
-        <span class="material-icons">
-            ${
-              type === "success"
-                ? "check_circle"
-                : type === "error"
-                ? "error"
-                : "info"
-            }
-        </span>
-        <span>${message}</span>
-    `;
+// Theme toggle functionality
+let isDarkMode = true;
 
-  // Add notification styles
-  const styles = `
-        .notification {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            background: var(--surface);
-            color: var(--on-surface);
-            padding: var(--spacing-md);
-            border-radius: var(--border-radius);
-            box-shadow: var(--elevation-3);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            z-index: 1001;
-            transform: translateX(400px);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .notification-success {
-            border-left: 4px solid #10B981;
-        }
-        
-        .notification-error {
-            border-left: 4px solid #EF4444;
-        }
-        
-        .notification-info {
-            border-left: 4px solid var(--primary-color);
-        }
-        
-        .notification.show {
-            transform: translateX(0);
-        }
-    `;
+function toggleTheme() {
+  const body = document.body;
+  const toggle = document.querySelector(".theme-toggle");
 
-  // Add styles if not already added
-  if (!document.querySelector("#notification-styles")) {
-    const styleSheet = document.createElement("style");
-    styleSheet.id = "notification-styles";
-    styleSheet.textContent = styles;
-    document.head.appendChild(styleSheet);
+  if (isDarkMode) {
+    // Switch to light mode
+    body.style.background = "linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%)";
+    body.style.color = "#1e293b";
+    toggle.innerHTML = "☀️";
+
+    // Update bento item backgrounds for light mode
+    document.querySelectorAll(".bento-item").forEach((item) => {
+      item.style.border = "1px solid rgba(30, 41, 59, 0.1)";
+    });
+
+    isDarkMode = false;
+  } else {
+    // Switch back to dark mode
+    body.style.background = "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)";
+    body.style.color = "#f8fafc";
+    toggle.innerHTML = "🌙";
+
+    // Reset bento item backgrounds for dark mode
+    document.querySelectorAll(".bento-item").forEach((item) => {
+      item.style.border = "1px solid rgba(255, 255, 255, 0.1)";
+    });
+
+    isDarkMode = true;
   }
-
-  document.body.appendChild(notification);
-
-  // Show notification
-  requestAnimationFrame(() => {
-    notification.classList.add("show");
-  });
-
-  // Remove notification after 5 seconds
-  setTimeout(() => {
-    notification.style.transform = "translateX(400px)";
-    setTimeout(() => {
-      document.body.removeChild(notification);
-    }, 300);
-  }, 5000);
 }
 
-// Ripple effect for buttons
-document.querySelectorAll(".ripple").forEach((button) => {
-  button.addEventListener("click", function (e) {
+// Add hover effects to bento items
+document.querySelectorAll(".bento-item").forEach((item) => {
+  item.addEventListener("mouseenter", function () {
+    this.style.transform = "translateY(-5px) scale(1.02)";
+  });
+
+  item.addEventListener("mouseleave", function () {
+    this.style.transform = "translateY(0) scale(1)";
+  });
+});
+
+// Typing effect for header
+function typeWriter(element, text, speed = 100) {
+  let i = 0;
+  element.innerHTML = "";
+
+  function type() {
+    if (i < text.length) {
+      element.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(type, speed);
+    }
+  }
+
+  type();
+}
+
+// Initialize typing effect on page load
+window.addEventListener("load", () => {
+  const headerText = document.querySelector(".header p");
+  const originalText = headerText.textContent;
+  typeWriter(headerText, originalText, 50);
+});
+
+// Add click effects to contact links
+document.querySelectorAll(".contact-link").forEach((link) => {
+  link.addEventListener("click", function (e) {
+    // Create ripple effect
+    const ripple = document.createElement("span");
     const rect = this.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height);
+    const size = Math.max(rect.height, rect.width);
     const x = e.clientX - rect.left - size / 2;
     const y = e.clientY - rect.top - size / 2;
 
-    const ripple = document.createElement("span");
-    ripple.style.cssText = `
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(0);
-            animation: ripple-animation 0.6s linear;
-            left: ${x}px;
-            top: ${y}px;
-            width: ${size}px;
-            height: ${size}px;
-        `;
+    ripple.style.width = ripple.style.height = size + "px";
+    ripple.style.left = x + "px";
+    ripple.style.top = y + "px";
+    ripple.classList.add("ripple");
 
     this.appendChild(ripple);
 
@@ -260,84 +119,62 @@ document.querySelectorAll(".ripple").forEach((button) => {
   });
 });
 
-// Add ripple animation styles
-const rippleStyles = `
-    @keyframes ripple-animation {
-        to {
-            transform: scale(4);
-            opacity: 0;
-        }
+// Add CSS for ripple effect
+const rippleStyle = document.createElement("style");
+rippleStyle.textContent = `
+            .ripple {
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(62, 207, 142, 0.6);
+                transform: scale(0);
+                animation: ripple-animation 0.6s linear;
+                pointer-events: none;
+            }
+            
+            @keyframes ripple-animation {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+document.head.appendChild(rippleStyle);
+
+// Counter animation for stats
+function animateCounter(element, target, duration = 2000) {
+  let start = 0;
+  const increment = target / (duration / 16);
+
+  function updateCounter() {
+    start += increment;
+    if (start < target) {
+      element.textContent = Math.floor(start) + (target > 999 ? "k" : "") + "+";
+      requestAnimationFrame(updateCounter);
+    } else {
+      element.textContent = target + (target > 999 ? "k" : "") + "+";
     }
-`;
+  }
 
-const styleSheet = document.createElement("style");
-styleSheet.textContent = rippleStyles;
-document.head.appendChild(styleSheet);
+  updateCounter();
+}
 
-// Parallax effect for floating cards
-window.addEventListener("scroll", () => {
-  const scrolled = window.pageYOffset;
-  const parallaxElements = document.querySelectorAll(".floating-card");
-
-  parallaxElements.forEach((element, index) => {
-    const speed = 0.5 + index * 0.1;
-    const yPos = scrolled * speed;
-    element.style.transform = `translateY(${yPos}px)`;
-  });
-});
-
-// Lazy loading for images
-const imageObserver = new IntersectionObserver((entries) => {
+// Animate counters when stats section is visible
+const statsObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      const img = entry.target;
-      img.src = img.dataset.src || img.src;
-      img.classList.add("loaded");
-      imageObserver.unobserve(img);
+      const statNumbers = entry.target.querySelectorAll(".stat-number");
+      statNumbers.forEach((num, index) => {
+        const targets = [50, 5, 20, 100];
+        setTimeout(() => {
+          animateCounter(num, targets[index]);
+        }, index * 200);
+      });
+      statsObserver.unobserve(entry.target);
     }
   });
 });
 
-document.querySelectorAll("img").forEach((img) => {
-  imageObserver.observe(img);
-});
-
-// Keyboard navigation
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    navMenu.classList.remove("active");
-  }
-});
-
-// Initialize
-document.addEventListener("DOMContentLoaded", () => {
-  // Set initial active nav link
-  updateActiveNavLink();
-
-  // Add loading class to body
-  document.body.classList.add("loaded");
-
-  console.log("Portfolio Material Design loaded successfully! 🚀");
-});
-
-// Performance optimization
-window.addEventListener("load", () => {
-  // Remove loading states
-  document.querySelectorAll(".loading").forEach((el) => {
-    el.classList.remove("loading");
-  });
-});
-
-// Service Worker registration (optional)
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker
-      .register("/sw.js")
-      .then((registration) => {
-        console.log("SW registered: ", registration);
-      })
-      .catch((registrationError) => {
-        console.log("SW registration failed: ", registrationError);
-      });
-  });
+const statsSection = document.querySelector(".stats");
+if (statsSection) {
+  statsObserver.observe(statsSection);
 }
