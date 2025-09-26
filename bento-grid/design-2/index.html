@@ -3,15 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio - Material Design</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
+    <title>Portfolio - Bento Grid Design</title>
     <style>
       * {
         margin: 0;
@@ -19,604 +11,360 @@
         box-sizing: border-box;
       }
 
-      :root {
-        --primary-color: #ff2d20;
-        --primary-light: #ff5722;
-        --primary-dark: #e53935;
-        --secondary-color: #fff3e0;
-        --accent-color: #ff6f00;
-        --text-primary: #212121;
-        --text-secondary: #757575;
-        --divider-color: #bdbdbd;
-        --surface-color: #ffffff;
-        --background-color: #fafafa;
-        --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-        --shadow-2: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-        --shadow-3: 0 10px 20px rgba(0, 0, 0, 0.19),
-          0 6px 6px rgba(0, 0, 0, 0.23);
-        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
       body {
-        font-family: "Roboto", sans-serif;
-        line-height: 1.6;
-        color: var(--text-primary);
-        background-color: var(--background-color);
-      }
-
-      /* Material Design Button */
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        padding: 12px 24px;
-        border: none;
-        border-radius: 4px;
-        font-size: 14px;
-        font-weight: 500;
-        text-transform: uppercase;
-        text-decoration: none;
-        cursor: pointer;
-        transition: var(--transition);
-        box-shadow: var(--shadow-1);
-        position: relative;
-        overflow: hidden;
-      }
-
-      .btn-primary {
-        background-color: var(--primary-color);
-        color: white;
-      }
-
-      .btn-primary:hover {
-        background-color: var(--primary-dark);
-        box-shadow: var(--shadow-2);
-        transform: translateY(-2px);
-      }
-
-      .btn-outline {
-        background-color: transparent;
-        color: var(--primary-color);
-        border: 2px solid var(--primary-color);
-        box-shadow: none;
-      }
-
-      .btn-outline:hover {
-        background-color: var(--primary-color);
-        color: white;
-        transform: translateY(-2px);
-      }
-
-      /* Material Design Cards */
-      .card {
-        background: var(--surface-color);
-        border-radius: 8px;
-        box-shadow: var(--shadow-1);
-        transition: var(--transition);
-        overflow: hidden;
-      }
-
-      .card:hover {
-        box-shadow: var(--shadow-2);
-        transform: translateY(-4px);
-      }
-
-      .card-content {
-        padding: 24px;
-      }
-
-      /* Navigation */
-      .navbar {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        background: var(--surface-color);
-        box-shadow: var(--shadow-1);
-        z-index: 1000;
-        transition: var(--transition);
-      }
-
-      .navbar.scrolled {
-        box-shadow: var(--shadow-2);
-      }
-
-      .nav-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 24px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 64px;
-      }
-
-      .logo {
-        font-size: 20px;
-        font-weight: 500;
-        color: var(--primary-color);
-        text-decoration: none;
-      }
-
-      .nav-menu {
-        display: flex;
-        list-style: none;
-        gap: 32px;
-      }
-
-      .nav-link {
-        text-decoration: none;
-        color: var(--text-primary);
-        font-weight: 400;
-        transition: var(--transition);
-        position: relative;
-      }
-
-      .nav-link:hover {
-        color: var(--primary-color);
-      }
-
-      .nav-link::after {
-        content: "";
-        position: absolute;
-        bottom: -8px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background-color: var(--primary-color);
-        transition: var(--transition);
-      }
-
-      .nav-link:hover::after {
-        width: 100%;
-      }
-
-      .menu-toggle {
-        display: none;
-        background: none;
-        border: none;
-        font-size: 24px;
-        cursor: pointer;
-        color: var(--text-primary);
-      }
-
-      /* Hero Section */
-      .hero {
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(135deg, #ff2d20 0%, #ff6b35 100%);
         min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(
-          135deg,
-          var(--secondary-color) 0%,
-          var(--background-color) 100%
-        );
-        position: relative;
-        overflow: hidden;
-      }
-
-      .hero::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23FF2D20" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-        opacity: 0.3;
-      }
-
-      .hero-content {
-        text-align: center;
-        max-width: 800px;
-        padding: 0 24px;
-        position: relative;
-        z-index: 1;
-      }
-
-      .hero-title {
-        font-size: 3.5rem;
-        font-weight: 300;
-        margin-bottom: 16px;
-        color: var(--text-primary);
-        opacity: 0;
-        animation: fadeInUp 1s ease forwards 0.3s;
-      }
-
-      .hero-subtitle {
-        font-size: 1.5rem;
-        color: var(--text-secondary);
-        margin-bottom: 32px;
-        opacity: 0;
-        animation: fadeInUp 1s ease forwards 0.6s;
-      }
-
-      .hero-buttons {
-        display: flex;
-        gap: 16px;
-        justify-content: center;
-        flex-wrap: wrap;
-        opacity: 0;
-        animation: fadeInUp 1s ease forwards 0.9s;
-      }
-
-      /* Sections */
-      .section {
-        padding: 80px 0;
+        padding: 20px;
       }
 
       .container {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 0 24px;
       }
 
-      .section-title {
-        font-size: 2.5rem;
-        font-weight: 300;
+      .header {
         text-align: center;
-        margin-bottom: 16px;
-        color: var(--text-primary);
+        margin-bottom: 40px;
+        color: white;
       }
 
-      .section-subtitle {
-        font-size: 1.1rem;
-        color: var(--text-secondary);
-        text-align: center;
-        margin-bottom: 64px;
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
+      .header h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
       }
 
-      /* About Section */
-      .about-grid {
+      .header p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+
+      .bento-grid {
         display: grid;
-        grid-template-columns: 1fr 2fr;
-        gap: 48px;
-        align-items: center;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-auto-rows: minmax(200px, auto);
+        gap: 20px;
+        margin-bottom: 40px;
       }
 
-      .about-image {
-        width: 100%;
-        border-radius: 8px;
-        box-shadow: var(--shadow-2);
-      }
-
-      .about-text {
-        font-size: 1.1rem;
-        line-height: 1.8;
-        color: var(--text-secondary);
-      }
-
-      .skills-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap: 24px;
-        margin-top: 32px;
-      }
-
-      .skill-item {
-        text-align: center;
-        padding: 24px;
-        background: var(--surface-color);
-        border-radius: 8px;
-        box-shadow: var(--shadow-1);
-        transition: var(--transition);
-      }
-
-      .skill-item:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-2);
-      }
-
-      .skill-icon {
-        font-size: 48px;
-        color: var(--primary-color);
-        margin-bottom: 16px;
-      }
-
-      .skill-name {
-        font-weight: 500;
-        color: var(--text-primary);
-      }
-
-      /* Projects Section */
-      .projects-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 32px;
-      }
-
-      .project-card {
+      .bento-item {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
         position: relative;
         overflow: hidden;
       }
 
-      .project-image {
-        width: 100%;
-        height: 250px;
-        object-fit: cover;
-        transition: var(--transition);
+      .bento-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
       }
 
-      .project-overlay {
+      .bento-item::before {
+        content: "";
         position: absolute;
         top: 0;
         left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(255, 45, 32, 0.9);
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #ff2d20, #ff6b35);
+        border-radius: 20px 20px 0 0;
+      }
+
+      /* Grid Layout Variations */
+      .large {
+        grid-column: span 2;
+        grid-row: span 2;
+      }
+
+      .wide {
+        grid-column: span 2;
+      }
+
+      .tall {
+        grid-row: span 2;
+      }
+
+      /* Content Styling */
+      .bento-item h3 {
+        color: #ff2d20;
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        font-weight: 600;
+      }
+
+      .bento-item p {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 15px;
+      }
+
+      /* Profile Section */
+      .profile {
+        text-align: center;
+      }
+
+      .profile-image {
+        width: 120px;
+        height: 120px;
+        background: linear-gradient(135deg, #ff2d20, #ff6b35);
+        border-radius: 50%;
+        margin: 0 auto 20px;
         display: flex;
         align-items: center;
         justify-content: center;
-        opacity: 0;
-        transition: var(--transition);
+        font-size: 3rem;
+        color: white;
+        font-weight: bold;
       }
 
-      .project-card:hover .project-overlay {
-        opacity: 1;
-      }
-
-      .project-card:hover .project-image {
-        transform: scale(1.05);
-      }
-
-      .project-info {
-        padding: 24px;
-      }
-
-      .project-title {
-        font-size: 1.5rem;
-        font-weight: 500;
-        margin-bottom: 8px;
-        color: var(--text-primary);
-      }
-
-      .project-description {
-        color: var(--text-secondary);
-        margin-bottom: 16px;
-      }
-
-      .project-tags {
+      /* Skills Section */
+      .skills-list {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 10px;
       }
 
-      .tag {
-        background: var(--secondary-color);
-        color: var(--primary-color);
-        padding: 4px 12px;
-        border-radius: 16px;
-        font-size: 0.85rem;
+      .skill-tag {
+        background: linear-gradient(135deg, #ff2d20, #ff6b35);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
         font-weight: 500;
       }
 
-      /* Contact Section */
-      .contact {
-        background: var(--primary-color);
-        color: white;
-      }
-
-      .contact .section-title,
-      .contact .section-subtitle {
-        color: white;
-      }
-
-      .contact-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 48px;
-      }
-
-      .contact-info {
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-      }
-
-      .contact-item {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-      }
-
-      .contact-icon {
-        width: 48px;
-        height: 48px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 50%;
+      /* Projects Section */
+      .project-image {
+        width: 100%;
+        height: 150px;
+        background: linear-gradient(135deg, #ff2d20, #ff6b35);
+        border-radius: 10px;
+        margin-bottom: 15px;
         display: flex;
         align-items: center;
         justify-content: center;
+        color: white;
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+
+      /* Contact Form */
+      .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
       }
 
       .form-group {
-        margin-bottom: 24px;
+        display: flex;
+        flex-direction: column;
       }
 
-      .form-label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: 500;
+      .form-group label {
+        color: #ff2d20;
+        font-weight: 600;
+        margin-bottom: 5px;
       }
 
-      .form-input,
-      .form-textarea {
-        width: 100%;
-        padding: 16px;
-        border: none;
-        border-radius: 4px;
-        font-size: 16px;
-        transition: var(--transition);
-        background: rgba(255, 255, 255, 0.9);
+      .form-group input,
+      .form-group textarea {
+        padding: 12px;
+        border: 2px solid #f0f0f0;
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
       }
 
-      .form-input:focus,
-      .form-textarea:focus {
+      .form-group input:focus,
+      .form-group textarea:focus {
         outline: none;
-        background: white;
-        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+        border-color: #ff2d20;
       }
 
-      .form-textarea {
-        resize: vertical;
-        min-height: 120px;
-      }
-
-      /* Footer */
-      .footer {
-        background: var(--text-primary);
+      .submit-btn {
+        background: linear-gradient(135deg, #ff2d20, #ff6b35);
         color: white;
-        text-align: center;
-        padding: 32px 0;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 10px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.3s ease;
       }
 
+      .submit-btn:hover {
+        transform: translateY(-2px);
+      }
+
+      /* Statistics */
+      .stat-item {
+        text-align: center;
+        padding: 20px;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 45, 32, 0.1),
+          rgba(255, 107, 53, 0.1)
+        );
+        border-radius: 15px;
+        margin-bottom: 15px;
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #ff2d20;
+        display: block;
+      }
+
+      .stat-label {
+        color: #666;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* Experience Timeline */
+      .timeline-item {
+        border-left: 3px solid #ff2d20;
+        padding-left: 20px;
+        margin-bottom: 25px;
+        position: relative;
+      }
+
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -8px;
+        top: 0;
+        width: 12px;
+        height: 12px;
+        background: #ff2d20;
+        border-radius: 50%;
+      }
+
+      .timeline-year {
+        color: #ff2d20;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .timeline-title {
+        color: #333;
+        font-weight: 600;
+        margin: 5px 0;
+      }
+
+      .timeline-description {
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      /* Social Links */
       .social-links {
         display: flex;
         justify-content: center;
-        gap: 24px;
-        margin-bottom: 24px;
+        gap: 20px;
+        margin-top: 20px;
       }
 
       .social-link {
-        width: 48px;
-        height: 48px;
-        background: var(--primary-color);
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #ff2d20, #ff6b35);
+        color: white;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         text-decoration: none;
-        color: white;
-        transition: var(--transition);
+        font-weight: bold;
+        transition: transform 0.3s ease;
       }
 
       .social-link:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-2);
-      }
-
-      /* Animations */
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+        transform: scale(1.1);
       }
 
       /* Responsive Design */
       @media (max-width: 768px) {
-        .menu-toggle {
-          display: block;
-        }
-
-        .nav-menu {
-          position: fixed;
-          top: 64px;
-          left: -100%;
-          width: 100%;
-          height: calc(100vh - 64px);
-          background: var(--surface-color);
-          flex-direction: column;
-          justify-content: flex-start;
-          align-items: center;
-          padding-top: 48px;
-          transition: var(--transition);
-          box-shadow: var(--shadow-2);
-        }
-
-        .nav-menu.active {
-          left: 0;
-        }
-
-        .nav-link {
-          padding: 16px 0;
-          font-size: 18px;
-        }
-
-        .hero-title {
-          font-size: 2.5rem;
-        }
-
-        .hero-subtitle {
-          font-size: 1.2rem;
-        }
-
-        .hero-buttons {
-          flex-direction: column;
-          align-items: center;
-        }
-
-        .about-grid {
-          grid-template-columns: 1fr;
-          text-align: center;
-        }
-
-        .skills-grid {
-          grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-        }
-
-        .projects-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .contact-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .section-title {
+        .header h1 {
           font-size: 2rem;
         }
 
-        .container {
-          padding: 0 16px;
+        .header p {
+          font-size: 1rem;
+        }
+
+        .bento-grid {
+          grid-template-columns: 1fr;
+          gap: 15px;
+        }
+
+        .large,
+        .wide,
+        .tall {
+          grid-column: span 1;
+          grid-row: span 1;
+        }
+
+        .bento-item {
+          padding: 20px;
+        }
+
+        body {
+          padding: 10px;
+        }
+
+        .profile-image {
+          width: 100px;
+          height: 100px;
+          font-size: 2.5rem;
         }
       }
 
       @media (max-width: 480px) {
-        .hero-title {
+        .header h1 {
+          font-size: 1.5rem;
+        }
+
+        .bento-item h3 {
+          font-size: 1.2rem;
+        }
+
+        .stat-number {
           font-size: 2rem;
         }
 
-        .section {
-          padding: 60px 0;
+        .social-links {
+          gap: 15px;
         }
 
-        .projects-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .project-card {
-          margin: 0 -16px;
+        .social-link {
+          width: 40px;
+          height: 40px;
         }
       }
 
-      /* Floating Action Button */
-      .fab {
-        position: fixed;
-        bottom: 24px;
-        right: 24px;
-        width: 56px;
-        height: 56px;
-        background: var(--primary-color);
-        border-radius: 50%;
-        border: none;
-        color: white;
-        font-size: 24px;
-        cursor: pointer;
-        box-shadow: var(--shadow-3);
-        transition: var(--transition);
-        z-index: 1000;
+      /* Animation Classes */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease;
       }
 
-      .fab:hover {
-        transform: scale(1.1);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2),
-          0 8px 8px rgba(0, 0, 0, 0.26);
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
       }
 
       /* Loading Animation */
@@ -624,9 +372,9 @@
         display: inline-block;
         width: 20px;
         height: 20px;
-        border: 3px solid rgba(255, 255, 255, 0.3);
+        border: 3px solid rgba(255, 45, 32, 0.3);
         border-radius: 50%;
-        border-top-color: #fff;
+        border-top-color: #ff2d20;
         animation: spin 1s ease-in-out infinite;
       }
 
@@ -638,411 +386,237 @@
     </style>
   </head>
   <body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-      <div class="nav-container">
-        <a href="#home" class="logo">Portfolio</a>
-        <ul class="nav-menu" id="nav-menu">
-          <li><a href="#home" class="nav-link">Home</a></li>
-          <li><a href="#about" class="nav-link">About</a></li>
-          <li><a href="#projects" class="nav-link">Projects</a></li>
-          <li><a href="#contact" class="nav-link">Contact</a></li>
-        </ul>
-        <button class="menu-toggle" id="menu-toggle">
-          <span class="material-icons">menu</span>
-        </button>
+    <div class="container">
+      <!-- Header -->
+      <div class="header fade-in">
+        <h1>John Doe</h1>
+        <p>Full Stack Laravel Developer</p>
       </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-      <div class="hero-content">
-        <h1 class="hero-title">John Doe</h1>
-        <p class="hero-subtitle">Full Stack Developer & Laravel Enthusiast</p>
-        <div class="hero-buttons">
-          <a href="#projects" class="btn btn-primary">
-            <span class="material-icons" style="margin-right: 8px">work</span>
-            View My Work
-          </a>
-          <a href="#contact" class="btn btn-outline">
-            <span class="material-icons" style="margin-right: 8px"
-              >contact_mail</span
-            >
-            Contact Me
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="section" id="about">
-      <div class="container">
-        <h2 class="section-title">About Me</h2>
-        <p class="section-subtitle">
-          Passionate developer with expertise in modern web technologies
-        </p>
-
-        <div class="about-grid">
-          <div>
-            <img
-              src="https://placeholder-image-service.onrender.com/image/400x500?prompt=Professional portrait of a young developer in casual business attire with a modern office background&id=7ecedd17-5a03-4306-a2bb-7b60f212a2e4&customer_id=cus_SZOmLuajy19nfC"
-              alt="Professional portrait of a young developer in casual business attire with a modern office background"
-              class="about-image"
-            />
-          </div>
-          <div>
-            <p class="about-text">
-              I'm a passionate full-stack developer with over 5 years of
-              experience creating modern, responsive web applications. I
-              specialize in Laravel, Vue.js, and modern JavaScript frameworks.
-              My goal is to build clean, efficient, and user-friendly
-              applications that solve real-world problems.
+      <!-- Bento Grid -->
+      <div class="bento-grid">
+        <!-- Profile Card -->
+        <div class="bento-item large fade-in">
+          <div class="profile">
+            <div class="profile-image">JD</div>
+            <h3>Tentang Saya</h3>
+            <p>
+              Saya adalah seorang Full Stack Developer dengan spesialisasi dalam
+              Laravel dan teknologi web modern. Berpengalaman dalam membangun
+              aplikasi web yang scalable dan user-friendly.
             </p>
-            <p class="about-text">
-              When I'm not coding, you can find me exploring new technologies,
-              contributing to open-source projects, or sharing knowledge with
-              the developer community through blog posts and tutorials.
+            <p>
+              Passionate tentang clean code, best practices, dan selalu eager
+              untuk mempelajari teknologi terbaru.
             </p>
-
-            <div class="skills-grid">
-              <div class="skill-item">
-                <div class="skill-icon">
-                  <span class="material-icons">code</span>
-                </div>
-                <div class="skill-name">Laravel</div>
-              </div>
-              <div class="skill-item">
-                <div class="skill-icon">
-                  <span class="material-icons">javascript</span>
-                </div>
-                <div class="skill-name">JavaScript</div>
-              </div>
-              <div class="skill-item">
-                <div class="skill-icon">
-                  <span class="material-icons">web</span>
-                </div>
-                <div class="skill-name">Vue.js</div>
-              </div>
-              <div class="skill-item">
-                <div class="skill-icon">
-                  <span class="material-icons">storage</span>
-                </div>
-                <div class="skill-name">MySQL</div>
-              </div>
-              <div class="skill-item">
-                <div class="skill-icon">
-                  <span class="material-icons">cloud</span>
-                </div>
-                <div class="skill-name">AWS</div>
-              </div>
-              <div class="skill-item">
-                <div class="skill-icon">
-                  <span class="material-icons">design_services</span>
-                </div>
-                <div class="skill-name">UI/UX</div>
-              </div>
+            <div class="social-links">
+              <a href="#" class="social-link">GH</a>
+              <a href="#" class="social-link">LI</a>
+              <a href="#" class="social-link">TW</a>
+              <a href="#" class="social-link">IG</a>
             </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Projects Section -->
-    <section class="section" id="projects">
-      <div class="container">
-        <h2 class="section-title">Featured Projects</h2>
-        <p class="section-subtitle">
-          Here are some of my recent works that showcase my skills and
-          creativity
-        </p>
-
-        <div class="projects-grid">
-          <div class="card project-card">
-            <img
-              src="https://placeholder-image-service.onrender.com/image/400x250?prompt=Modern e-commerce website interface showing clean product listings and shopping cart functionality&id=7ecedd17-5a03-4306-a2bb-7b60f212a2e4&customer_id=cus_SZOmLuajy19nfC"
-              alt="Modern e-commerce website interface showing clean product listings and shopping cart functionality"
-              class="project-image"
-            />
-            <div class="project-overlay">
-              <div style="text-align: center">
-                <a
-                  href="#"
-                  class="btn"
-                  style="
-                    background: white;
-                    color: var(--primary-color);
-                    margin: 8px;
-                  "
-                >
-                  <span class="material-icons" style="margin-right: 8px"
-                    >visibility</span
-                  >
-                  View Live
-                </a>
-                <a
-                  href="#"
-                  class="btn"
-                  style="
-                    background: rgba(255, 255, 255, 0.1);
-                    color: white;
-                    margin: 8px;
-                  "
-                >
-                  <span class="material-icons" style="margin-right: 8px"
-                    >code</span
-                  >
-                  View Code
-                </a>
-              </div>
-            </div>
-            <div class="project-info">
-              <h3 class="project-title">E-Commerce Platform</h3>
-              <p class="project-description">
-                A full-featured e-commerce platform built with Laravel and
-                Vue.js, featuring user authentication, product management, and
-                payment integration.
-              </p>
-              <div class="project-tags">
-                <span class="tag">Laravel</span>
-                <span class="tag">Vue.js</span>
-                <span class="tag">MySQL</span>
-                <span class="tag">Stripe</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card project-card">
-            <img
-              src="https://placeholder-image-service.onrender.com/image/400x250?prompt=Task management dashboard with kanban boards, charts, and project tracking interface&id=7ecedd17-5a03-4306-a2bb-7b60f212a2e4&customer_id=cus_SZOmLuajy19nfC"
-              alt="Task management dashboard with kanban boards, charts, and project tracking interface"
-              class="project-image"
-            />
-            <div class="project-overlay">
-              <div style="text-align: center">
-                <a
-                  href="#"
-                  class="btn"
-                  style="
-                    background: white;
-                    color: var(--primary-color);
-                    margin: 8px;
-                  "
-                >
-                  <span class="material-icons" style="margin-right: 8px"
-                    >visibility</span
-                  >
-                  View Live
-                </a>
-                <a
-                  href="#"
-                  class="btn"
-                  style="
-                    background: rgba(255, 255, 255, 0.1);
-                    color: white;
-                    margin: 8px;
-                  "
-                >
-                  <span class="material-icons" style="margin-right: 8px"
-                    >code</span
-                  >
-                  View Code
-                </a>
-              </div>
-            </div>
-            <div class="project-info">
-              <h3 class="project-title">Task Management App</h3>
-              <p class="project-description">
-                A collaborative task management application with real-time
-                updates, team collaboration features, and advanced project
-                analytics.
-              </p>
-              <div class="project-tags">
-                <span class="tag">Laravel</span>
-                <span class="tag">React</span>
-                <span class="tag">WebSocket</span>
-                <span class="tag">PostgreSQL</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card project-card">
-            <img
-              src="https://placeholder-image-service.onrender.com/image/400x250?prompt=RESTful API documentation interface with endpoint listings, code examples, and testing tools&id=7ecedd17-5a03-4306-a2bb-7b60f212a2e4&customer_id=cus_SZOmLuajy19nfC"
-              alt="RESTful API documentation interface with endpoint listings, code examples, and testing tools"
-              class="project-image"
-            />
-            <div class="project-overlay">
-              <div style="text-align: center">
-                <a
-                  href="#"
-                  class="btn"
-                  style="
-                    background: white;
-                    color: var(--primary-color);
-                    margin: 8px;
-                  "
-                >
-                  <span class="material-icons" style="margin-right: 8px"
-                    >visibility</span
-                  >
-                  View Live
-                </a>
-                <a
-                  href="#"
-                  class="btn"
-                  style="
-                    background: rgba(255, 255, 255, 0.1);
-                    color: white;
-                    margin: 8px;
-                  "
-                >
-                  <span class="material-icons" style="margin-right: 8px"
-                    >code</span
-                  >
-                  View Code
-                </a>
-              </div>
-            </div>
-            <div class="project-info">
-              <h3 class="project-title">RESTful API Service</h3>
-              <p class="project-description">
-                A robust RESTful API service with comprehensive documentation,
-                rate limiting, caching, and extensive testing coverage.
-              </p>
-              <div class="project-tags">
-                <span class="tag">Laravel</span>
-                <span class="tag">API</span>
-                <span class="tag">Redis</span>
-                <span class="tag">JWT</span>
-              </div>
-            </div>
+        <!-- Skills Card -->
+        <div class="bento-item wide fade-in">
+          <h3>Keahlian Teknis</h3>
+          <div class="skills-list">
+            <span class="skill-tag">Laravel</span>
+            <span class="skill-tag">PHP</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">Vue.js</span>
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">MySQL</span>
+            <span class="skill-tag">PostgreSQL</span>
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">AWS</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">REST API</span>
+            <span class="skill-tag">GraphQL</span>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section class="section contact" id="contact">
-      <div class="container">
-        <h2 class="section-title">Get In Touch</h2>
-        <p class="section-subtitle">
-          Let's discuss your project or just say hello!
-        </p>
-
-        <div class="contact-grid">
-          <div class="contact-info">
-            <div class="contact-item">
-              <div class="contact-icon">
-                <span class="material-icons">email</span>
-              </div>
-              <div>
-                <h4>Email</h4>
-                <p>john.doe@example.com</p>
-              </div>
-            </div>
-            <div class="contact-item">
-              <div class="contact-icon">
-                <span class="material-icons">phone</span>
-              </div>
-              <div>
-                <h4>Phone</h4>
-                <p>+1 (555) 123-4567</p>
-              </div>
-            </div>
-            <div class="contact-item">
-              <div class="contact-icon">
-                <span class="material-icons">location_on</span>
-              </div>
-              <div>
-                <h4>Location</h4>
-                <p>San Francisco, CA</p>
-              </div>
-            </div>
+        <!-- Statistics Card -->
+        <div class="bento-item fade-in">
+          <h3>Statistik</h3>
+          <div class="stat-item">
+            <span class="stat-number">5+</span>
+            <span class="stat-label">Tahun Pengalaman</span>
           </div>
+          <div class="stat-item">
+            <span class="stat-number">50+</span>
+            <span class="stat-label">Proyek Selesai</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Kepuasan Klien</span>
+          </div>
+        </div>
 
-          <form class="contact-form" id="contact-form">
-            <div class="form-group">
-              <label for="name" class="form-label">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                class="form-input"
-                required
-              />
+        <!-- Project Card 1 -->
+        <div class="bento-item fade-in">
+          <div class="project-image">E-Commerce</div>
+          <h3>Sistem E-Commerce</h3>
+          <p>
+            Platform e-commerce lengkap dengan fitur payment gateway, inventory
+            management, dan admin dashboard menggunakan Laravel dan Vue.js.
+          </p>
+        </div>
+
+        <!-- Project Card 2 -->
+        <div class="bento-item fade-in">
+          <div class="project-image">CRM</div>
+          <h3>Customer Management</h3>
+          <p>
+            Sistem CRM untuk mengelola customer, lead tracking, dan sales
+            pipeline dengan reporting dashboard yang komprehensif.
+          </p>
+        </div>
+
+        <!-- Experience Card -->
+        <div class="bento-item tall fade-in">
+          <h3>Pengalaman Kerja</h3>
+          <div class="timeline-item">
+            <div class="timeline-year">2022 - Sekarang</div>
+            <div class="timeline-title">Senior Laravel Developer</div>
+            <div class="timeline-description">PT Tech Innovation Indonesia</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2020 - 2022</div>
+            <div class="timeline-title">Full Stack Developer</div>
+            <div class="timeline-description">CV Digital Solutions</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2019 - 2020</div>
+            <div class="timeline-title">Junior Web Developer</div>
+            <div class="timeline-description">Startup Teknologi ABC</div>
+          </div>
+        </div>
+
+        <!-- Services Card -->
+        <div class="bento-item fade-in">
+          <h3>Layanan</h3>
+          <p>
+            <strong>Web Development:</strong> Aplikasi web custom dengan Laravel
+          </p>
+          <p><strong>API Development:</strong> RESTful API dan microservices</p>
+          <p>
+            <strong>Database Design:</strong> Optimasi dan arsitektur database
+          </p>
+          <p>
+            <strong>Consultation:</strong> Technical consulting dan code review
+          </p>
+        </div>
+
+        <!-- Contact Card -->
+        <div class="bento-item wide fade-in">
+          <h3>Hubungi Saya</h3>
+          <form class="contact-form" id="contactForm">
+            <div style="display: flex; gap: 15px">
+              <div class="form-group" style="flex: 1">
+                <label for="name">Nama</label>
+                <input type="text" id="name" name="name" required />
+              </div>
+              <div class="form-group" style="flex: 1">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required />
+              </div>
             </div>
             <div class="form-group">
-              <label for="email" class="form-label">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                class="form-input"
-                required
-              />
+              <label for="subject">Subjek</label>
+              <input type="text" id="subject" name="subject" required />
             </div>
             <div class="form-group">
-              <label for="message" class="form-label">Message</label>
+              <label for="message">Pesan</label>
               <textarea
                 id="message"
                 name="message"
-                class="form-textarea"
+                rows="4"
                 required
               ></textarea>
             </div>
-            <button
-              type="submit"
-              class="btn"
-              style="background: white; color: var(--primary-color)"
-            >
-              <span class="material-icons" style="margin-right: 8px">send</span>
-              Send Message
+            <button type="submit" class="submit-btn" id="submitBtn">
+              <span id="btnText">Kirim Pesan</span>
+              <span
+                id="btnLoading"
+                class="loading"
+                style="display: none"
+              ></span>
             </button>
           </form>
         </div>
       </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <div class="social-links">
-          <a href="#" class="social-link">
-            <span class="material-icons">code</span>
-          </a>
-          <a href="#" class="social-link">
-            <span class="material-icons">link</span>
-          </a>
-          <a href="#" class="social-link">
-            <span class="material-icons">mail</span>
-          </a>
-          <a href="#" class="social-link">
-            <span class="material-icons">person</span>
-          </a>
-        </div>
-        <p>&copy; 2024 John Doe. All rights reserved.</p>
-      </div>
-    </footer>
-
-    <!-- Floating Action Button -->
-    <button class="fab" id="scroll-top">
-      <span class="material-icons">keyboard_arrow_up</span>
-    </button>
+    </div>
 
     <script>
-      // Mobile Navigation Toggle
-      const menuToggle = document.getElementById("menu-toggle");
-      const navMenu = document.getElementById("nav-menu");
+      // Intersection Observer for fade-in animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
 
-      menuToggle.addEventListener("click", () => {
-        navMenu.classList.toggle("active");
-        const icon = menuToggle.querySelector(".material-icons");
-        icon.textContent = navMenu.classList.contains("active")
-          ? "close"
-          : "menu";
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      // Observe all fade-in elements
+      document.querySelectorAll(".fade-in").forEach((el) => {
+        observer.observe(el);
       });
 
-      // Smooth Scrolling
+      // Contact form handling
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const submitBtn = document.getElementById("submitBtn");
+          const btnText = document.getElementById("btnText");
+          const btnLoading = document.getElementById("btnLoading");
+
+          // Show loading state
+          btnText.style.display = "none";
+          btnLoading.style.display = "inline-block";
+          submitBtn.disabled = true;
+
+          // Get form data
+          const formData = new FormData(this);
+          const data = Object.fromEntries(formData);
+
+          // Simulate API call
+          setTimeout(() => {
+            // Hide loading state
+            btnText.style.display = "inline-block";
+            btnLoading.style.display = "none";
+            submitBtn.disabled = false;
+
+            // Show success message
+            alert(
+              "Terima kasih! Pesan Anda telah terkirim. Saya akan segera merespons."
+            );
+
+            // Reset form
+            this.reset();
+          }, 2000);
+        });
+
+      // Add hover effects for bento items
+      document.querySelectorAll(".bento-item").forEach((item) => {
+        item.addEventListener("mouseenter", function () {
+          this.style.transform = "translateY(-5px) scale(1.02)";
+        });
+
+        item.addEventListener("mouseleave", function () {
+          this.style.transform = "translateY(0) scale(1)";
+        });
+      });
+
+      // Smooth scrolling for anchor links
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener("click", function (e) {
           e.preventDefault();
@@ -1052,156 +626,122 @@
               behavior: "smooth",
               block: "start",
             });
-            // Close mobile menu if open
-            navMenu.classList.remove("active");
-            menuToggle.querySelector(".material-icons").textContent = "menu";
           }
         });
       });
 
-      // Navbar Scroll Effect
-      const navbar = document.getElementById("navbar");
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) {
-          navbar.classList.add("scrolled");
+      // Dynamic greeting based on time
+      function updateGreeting() {
+        const hour = new Date().getHours();
+        const headerText = document.querySelector(".header p");
+        let greeting = "Full Stack Laravel Developer";
+
+        if (hour < 12) {
+          greeting = "Selamat Pagi! " + greeting;
+        } else if (hour < 17) {
+          greeting = "Selamat Siang! " + greeting;
         } else {
-          navbar.classList.remove("scrolled");
-        }
-      });
-
-      // Scroll to Top Button
-      const scrollTopBtn = document.getElementById("scroll-top");
-
-      window.addEventListener("scroll", () => {
-        if (window.pageYOffset > 300) {
-          scrollTopBtn.style.display = "flex";
-        } else {
-          scrollTopBtn.style.display = "none";
-        }
-      });
-
-      scrollTopBtn.addEventListener("click", () => {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
-      });
-
-      // Contact Form Handling
-      const contactForm = document.getElementById("contact-form");
-      contactForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        const submitBtn = this.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
-
-        // Show loading state
-        submitBtn.innerHTML = '<div class="loading"></div> Sending...';
-        submitBtn.disabled = true;
-
-        // Simulate form submission (replace with actual form handling)
-        setTimeout(() => {
-          alert("Message sent successfully! I'll get back to you soon.");
-          this.reset();
-          submitBtn.innerHTML = originalText;
-          submitBtn.disabled = false;
-        }, 2000);
-      });
-
-      // Intersection Observer for Animations
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px",
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateY(0)";
-          }
-        });
-      }, observerOptions);
-
-      // Animate elements on scroll
-      document
-        .querySelectorAll(".card, .skill-item, .contact-item")
-        .forEach((el) => {
-          el.style.opacity = "0";
-          el.style.transform = "translateY(30px)";
-          el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
-          observer.observe(el);
-        });
-
-      // Active Navigation Link
-      const sections = document.querySelectorAll("section");
-      const navLinks = document.querySelectorAll(".nav-link");
-
-      window.addEventListener("scroll", () => {
-        let current = "";
-        sections.forEach((section) => {
-          const sectionTop = section.offsetTop;
-          const sectionHeight = section.clientHeight;
-          if (scrollY >= sectionTop - 200) {
-            current = section.getAttribute("id");
-          }
-        });
-
-        navLinks.forEach((link) => {
-          link.classList.remove("active");
-          if (link.getAttribute("href") === `#${current}`) {
-            link.classList.add("active");
-          }
-        });
-      });
-
-      // Material Design Ripple Effect
-      function createRipple(event) {
-        const button = event.currentTarget;
-        const circle = document.createElement("span");
-        const diameter = Math.max(button.clientWidth, button.clientHeight);
-        const radius = diameter / 2;
-
-        circle.style.width = circle.style.height = `${diameter}px`;
-        circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
-        circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
-        circle.classList.add("ripple");
-
-        const ripple = button.getElementsByClassName("ripple")[0];
-        if (ripple) {
-          ripple.remove();
+          greeting = "Selamat Malam! " + greeting;
         }
 
-        button.appendChild(circle);
+        headerText.textContent = greeting;
       }
 
-      // Add ripple effect to buttons
-      document.querySelectorAll(".btn").forEach((btn) => {
-        btn.addEventListener("click", createRipple);
+      // Initialize greeting
+      updateGreeting();
+
+      // Add parallax effect to background
+      window.addEventListener("scroll", () => {
+        const scrolled = window.pageYOffset;
+        const parallax = scrolled * 0.5;
+        document.body.style.backgroundPosition = `center ${parallax}px`;
       });
 
-      // Add ripple styles
-      const rippleStyle = document.createElement("style");
-      rippleStyle.textContent = `
-            .btn {
-                position: relative;
-                overflow: hidden;
-            }
-            .ripple {
-                position: absolute;
-                border-radius: 50%;
-                transform: scale(0);
-                animation: ripple 600ms linear;
-                background-color: rgba(255, 255, 255, 0.6);
-            }
-            @keyframes ripple {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
-            }
-        `;
-      document.head.appendChild(rippleStyle);
+      // Skills animation on hover
+      document.querySelectorAll(".skill-tag").forEach((skill) => {
+        skill.addEventListener("mouseenter", function () {
+          this.style.transform = "scale(1.1) rotate(2deg)";
+          this.style.boxShadow = "0 5px 15px rgba(255, 45, 32, 0.3)";
+        });
+
+        skill.addEventListener("mouseleave", function () {
+          this.style.transform = "scale(1) rotate(0deg)";
+          this.style.boxShadow = "none";
+        });
+      });
+
+      // Social links interaction
+      document.querySelectorAll(".social-link").forEach((link) => {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          const linkName = this.textContent;
+          alert(`Mengarahkan ke profil ${linkName}...`);
+        });
+      });
+
+      // Add typing effect to header
+      function typeWriter(text, element, speed = 100) {
+        let i = 0;
+        element.textContent = "";
+        function type() {
+          if (i < text.length) {
+            element.textContent += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+          }
+        }
+        type();
+      }
+
+      // Initialize typing effect on page load
+      window.addEventListener("load", () => {
+        const nameElement = document.querySelector(".header h1");
+        typeWriter("John Doe", nameElement, 150);
+      });
+
+      // Add counter animation for statistics
+      function animateCounter(element, target, duration = 2000) {
+        let start = 0;
+        const increment = target / (duration / 16);
+
+        function updateCounter() {
+          start += increment;
+          if (start < target) {
+            element.textContent =
+              Math.floor(start) +
+              (element.textContent.includes("+") ? "+" : "");
+            requestAnimationFrame(updateCounter);
+          } else {
+            element.textContent =
+              target + (element.textContent.includes("+") ? "+" : "");
+          }
+        }
+
+        updateCounter();
+      }
+
+      // Trigger counter animation when statistics card is visible
+      const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const numbers = entry.target.querySelectorAll(".stat-number");
+            numbers.forEach((number) => {
+              const text = number.textContent;
+              const target = parseInt(text.replace(/\D/g, ""));
+              if (target) {
+                animateCounter(number, target);
+              }
+            });
+            statsObserver.unobserve(entry.target);
+          }
+        });
+      });
+
+      document.querySelectorAll(".bento-item").forEach((item) => {
+        if (item.querySelector(".stat-number")) {
+          statsObserver.observe(item);
+        }
+      });
     </script>
   </body>
 </html>
