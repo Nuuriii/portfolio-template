@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio - Modern Bubble Gum</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg-primary: #fff0f5;
+        --bg-secondary: #ffe4f0;
+        --accent-pink: #ff69b4;
+        --accent-purple: #9d4edd;
+        --accent-blue: #7209b7;
+        --accent-cyan: #06ffa5;
+        --text-dark: #2d1b69;
+        --text-light: #666;
+        --white: #ffffff;
+        --shadow: 8px 8px 0px #000;
+        --border: 4px solid #000;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(
+          135deg,
+          var(--bg-primary) 0%,
+          var(--bg-secondary) 100%
+        );
+        color: var(--text-dark);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      /* Bento Grid Layout */
+      .bento-grid {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: auto;
+      }
+
+      .bento-item {
+        background: var(--white);
+        border: var(--border);
+        box-shadow: var(--shadow);
+        border-radius: 20px;
+        padding: 25px;
+        transition: transform 0.2s ease;
+      }
+
+      .bento-item:hover {
+        transform: translate(-4px, -4px);
+        box-shadow: 12px 12px 0px #000;
+      }
+
+      /* Grid Areas */
+      .hero {
+        grid-column: 1 / 8;
+        grid-row: 1;
+        background: linear-gradient(
+          135deg,
+          var(--accent-pink),
+          var(--accent-purple)
+        );
+        color: var(--white);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .profile-pic {
+        grid-column: 8 / 13;
+        grid-row: 1;
+        background: linear-gradient(
+          135deg,
+          var(--accent-cyan),
+          var(--accent-blue)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      .about {
+        grid-column: 1 / 7;
+        grid-row: 2;
+        background: var(--white);
+      }
+
+      .skills {
+        grid-column: 7 / 13;
+        grid-row: 2;
+        background: linear-gradient(135deg, #ffd700, #ffb347);
+      }
+
+      .projects {
+        grid-column: 1 / 9;
+        grid-row: 3;
+        background: var(--white);
+      }
+
+      .contact {
+        grid-column: 9 / 13;
+        grid-row: 3;
+        background: linear-gradient(
+          135deg,
+          var(--accent-purple),
+          var(--accent-blue)
+        );
+        color: var(--white);
+      }
+
+      .stats {
+        grid-column: 1 / 5;
+        grid-row: 4;
+        background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        color: var(--white);
+      }
+
+      .social {
+        grid-column: 5 / 9;
+        grid-row: 4;
+        background: var(--white);
+      }
+
+      .testimonial {
+        grid-column: 9 / 13;
+        grid-row: 4;
+        background: linear-gradient(135deg, #54a0ff, #2e86de);
+        color: var(--white);
+      }
+
+      /* Typography */
+      h1 {
+        font-size: 3rem;
+        font-weight: 900;
+        margin-bottom: 10px;
+        text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
+      }
+
+      h2 {
+        font-size: 1.8rem;
+        font-weight: 800;
+        margin-bottom: 15px;
+        color: var(--text-dark);
+      }
+
+      h3 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-size: 1rem;
+        margin-bottom: 15px;
+      }
+
+      /* Components */
+      .btn {
+        display: inline-block;
+        padding: 12px 25px;
+        background: var(--accent-pink);
+        color: var(--white);
+        text-decoration: none;
+        border: 3px solid #000;
+        border-radius: 50px;
+        font-weight: bold;
+        box-shadow: 4px 4px 0px #000;
+        transition: all 0.2s ease;
+        margin: 5px;
+      }
+
+      .btn:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0px #000;
+      }
+
+      .skill-tag {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--text-dark);
+        padding: 8px 15px;
+        border: 2px solid #000;
+        border-radius: 25px;
+        margin: 5px;
+        font-weight: bold;
+        font-size: 0.9rem;
+      }
+
+      .project-card {
+        background: rgba(255, 255, 255, 0.9);
+        border: 3px solid #000;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 15px;
+        box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.1);
+      }
+
+      .social-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        background: var(--accent-pink);
+        color: var(--white);
+        text-decoration: none;
+        border: 3px solid #000;
+        border-radius: 50%;
+        margin: 8px;
+        font-weight: bold;
+        box-shadow: 4px 4px 0px #000;
+        transition: all 0.2s ease;
+      }
+
+      .social-link:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0px #000;
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: 900;
+        display: block;
+        text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
+      }
+
+      .stat-label {
+        font-size: 0.9rem;
+        opacity: 0.9;
+      }
+
+      /* Profile Picture Placeholder */
+      .profile-placeholder {
+        width: 150px;
+        height: 150px;
+        background: var(--white);
+        border: 4px solid #000;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        font-weight: bold;
+        color: var(--accent-purple);
+        box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .container {
+          padding: 15px;
+        }
+
+        .bento-grid {
+          grid-template-columns: 1fr;
+          gap: 15px;
+        }
+
+        .bento-item {
+          grid-column: 1 !important;
+          grid-row: auto !important;
+          padding: 20px;
+        }
+
+        h1 {
+          font-size: 2.2rem;
+        }
+
+        h2 {
+          font-size: 1.5rem;
+        }
+
+        .profile-placeholder {
+          width: 120px;
+          height: 120px;
+          font-size: 2.5rem;
+        }
+
+        .bento-item:hover {
+          transform: none;
+          box-shadow: var(--shadow);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 10px;
+        }
+
+        .bento-item {
+          padding: 15px;
+          border-radius: 15px;
+        }
+
+        h1 {
+          font-size: 1.8rem;
+        }
+
+        .btn {
+          padding: 10px 20px;
+          font-size: 0.9rem;
+        }
+
+        .social-link {
+          width: 45px;
+          height: 45px;
+          margin: 5px;
+        }
+      }
+
+      /* Decorative Elements */
+      .hero::before {
+        content: "✨";
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 2rem;
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .hero::after {
+        content: "🎨";
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        font-size: 2rem;
+        animation: float 3s ease-in-out infinite reverse;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 12px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--bg-primary);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--accent-pink);
+        border-radius: 6px;
+        border: 2px solid var(--bg-primary);
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--accent-purple);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="bento-grid">
+        <!-- Hero Section -->
+        <div class="bento-item hero">
+          <h1>Halo! Saya Alex</h1>
+          <p>Creative Developer & UI/UX Designer</p>
+          <p>
+            Membuat pengalaman digital yang menakjubkan dengan sentuhan kreatif
+            dan inovatif
+          </p>
+          <a href="#contact" class="btn">Mari Berkolaborasi!</a>
+          <a href="#projects" class="btn">Lihat Karya Saya</a>
+        </div>
+
+        <!-- Profile Picture -->
+        <div class="bento-item profile-pic">
+          <div class="profile-placeholder">👨‍💻</div>
+        </div>
+
+        <!-- About Section -->
+        <div class="bento-item about">
+          <h2>Tentang Saya</h2>
+          <p>
+            Seorang creative developer dengan passion untuk menciptakan
+            pengalaman digital yang unik dan menarik. Saya memiliki pengalaman
+            5+ tahun dalam dunia web development dan UI/UX design.
+          </p>
+          <p>
+            Saya percaya bahwa design yang baik bukan hanya tentang estetika,
+            tapi juga tentang fungsi dan pengalaman pengguna yang seamless.
+          </p>
+          <p>
+            Ketika tidak sedang coding, saya suka mengeksplorasi tren design
+            terbaru dan bermain dengan teknologi baru.
+          </p>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="bento-item skills">
+          <h2>Keahlian</h2>
+          <div class="skills-container">
+            <span class="skill-tag">HTML/CSS</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">Vue.js</span>
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Figma</span>
+            <span class="skill-tag">Adobe XD</span>
+            <span class="skill-tag">UI/UX Design</span>
+            <span class="skill-tag">Photoshop</span>
+          </div>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="bento-item projects">
+          <h2>Proyek Terbaru</h2>
+
+          <div class="project-card">
+            <h3>E-Commerce Modern</h3>
+            <p>
+              Platform e-commerce dengan design minimalis dan UX yang intuitif.
+              Dibangun dengan React dan Node.js.
+            </p>
+          </div>
+
+          <div class="project-card">
+            <h3>Dashboard Analytics</h3>
+            <p>
+              Dashboard interaktif untuk visualisasi data dengan chart yang
+              menarik dan responsive design.
+            </p>
+          </div>
+
+          <div class="project-card">
+            <h3>Mobile App Design</h3>
+            <p>
+              Design UI/UX untuk aplikasi mobile startup fintech dengan focus
+              pada accessibility dan usability.
+            </p>
+          </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="bento-item contact">
+          <h2>Kontak</h2>
+          <p>Mari diskusikan proyek Anda!</p>
+          <p>📧 hello@alexdev.com</p>
+          <p>📱 +62 812-3456-7890</p>
+          <p>📍 Jakarta, Indonesia</p>
+          <a href="mailto:hello@alexdev.com" class="btn">Email Saya</a>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="bento-item stats">
+          <h2>Statistik</h2>
+          <div style="text-align: center">
+            <span class="stat-number">50+</span>
+            <span class="stat-label">Proyek Selesai</span>
+          </div>
+          <div style="text-align: center; margin-top: 15px">
+            <span class="stat-number">5+</span>
+            <span class="stat-label">Tahun Pengalaman</span>
+          </div>
+        </div>
+
+        <!-- Social Media -->
+        <div class="bento-item social">
+          <h2>Ikuti Saya</h2>
+          <div style="text-align: center">
+            <a href="#" class="social-link">IG</a>
+            <a href="#" class="social-link">TW</a>
+            <a href="#" class="social-link">LI</a>
+            <a href="#" class="social-link">GH</a>
+            <a href="#" class="social-link">DR</a>
+            <a href="#" class="social-link">BE</a>
+          </div>
+          <p style="margin-top: 15px; text-align: center; font-size: 0.9rem">
+            Temukan inspirasi dan update terbaru dari project saya!
+          </p>
+        </div>
+
+        <!-- Testimonial -->
+        <div class="bento-item testimonial">
+          <h2>Testimonial</h2>
+          <p>
+            "Alex adalah developer yang sangat talented dan profesional. Hasil
+            kerjanya selalu melampaui ekspektasi!"
+          </p>
+          <p><strong>- Sarah, CEO Startup ABC</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Add click effect to bento items
+      document.querySelectorAll(".bento-item").forEach((item) => {
+        item.addEventListener("click", function () {
+          this.style.transform = "translate(-2px, -2px)";
+          this.style.boxShadow = "10px 10px 0px #000";
+
+          setTimeout(() => {
+            this.style.transform = "";
+            this.style.boxShadow = "";
+          }, 150);
+        });
+      });
+
+      // Dynamic greeting based on time
+      function updateGreeting() {
+        const hour = new Date().getHours();
+        const heroTitle = document.querySelector(".hero h1");
+
+        if (hour < 12) {
+          heroTitle.textContent = "Selamat Pagi! Saya Alex";
+        } else if (hour < 17) {
+          heroTitle.textContent = "Selamat Siang! Saya Alex";
+        } else {
+          heroTitle.textContent = "Selamat Malam! Saya Alex";
+        }
+      }
+
+      // Initialize greeting on page load
+      updateGreeting();
+
+      // Add typing effect to hero subtitle
+      function typeWriter(element, text, speed = 100) {
+        let i = 0;
+        element.innerHTML = "";
+
+        function type() {
+          if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+          }
+        }
+        type();
+      }
+
+      // Initialize typing effect
+      window.addEventListener("load", () => {
+        const subtitle = document.querySelector(".hero p");
+        const originalText = subtitle.textContent;
+        typeWriter(subtitle, originalText, 50);
+      });
+
+      // Add hover sound effect (optional - requires audio files)
+      document.querySelectorAll(".btn, .social-link").forEach((element) => {
+        element.addEventListener("mouseenter", () => {
+          // Add subtle visual feedback
+          element.style.transform = "scale(1.05)";
+        });
+
+        element.addEventListener("mouseleave", () => {
+          element.style.transform = "scale(1)";
+        });
+      });
+
+      // Contact form handling (if you add a form later)
+      function handleContact() {
+        // Add contact form logic here
+        alert("Terima kasih! Pesan Anda akan segera dibalas.");
+      }
+
+      // Performance optimization: Lazy loading for images (if you add them later)
+      if ("IntersectionObserver" in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              img.src = img.dataset.src;
+              img.classList.remove("lazy");
+              observer.unobserve(img);
+            }
+          });
+        });
+
+        document.querySelectorAll("img[data-src]").forEach((img) => {
+          imageObserver.observe(img);
+        });
+      }
+    </script>
+  </body>
+</html>

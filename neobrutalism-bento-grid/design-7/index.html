@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio - Modern Bubble Gum Design</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary-pink: #ff6b9d;
+        --primary-purple: #a855f7;
+        --primary-blue: #3b82f6;
+        --primary-yellow: #fde047;
+        --primary-green: #10b981;
+        --primary-orange: #f97316;
+        --bg-light: #fefefe;
+        --text-dark: #1f1f1f;
+        --shadow-brutal: 6px 6px 0px #000;
+        --border-brutal: 4px solid #000;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background: var(--bg-light);
+        color: var(--text-dark);
+        line-height: 1.6;
+        padding: 20px;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .bento-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+        margin-bottom: 40px;
+      }
+
+      .bento-item {
+        border: var(--border-brutal);
+        border-radius: 16px;
+        box-shadow: var(--shadow-brutal);
+        padding: 24px;
+        background: white;
+        transition: transform 0.2s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .bento-item:hover {
+        transform: translateY(-4px);
+      }
+
+      .bento-item.large {
+        grid-column: span 2;
+      }
+
+      .bento-item.tall {
+        grid-row: span 2;
+      }
+
+      .hero-section {
+        background: linear-gradient(
+          135deg,
+          var(--primary-pink),
+          var(--primary-purple)
+        );
+        color: white;
+        text-align: center;
+        grid-column: span 2;
+      }
+
+      .hero-title {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 16px;
+        text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
+      }
+
+      .hero-subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 24px;
+        opacity: 0.9;
+      }
+
+      .profile-image {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 6px solid white;
+        box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
+        margin: 0 auto 24px;
+        background: var(--primary-yellow);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+      }
+
+      .about-section {
+        background: var(--primary-yellow);
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 16px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .skills-section {
+        background: var(--primary-blue);
+        color: white;
+      }
+
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        gap: 12px;
+        margin-top: 16px;
+      }
+
+      .skill-item {
+        background: rgba(255, 255, 255, 0.2);
+        border: 2px solid white;
+        border-radius: 8px;
+        padding: 8px 12px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 0.9rem;
+      }
+
+      .projects-section {
+        background: var(--primary-green);
+        color: white;
+      }
+
+      .project-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-top: 16px;
+      }
+
+      .project-item {
+        background: rgba(255, 255, 255, 0.2);
+        border: 2px solid white;
+        border-radius: 12px;
+        padding: 16px;
+        cursor: pointer;
+        transition: background 0.2s ease;
+      }
+
+      .project-item:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .project-title {
+        font-weight: bold;
+        margin-bottom: 8px;
+        font-size: 1.1rem;
+      }
+
+      .contact-section {
+        background: var(--primary-orange);
+        color: white;
+        text-align: center;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 16px;
+      }
+
+      .social-link {
+        background: white;
+        color: var(--primary-orange);
+        border: 3px solid var(--text-dark);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-weight: bold;
+        box-shadow: 3px 3px 0px var(--text-dark);
+        transition: transform 0.2s ease;
+      }
+
+      .social-link:hover {
+        transform: translateY(-2px);
+      }
+
+      .experience-section {
+        background: var(--primary-purple);
+        color: white;
+      }
+
+      .experience-list {
+        margin-top: 16px;
+      }
+
+      .experience-item {
+        border-left: 4px solid white;
+        padding-left: 16px;
+        margin-bottom: 16px;
+      }
+
+      .experience-title {
+        font-weight: bold;
+        font-size: 1.1rem;
+      }
+
+      .experience-company {
+        opacity: 0.8;
+        font-size: 0.9rem;
+        margin-bottom: 4px;
+      }
+
+      .stats-section {
+        background: var(--primary-yellow);
+        text-align: center;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin-top: 16px;
+      }
+
+      .stat-item {
+        background: var(--text-dark);
+        color: var(--primary-yellow);
+        border-radius: 12px;
+        padding: 16px;
+        border: 3px solid var(--text-dark);
+      }
+
+      .stat-number {
+        font-size: 2rem;
+        font-weight: bold;
+        display: block;
+      }
+
+      .testimonial-section {
+        background: var(--primary-pink);
+        color: white;
+      }
+
+      .quote {
+        font-style: italic;
+        font-size: 1.1rem;
+        margin: 16px 0;
+        position: relative;
+      }
+
+      .quote::before {
+        content: '"';
+        font-size: 3rem;
+        position: absolute;
+        left: -20px;
+        top: -10px;
+        opacity: 0.5;
+      }
+
+      .quote-author {
+        text-align: right;
+        font-weight: bold;
+        opacity: 0.8;
+      }
+
+      .fun-fact-section {
+        background: linear-gradient(
+          45deg,
+          var(--primary-blue),
+          var(--primary-green)
+        );
+        color: white;
+        text-align: center;
+      }
+
+      .emoji {
+        font-size: 3rem;
+        margin-bottom: 16px;
+        display: block;
+      }
+
+      @media (max-width: 768px) {
+        .bento-grid {
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+
+        .bento-item.large,
+        .hero-section {
+          grid-column: span 1;
+        }
+
+        .hero-title {
+          font-size: 2rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1rem;
+        }
+
+        .profile-image {
+          width: 80px;
+          height: 80px;
+          font-size: 2rem;
+        }
+
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .skills-grid {
+          grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+        }
+      }
+
+      @media (max-width: 480px) {
+        body {
+          padding: 12px;
+        }
+
+        .bento-item {
+          padding: 16px;
+        }
+
+        .hero-title {
+          font-size: 1.5rem;
+        }
+      }
+
+      .decorative-blob {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        top: -20px;
+        right: -20px;
+        z-index: 0;
+      }
+
+      .content-wrapper {
+        position: relative;
+        z-index: 1;
+      }
+
+      .tag {
+        display: inline-block;
+        background: var(--text-dark);
+        color: white;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        margin: 4px;
+        border: 2px solid var(--text-dark);
+      }
+
+      .button-primary {
+        background: var(--text-dark);
+        color: white;
+        border: 3px solid var(--text-dark);
+        padding: 12px 24px;
+        border-radius: 8px;
+        text-decoration: none;
+        display: inline-block;
+        font-weight: bold;
+        box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.3);
+        transition: transform 0.2s ease;
+        cursor: pointer;
+      }
+
+      .button-primary:hover {
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="bento-grid">
+        <!-- Hero Section -->
+        <div class="bento-item hero-section large">
+          <div class="decorative-blob"></div>
+          <div class="content-wrapper">
+            <div class="profile-image">👨‍💻</div>
+            <h1 class="hero-title">John Doe</h1>
+            <p class="hero-subtitle">Full Stack Developer & UI/UX Designer</p>
+            <a href="#contact" class="button-primary">Mari Berkolaborasi</a>
+          </div>
+        </div>
+
+        <!-- About Section -->
+        <div class="bento-item about-section">
+          <div class="content-wrapper">
+            <h2 class="section-title">Tentang Saya</h2>
+            <p>
+              Saya adalah developer passionate yang suka membuat solusi digital
+              yang inovatif. Dengan pengalaman 5+ tahun, saya fokus pada
+              pengembangan aplikasi web modern yang user-friendly.
+            </p>
+            <div style="margin-top: 16px">
+              <span class="tag">Creative</span>
+              <span class="tag">Problem Solver</span>
+              <span class="tag">Team Player</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="bento-item skills-section">
+          <div class="decorative-blob"></div>
+          <div class="content-wrapper">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+              <div class="skill-item">React</div>
+              <div class="skill-item">Node.js</div>
+              <div class="skill-item">Python</div>
+              <div class="skill-item">TypeScript</div>
+              <div class="skill-item">MongoDB</div>
+              <div class="skill-item">Figma</div>
+              <div class="skill-item">AWS</div>
+              <div class="skill-item">Git</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="bento-item projects-section tall">
+          <div class="content-wrapper">
+            <h2 class="section-title">Projek Terbaru</h2>
+            <div class="project-list">
+              <div class="project-item" onclick="openProject('ecommerce')">
+                <div class="project-title">🛍️ E-Commerce Platform</div>
+                <p>
+                  Platform e-commerce full-stack dengan payment gateway dan
+                  admin dashboard.
+                </p>
+              </div>
+              <div class="project-item" onclick="openProject('portfolio')">
+                <div class="project-title">🎨 Creative Portfolio</div>
+                <p>
+                  Website portfolio untuk seniman dengan gallery interaktif dan
+                  booking system.
+                </p>
+              </div>
+              <div class="project-item" onclick="openProject('dashboard')">
+                <div class="project-title">📊 Analytics Dashboard</div>
+                <p>
+                  Dashboard analytics real-time dengan data visualization dan
+                  reporting.
+                </p>
+              </div>
+              <div class="project-item" onclick="openProject('mobile')">
+                <div class="project-title">📱 Mobile App</div>
+                <p>
+                  Aplikasi mobile untuk manajemen tugas dengan fitur
+                  collaboration.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Experience Section -->
+        <div class="bento-item experience-section">
+          <div class="content-wrapper">
+            <h2 class="section-title">Pengalaman</h2>
+            <div class="experience-list">
+              <div class="experience-item">
+                <div class="experience-title">Senior Full Stack Developer</div>
+                <div class="experience-company">
+                  Tech Startup • 2022 - Sekarang
+                </div>
+              </div>
+              <div class="experience-item">
+                <div class="experience-title">Frontend Developer</div>
+                <div class="experience-company">
+                  Digital Agency • 2020 - 2022
+                </div>
+              </div>
+              <div class="experience-item">
+                <div class="experience-title">Junior Web Developer</div>
+                <div class="experience-company">
+                  Software Company • 2019 - 2020
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="bento-item stats-section">
+          <div class="content-wrapper">
+            <h2 class="section-title">Statistik</h2>
+            <div class="stats-grid">
+              <div class="stat-item">
+                <span class="stat-number">50+</span>
+                <span>Projek</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">30+</span>
+                <span>Klien</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">5+</span>
+                <span>Tahun</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">100%</span>
+                <span>Satisfied</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial Section -->
+        <div class="bento-item testimonial-section">
+          <div class="content-wrapper">
+            <h2 class="section-title">Testimoni</h2>
+            <div class="quote">
+              John sangat professional dan selalu deliver hasil yang excellent.
+              Komunikasi yang baik dan timeline yang tepat waktu.
+            </div>
+            <div class="quote-author">— Sarah, CEO StartupXYZ</div>
+          </div>
+        </div>
+
+        <!-- Fun Fact Section -->
+        <div class="bento-item fun-fact-section">
+          <div class="content-wrapper">
+            <h2 class="section-title">Fun Fact</h2>
+            <span class="emoji">🎵</span>
+            <p>
+              Saya coding sambil dengerin musik jazz dan udah minum 1000+
+              cangkir kopi!
+            </p>
+          </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="bento-item contact-section" id="contact">
+          <div class="decorative-blob"></div>
+          <div class="content-wrapper">
+            <h2 class="section-title">Mari Terhubung</h2>
+            <p>
+              Punya projek menarik? Atau sekedar ingin ngobrol tentang tech?
+            </p>
+            <div class="social-links">
+              <a
+                href="mailto:john@example.com"
+                class="social-link"
+                title="Email"
+                >📧</a
+              >
+              <a href="#" class="social-link" title="LinkedIn">💼</a>
+              <a href="#" class="social-link" title="GitHub">👨‍💻</a>
+              <a href="#" class="social-link" title="Twitter">🐦</a>
+              <a href="#" class="social-link" title="Instagram">📸</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Simple project modal functionality
+      function openProject(projectId) {
+        const projects = {
+          ecommerce: {
+            title: "E-Commerce Platform",
+            description:
+              "Full-stack e-commerce solution with React, Node.js, and Stripe integration.",
+            tech: ["React", "Node.js", "MongoDB", "Stripe", "AWS"],
+            link: "#",
+          },
+          portfolio: {
+            title: "Creative Portfolio",
+            description:
+              "Interactive portfolio website for artists with gallery and booking system.",
+            tech: ["Next.js", "Sanity CMS", "Framer Motion", "Vercel"],
+            link: "#",
+          },
+          dashboard: {
+            title: "Analytics Dashboard",
+            description:
+              "Real-time analytics dashboard with data visualization and reporting features.",
+            tech: ["Vue.js", "D3.js", "Python", "PostgreSQL", "Docker"],
+            link: "#",
+          },
+          mobile: {
+            title: "Mobile App",
+            description:
+              "Task management mobile app with collaboration features and real-time sync.",
+            tech: ["React Native", "Firebase", "Redux", "Push Notifications"],
+            link: "#",
+          },
+        };
+
+        const project = projects[projectId];
+        alert(
+          `${project.title}\n\n${
+            project.description
+          }\n\nTech Stack: ${project.tech.join(", ")}`
+        );
+      }
+
+      // Simple contact form handling
+      document.addEventListener("DOMContentLoaded", function () {
+        // Add some interactive behaviors
+        const bentoItems = document.querySelectorAll(".bento-item");
+
+        bentoItems.forEach((item) => {
+          item.addEventListener("mouseenter", function () {
+            this.style.transform = "translateY(-4px) scale(1.02)";
+          });
+
+          item.addEventListener("mouseleave", function () {
+            this.style.transform = "translateY(0) scale(1)";
+          });
+        });
+
+        // Social links click handling
+        const socialLinks = document.querySelectorAll(".social-link");
+        socialLinks.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            if (this.href === "#") {
+              e.preventDefault();
+              alert(
+                "Link akan mengarah ke profil social media yang sebenarnya!"
+              );
+            }
+          });
+        });
+
+        // Add some dynamic content updates
+        const stats = document.querySelectorAll(".stat-number");
+        stats.forEach((stat) => {
+          const originalNumber = stat.textContent;
+          stat.addEventListener("mouseenter", function () {
+            this.style.transform = "scale(1.2)";
+            this.style.transition = "transform 0.2s ease";
+          });
+
+          stat.addEventListener("mouseleave", function () {
+            this.style.transform = "scale(1)";
+          });
+        });
+      });
+
+      // Simple theme switcher (bonus feature)
+      let currentTheme = "bubble-gum";
+
+      function switchTheme() {
+        const root = document.documentElement;
+        if (currentTheme === "bubble-gum") {
+          // Switch to dark mode
+          root.style.setProperty("--primary-pink", "#E11D48");
+          root.style.setProperty("--primary-purple", "#7C3AED");
+          root.style.setProperty("--primary-blue", "#1D4ED8");
+          root.style.setProperty("--bg-light", "#1F1F1F");
+          root.style.setProperty("--text-dark", "#FEFEFE");
+          currentTheme = "dark";
+        } else {
+          // Switch back to bubble gum
+          root.style.setProperty("--primary-pink", "#FF6B9D");
+          root.style.setProperty("--primary-purple", "#A855F7");
+          root.style.setProperty("--primary-blue", "#3B82F6");
+          root.style.setProperty("--bg-light", "#FEFEFE");
+          root.style.setProperty("--text-dark", "#1F1F1F");
+          currentTheme = "bubble-gum";
+        }
+      }
+
+      // Add keyboard shortcuts
+      document.addEventListener("keydown", function (e) {
+        if (e.ctrlKey && e.key === "t") {
+          e.preventDefault();
+          switchTheme();
+        }
+      });
+    </script>
+  </body>
+</html>
