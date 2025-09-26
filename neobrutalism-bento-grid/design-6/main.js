@@ -1,180 +1,218 @@
-// Portfolio JavaScript - Green Poison Neobrutalism
-document.addEventListener("DOMContentLoaded", function () {
-  // Smooth hover effects untuk grid items
-  const gridItems = document.querySelectorAll(".grid-item");
+// Theme Toggle
+const themeToggle = document.getElementById("themeToggle");
+const body = document.body;
+let isDarkTheme = false;
 
-  gridItems.forEach((item) => {
-    item.addEventListener("mouseenter", function () {
-      this.style.transform = "translate(-3px, -3px)";
-    });
-
-    item.addEventListener("mouseleave", function () {
-      this.style.transform = "translate(0, 0)";
-    });
-  });
-
-  // Project click handlers
-  const projects = document.querySelectorAll(".project");
-
-  projects.forEach((project) => {
-    project.addEventListener("click", function () {
-      const projectTitle = this.querySelector(".project-title").textContent;
-      alert(`Opening project: ${projectTitle}`);
-      // Di sini bisa ditambahkan logic untuk membuka modal atau redirect
-    });
-  });
-
-  // Social link tracking
-  const socialLinks = document.querySelectorAll(".social-link");
-
-  socialLinks.forEach((link) => {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-      const platform = this.textContent.trim();
-      console.log(`Clicked on ${platform}`);
-      // Di sini bisa ditambahkan analytics tracking
-    });
-  });
-
-  // Contact button handlers
-  const hireButton = document.querySelector(".btn-secondary");
-  const viewProjectButton = document.querySelector(".btn-primary");
-
-  if (hireButton) {
-    hireButton.addEventListener("click", function () {
-      // Bisa redirect ke contact form atau WhatsApp
-      window.open(
-        "mailto:hello@johndoe.com?subject=Hire Inquiry&body=Hi, I would like to discuss a project with you.",
-        "_blank"
-      );
-    });
-  }
-
-  if (viewProjectButton) {
-    viewProjectButton.addEventListener("click", function () {
-      alert("Opening featured project...");
-      // Logic untuk membuka project detail
-    });
-  }
-
-  // Dynamic status indicator
-  const statusDot = document.querySelector(".status-dot");
-
-  if (statusDot) {
-    // Simulasi status update
-    setInterval(() => {
-      statusDot.style.boxShadow =
-        statusDot.style.boxShadow === "none"
-          ? "0 0 15px var(--poison-green)"
-          : "none";
-    }, 2000);
-  }
-
-  // Responsive grid adjustments
-  function handleResize() {
-    const container = document.querySelector(".container");
-    const width = window.innerWidth;
-
-    // Dynamic gap adjustments
-    if (width < 480) {
-      container.style.gap = "10px";
-    } else if (width < 768) {
-      container.style.gap = "15px";
-    } else {
-      container.style.gap = "20px";
-    }
-  }
-
-  window.addEventListener("resize", handleResize);
-  handleResize(); // Initial call
-
-  // Keyboard navigation support
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Tab") {
-      document.body.classList.add("keyboard-navigation");
-    }
-  });
-
-  document.addEventListener("mousedown", function () {
-    document.body.classList.remove("keyboard-navigation");
-  });
-
-  // Simple form validation jika ada contact form
-  const contactForm = document.querySelector("#contactForm");
-
-  if (contactForm) {
-    contactForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const name = this.querySelector('input[name="name"]').value;
-      const email = this.querySelector('input[name="email"]').value;
-      const message = this.querySelector('textarea[name="message"]').value;
-
-      if (!name || !email || !message) {
-        alert("Please fill in all fields");
-        return;
-      }
-
-      // Process form submission
-      console.log("Form submitted:", { name, email, message });
-      alert("Message sent successfully!");
-    });
-  }
-
-  // Performance optimization - lazy loading untuk images
-  const images = document.querySelectorAll("img[data-src]");
-
-  const imageObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const img = entry.target;
-        img.src = img.dataset.src;
-        img.classList.remove("lazy");
-        observer.unobserve(img);
-      }
-    });
-  });
-
-  images.forEach((img) => imageObserver.observe(img));
-
-  // Theme customization (optional)
-  const themeToggle = document.querySelector("#themeToggle");
-
-  if (themeToggle) {
-    themeToggle.addEventListener("click", function () {
-      document.body.classList.toggle("theme-alt");
-    });
-  }
-
-  console.log("Portfolio loaded successfully! 🚀");
+themeToggle.addEventListener("click", () => {
+  isDarkTheme = !isDarkTheme;
+  body.classList.toggle("dark-theme");
+  themeToggle.textContent = isDarkTheme ? "☀️" : "🌙";
+  localStorage.setItem("darkTheme", isDarkTheme);
 });
 
-// Utility functions
-function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
+// Load saved theme
+const savedTheme = localStorage.getItem("darkTheme");
+if (savedTheme === "true") {
+  body.classList.add("dark-theme");
+  themeToggle.textContent = "☀️";
+  isDarkTheme = true;
 }
 
-// Smooth scrolling untuk internal links (jika ada)
-function smoothScroll(target) {
-  const element = document.querySelector(target);
-  if (element) {
-    element.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+// Contact Form
+const contactForm = document.getElementById("contactForm");
+contactForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  // Get form values
+  const formData = new FormData(contactForm);
+
+  // Show success message
+  const submitBtn = contactForm.querySelector(".submit-btn");
+  const originalText = submitBtn.textContent;
+  submitBtn.textContent = "Terkirim! ✓";
+  submitBtn.style.background = "var(--green-primary)";
+
+  // Reset form
+  contactForm.reset();
+
+  // Reset button after 3 seconds
+  setTimeout(() => {
+    submitBtn.textContent = originalText;
+    submitBtn.style.background = "var(--pink-primary)";
+  }, 3000);
+});
+
+// Add click effect to cards
+const cards = document.querySelectorAll(".card");
+cards.forEach((card) => {
+  card.addEventListener("mousedown", () => {
+    card.style.transform = "scale(0.98)";
+  });
+
+  card.addEventListener("mouseup", () => {
+    card.style.transform = "scale(1)";
+  });
+
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = "scale(1)";
+  });
+});
+
+// Parallax effect on mouse move (subtle)
+document.addEventListener("mousemove", (e) => {
+  const mouseX = e.clientX / window.innerWidth;
+  const mouseY = e.clientY / window.innerHeight;
+
+  const translateX = (mouseX - 0.5) * 10;
+  const translateY = (mouseY - 0.5) * 10;
+
+  const profileCard = document.querySelector(".profile-card");
+  if (profileCard) {
+    profileCard.style.transform = `translate(${translateX}px, ${translateY}px)`;
+  }
+});
+
+// Dynamic greeting based on time
+function updateGreeting() {
+  const hour = new Date().getHours();
+  const profileTitle = document.querySelector(".profile-card .title");
+
+  if (hour >= 5 && hour < 12) {
+    profileTitle.textContent = "Creative Developer & Designer ☀️";
+  } else if (hour >= 12 && hour < 17) {
+    profileTitle.textContent = "Creative Developer & Designer 🌤️";
+  } else if (hour >= 17 && hour < 21) {
+    profileTitle.textContent = "Creative Developer & Designer 🌅";
+  } else {
+    profileTitle.textContent = "Creative Developer & Designer 🌙";
   }
 }
 
-// Export functions untuk penggunaan global
-window.portfolioUtils = {
-  debounce,
-  smoothScroll,
+updateGreeting();
+
+// Stats counter animation (only on first view)
+let statsAnimated = false;
+const observerOptions = {
+  threshold: 0.5,
 };
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting && !statsAnimated) {
+      statsAnimated = true;
+      animateStats();
+    }
+  });
+}, observerOptions);
+
+const statsCard = document.querySelector(".stats-card");
+if (statsCard) {
+  observer.observe(statsCard);
+}
+
+function animateStats() {
+  const statNumbers = document.querySelectorAll(".stat-number");
+
+  statNumbers.forEach((stat) => {
+    const finalValue = stat.textContent;
+    let currentValue = 0;
+    const isLarge = finalValue.includes("K");
+    const targetValue = isLarge
+      ? 500
+      : parseInt(finalValue.replace(/[^0-9]/g, ""));
+    const increment = targetValue / 50;
+
+    const counter = setInterval(() => {
+      currentValue += increment;
+
+      if (currentValue >= targetValue) {
+        stat.textContent = finalValue;
+        clearInterval(counter);
+      } else {
+        if (isLarge) {
+          stat.textContent = Math.floor(currentValue) + "K+";
+        } else {
+          stat.textContent = Math.floor(currentValue).toLocaleString();
+        }
+      }
+    }, 30);
+  });
+}
+
+// Keyboard shortcuts
+document.addEventListener("keydown", (e) => {
+  // Press 'T' to toggle theme
+  if (e.key === "t" || e.key === "T") {
+    themeToggle.click();
+  }
+
+  // Press 'C' to focus contact form
+  if (e.key === "c" || e.key === "C") {
+    const firstInput = contactForm.querySelector("input");
+    firstInput.focus();
+    firstInput.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+});
+
+// Add ripple effect on click
+function createRipple(e) {
+  const card = e.currentTarget;
+  const ripple = document.createElement("span");
+  const rect = card.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height);
+  const x = e.clientX - rect.left - size / 2;
+  const y = e.clientY - rect.top - size / 2;
+
+  ripple.style.width = ripple.style.height = size + "px";
+  ripple.style.left = x + "px";
+  ripple.style.top = y + "px";
+  ripple.classList.add("ripple");
+
+  // Add ripple styles
+  const style = document.createElement("style");
+  style.textContent = `
+                .ripple {
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.6);
+                    transform: scale(0);
+                    animation: ripple-animation 0.6s ease-out;
+                    pointer-events: none;
+                }
+                
+                @keyframes ripple-animation {
+                    to {
+                        transform: scale(4);
+                        opacity: 0;
+                    }
+                }
+            `;
+
+  if (!document.head.querySelector("style[data-ripple]")) {
+    style.setAttribute("data-ripple", "");
+    document.head.appendChild(style);
+  }
+
+  card.style.position = "relative";
+  card.style.overflow = "hidden";
+  card.appendChild(ripple);
+
+  setTimeout(() => {
+    ripple.remove();
+  }, 600);
+}
+
+// Add ripple to all cards
+cards.forEach((card) => {
+  card.addEventListener("click", createRipple);
+});
+
+// Console Easter Egg
+console.log(
+  "%c🎨 Welcome to my portfolio! 🚀",
+  "font-size: 20px; font-weight: bold; color: #FF6B9D;"
+);
+console.log(
+  "%c👨‍💻 Looking for a developer? Let's connect!",
+  "font-size: 14px; color: #C66EFC;"
+);
