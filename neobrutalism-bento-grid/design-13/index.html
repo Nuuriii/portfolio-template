@@ -1,15 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio - Modern Neobrutalism</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <title>Portfolio - Modern Bubble Gum</title>
     <style>
       * {
         margin: 0;
@@ -17,493 +11,475 @@
         box-sizing: border-box;
       }
 
-      :root {
-        --bubble-green: #00ff88;
-        --dark-green: #00cc6a;
-        --black: #1a1a1a;
-        --white: #ffffff;
-        --gray: #f5f5f5;
-        --shadow: rgba(0, 0, 0, 0.2);
-        --border-width: 3px;
-        --border-radius: 12px;
-      }
-
       body {
-        font-family: "Space Grotesk", sans-serif;
-        background-color: var(--white);
-        color: var(--black);
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(
+          135deg,
+          #ffe066 0%,
+          #fff2a1 50%,
+          #ffe066 100%
+        );
+        min-height: 100vh;
+        padding: 20px;
         line-height: 1.6;
-        overflow-x: hidden;
       }
 
       .container {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 20px;
-      }
-
-      .bento-grid {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 20px;
-        margin-bottom: 20px;
+        grid-auto-rows: minmax(150px, auto);
       }
 
-      .bento-item {
-        background: var(--white);
-        border: var(--border-width) solid var(--black);
-        border-radius: var(--border-radius);
-        padding: 30px;
-        box-shadow: 8px 8px 0px var(--shadow);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      .card {
+        background: white;
+        border: 4px solid #000;
+        border-radius: 20px;
+        box-shadow: 8px 8px 0px #000;
+        padding: 25px;
         position: relative;
-        overflow: hidden;
+        transition: transform 0.2s ease;
       }
 
-      .bento-item:hover {
-        transform: translate(-2px, -2px);
-        box-shadow: 12px 12px 0px var(--shadow);
+      .card:hover {
+        transform: translate(-4px, -4px);
+        box-shadow: 12px 12px 0px #000;
       }
 
-      .bento-item.hero {
+      .card-large {
         grid-column: span 2;
         grid-row: span 2;
-        background: var(--bubble-green);
+      }
+
+      .card-wide {
+        grid-column: span 2;
+      }
+
+      .card-tall {
+        grid-row: span 2;
+      }
+
+      .profile-card {
+        background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+        color: white;
+        text-align: center;
         display: flex;
         flex-direction: column;
+        align-items: center;
         justify-content: center;
-        text-align: center;
-      }
-
-      .bento-item.about {
-        grid-column: span 2;
-      }
-
-      .bento-item.skills {
-        grid-column: span 1;
-        grid-row: span 2;
-      }
-
-      .bento-item.experience {
-        grid-column: span 1;
-      }
-
-      .bento-item.projects {
-        grid-column: span 3;
-      }
-
-      .bento-item.contact {
-        grid-column: span 1;
-        background: var(--black);
-        color: var(--white);
-      }
-
-      .hero h1 {
-        font-size: 4rem;
-        font-weight: 700;
-        margin-bottom: 20px;
-        color: var(--black);
-        text-transform: uppercase;
-        letter-spacing: -2px;
-      }
-
-      .hero p {
-        font-size: 1.2rem;
-        font-weight: 500;
-        color: var(--black);
-        margin-bottom: 30px;
-      }
-
-      .cta-button {
-        background: var(--black);
-        color: var(--white);
-        padding: 15px 30px;
-        border: none;
-        border-radius: var(--border-radius);
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        transition: all 0.2s ease;
-        text-decoration: none;
-        display: inline-block;
-      }
-
-      .cta-button:hover {
-        background: var(--dark-green);
-        transform: scale(1.05);
-      }
-
-      h2 {
-        font-size: 2rem;
-        font-weight: 700;
-        margin-bottom: 20px;
-        text-transform: uppercase;
-        letter-spacing: -1px;
-      }
-
-      h3 {
-        font-size: 1.5rem;
-        font-weight: 600;
-        margin-bottom: 15px;
-        color: var(--bubble-green);
-      }
-
-      .skill-tag {
-        display: inline-block;
-        background: var(--bubble-green);
-        color: var(--black);
-        padding: 8px 16px;
-        border-radius: 20px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        margin: 5px 5px 5px 0;
-        border: 2px solid var(--black);
-      }
-
-      .project-card {
-        background: var(--gray);
-        border: 2px solid var(--black);
-        border-radius: var(--border-radius);
-        padding: 20px;
-        margin-bottom: 20px;
-        box-shadow: 4px 4px 0px var(--shadow);
-      }
-
-      .project-card:last-child {
-        margin-bottom: 0;
-      }
-
-      .project-card h4 {
-        font-size: 1.3rem;
-        font-weight: 600;
-        margin-bottom: 10px;
-        color: var(--black);
-      }
-
-      .project-card p {
-        margin-bottom: 15px;
-        color: #666;
-      }
-
-      .project-link {
-        background: var(--bubble-green);
-        color: var(--black);
-        padding: 10px 20px;
-        text-decoration: none;
-        border-radius: 20px;
-        font-weight: 600;
-        border: 2px solid var(--black);
-        font-size: 0.9rem;
-        transition: all 0.2s ease;
-      }
-
-      .project-link:hover {
-        background: var(--dark-green);
-        transform: translateY(-2px);
-      }
-
-      .contact-info {
-        text-align: center;
-      }
-
-      .contact-info h2 {
-        color: var(--bubble-green);
-        margin-bottom: 20px;
-      }
-
-      .contact-link {
-        display: block;
-        color: var(--bubble-green);
-        text-decoration: none;
-        font-weight: 600;
-        margin-bottom: 15px;
-        font-size: 1.1rem;
-        transition: color 0.2s ease;
-      }
-
-      .contact-link:hover {
-        color: var(--white);
       }
 
       .profile-image {
         width: 120px;
         height: 120px;
         border-radius: 50%;
-        border: 4px solid var(--black);
+        border: 4px solid #000;
+        background: #ffe066;
         margin-bottom: 20px;
-        object-fit: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
       }
 
-      .experience-item {
-        margin-bottom: 25px;
-        padding-bottom: 20px;
-        border-bottom: 2px solid var(--bubble-green);
+      .profile-name {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 0px #000;
       }
 
-      .experience-item:last-child {
-        border-bottom: none;
-        margin-bottom: 0;
+      .profile-title {
+        font-size: 1.2rem;
+        opacity: 0.9;
       }
 
-      .experience-date {
-        color: var(--bubble-green);
-        font-weight: 600;
-        font-size: 0.9rem;
-        margin-bottom: 5px;
+      .about-card {
+        background: linear-gradient(135deg, #4ecdc4, #6ee7e0);
       }
 
-      .experience-title {
-        font-weight: 600;
-        margin-bottom: 5px;
+      .skills-card {
+        background: linear-gradient(135deg, #45b7d1, #68c5db);
       }
 
-      .experience-company {
-        color: #666;
-        font-size: 0.9rem;
+      .projects-card {
+        background: linear-gradient(135deg, #96ceb4, #a8d5ba);
+      }
+
+      .contact-card {
+        background: linear-gradient(135deg, #feca57, #ffd464);
+      }
+
+      .social-card {
+        background: linear-gradient(135deg, #ff9ff3, #ffb3f7);
+      }
+
+      .stats-card {
+        background: linear-gradient(135deg, #a8e6cf, #b8f2d6);
+      }
+
+      .card-title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-bottom: 15px;
+        text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+        color: #000;
+      }
+
+      .card-content {
+        color: #333;
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      .skill-item {
+        background: rgba(0, 0, 0, 0.1);
+        padding: 8px 15px;
+        border-radius: 25px;
+        display: inline-block;
+        margin: 5px;
+        border: 2px solid #000;
+        font-weight: bold;
+      }
+
+      .project-item {
+        background: rgba(255, 255, 255, 0.3);
+        padding: 15px;
+        border-radius: 15px;
+        margin-bottom: 15px;
+        border: 2px solid #000;
+      }
+
+      .project-title {
+        font-weight: bold;
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+      }
+
+      .social-link {
+        display: flex;
+        align-items: center;
+        padding: 12px;
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+        margin-bottom: 10px;
+        text-decoration: none;
+        color: #000;
+        border: 2px solid #000;
+        transition: background 0.2s;
+      }
+
+      .social-link:hover {
+        background: rgba(0, 0, 0, 0.2);
+      }
+
+      .social-icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 12px;
+        font-size: 1.2rem;
+      }
+
+      .stat-item {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #000;
+        text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5);
+      }
+
+      .stat-label {
+        font-size: 1rem;
+        color: #333;
+        font-weight: bold;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        padding: 12px;
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+        margin-bottom: 10px;
+        border: 2px solid #000;
+      }
+
+      .contact-icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 12px;
+        font-size: 1.2rem;
+      }
+
+      .btn {
+        background: #000;
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 25px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 15px;
+      }
+
+      .btn:hover {
+        background: #333;
+        transform: translateY(-2px);
       }
 
       /* Responsive Design */
-      @media (max-width: 1024px) {
-        .bento-grid {
-          grid-template-columns: repeat(3, 1fr);
-          gap: 15px;
-        }
-
-        .bento-item.hero {
-          grid-column: span 3;
-          grid-row: span 1;
-        }
-
-        .bento-item.about {
-          grid-column: span 3;
-        }
-
-        .bento-item.skills {
-          grid-column: span 1;
-          grid-row: span 1;
-        }
-
-        .bento-item.experience {
-          grid-column: span 2;
-        }
-
-        .bento-item.projects {
-          grid-column: span 3;
-        }
-
-        .bento-item.contact {
-          grid-column: span 3;
-        }
-
-        .hero h1 {
-          font-size: 3rem;
-        }
-      }
-
       @media (max-width: 768px) {
-        .container {
-          padding: 15px;
+        body {
+          padding: 10px;
         }
 
-        .bento-grid {
+        .container {
           grid-template-columns: 1fr;
           gap: 15px;
         }
 
-        .bento-item {
-          grid-column: span 1 !important;
-          grid-row: span 1 !important;
-          padding: 25px;
+        .card-large,
+        .card-wide {
+          grid-column: span 1;
         }
 
-        .hero h1 {
-          font-size: 2.5rem;
+        .card-tall {
+          grid-row: span 1;
         }
 
-        h2 {
+        .profile-name {
+          font-size: 2rem;
+        }
+
+        .card-title {
           font-size: 1.5rem;
         }
 
-        .bento-item.hero {
-          text-align: left;
+        .card {
+          padding: 20px;
         }
       }
 
       @media (max-width: 480px) {
-        .bento-item {
-          padding: 20px;
+        .profile-image {
+          width: 100px;
+          height: 100px;
+          font-size: 36px;
         }
 
-        .hero h1 {
+        .profile-name {
+          font-size: 1.8rem;
+        }
+
+        .stat-number {
           font-size: 2rem;
         }
 
-        .hero p {
-          font-size: 1rem;
-        }
-
-        .cta-button {
-          padding: 12px 24px;
-          font-size: 0.9rem;
+        .card {
+          padding: 15px;
         }
       }
 
-      /* Fun decorative elements */
-      .bento-item::before {
-        content: "";
-        position: absolute;
-        top: -2px;
-        left: -2px;
-        right: -2px;
-        bottom: -2px;
-        background: linear-gradient(
-          45deg,
-          var(--bubble-green),
-          var(--dark-green)
-        );
-        z-index: -1;
-        border-radius: var(--border-radius);
-        opacity: 0;
-        transition: opacity 0.3s ease;
+      /* Animation untuk interaktivitas tanpa scroll */
+      .card.clicked {
+        animation: pulse 0.3s ease;
       }
 
-      .bento-item:hover::before {
-        opacity: 0.1;
-      }
-
-      /* Smooth transitions for all interactive elements */
-      .bento-item,
-      .cta-button,
-      .project-link,
-      .contact-link,
-      .skill-tag {
-        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <div class="bento-grid">
-        <!-- Hero Section -->
-        <div class="bento-item hero">
-          <img
-            src="https://placeholder-image-service.onrender.com/image/120x120?prompt=Professional headshot photo of a creative designer with modern styling and clean background&id=7ecedd17-5a03-4306-a2bb-7b60f212a2e4&customer_id=cus_SZOmLuajy19nfC"
-            alt="Professional headshot of creative designer with modern styling"
-            class="profile-image"
-          />
-          <h1>Your Name</h1>
-          <p>Creative Developer & Designer</p>
-          <a href="#contact" class="cta-button">Get In Touch</a>
-        </div>
+      <!-- Profile Card -->
+      <div class="card profile-card card-large">
+        <div class="profile-image">👨‍💻</div>
+        <h1 class="profile-name">John Doe</h1>
+        <p class="profile-title">Full Stack Developer & UI/UX Designer</p>
+        <a href="#contact" class="btn">Hubungi Saya</a>
+      </div>
 
-        <!-- About Section -->
-        <div class="bento-item about">
-          <h2>About Me</h2>
+      <!-- About Card -->
+      <div class="card about-card card-wide">
+        <h2 class="card-title">Tentang Saya</h2>
+        <div class="card-content">
           <p>
-            I'm a passionate creative developer with 5+ years of experience in
-            crafting digital experiences. I specialize in modern web
-            development, user interface design, and creative problem solving.
+            Halo! Saya seorang developer yang passionate dalam menciptakan
+            pengalaman digital yang menakjubkan. Dengan pengalaman lebih dari 5
+            tahun di industri teknologi, saya fokus pada pengembangan aplikasi
+            web modern dan desain yang user-friendly.
           </p>
-          <p>
-            I believe in the power of clean code, beautiful design, and
-            meaningful user experiences. When I'm not coding, you can find me
-            exploring new technologies or working on creative side projects.
+          <p style="margin-top: 10px">
+            Saya percaya bahwa desain yang baik adalah kombinasi antara estetika
+            yang menarik dan functionality yang optimal.
           </p>
         </div>
+      </div>
 
-        <!-- Skills Section -->
-        <div class="bento-item skills">
-          <h2>Skills</h2>
-          <div class="skills-container">
-            <span class="skill-tag">JavaScript</span>
-            <span class="skill-tag">React</span>
-            <span class="skill-tag">Node.js</span>
-            <span class="skill-tag">CSS</span>
-            <span class="skill-tag">HTML</span>
-            <span class="skill-tag">UI/UX</span>
-            <span class="skill-tag">Figma</span>
-            <span class="skill-tag">Git</span>
+      <!-- Skills Card -->
+      <div class="card skills-card">
+        <h2 class="card-title">Keahlian</h2>
+        <div class="card-content">
+          <span class="skill-item">React.js</span>
+          <span class="skill-item">Node.js</span>
+          <span class="skill-item">TypeScript</span>
+          <span class="skill-item">Python</span>
+          <span class="skill-item">MongoDB</span>
+          <span class="skill-item">PostgreSQL</span>
+          <span class="skill-item">Figma</span>
+          <span class="skill-item">Docker</span>
+          <span class="skill-item">AWS</span>
+          <span class="skill-item">GraphQL</span>
+        </div>
+      </div>
+
+      <!-- Projects Card -->
+      <div class="card projects-card card-tall">
+        <h2 class="card-title">Proyek Terbaru</h2>
+        <div class="card-content">
+          <div class="project-item">
+            <div class="project-title">E-Commerce Platform</div>
+            <p>
+              Platform e-commerce dengan React & Node.js, fitur pembayaran
+              terintegrasi dan dashboard admin.
+            </p>
+          </div>
+          <div class="project-item">
+            <div class="project-title">Task Management App</div>
+            <p>
+              Aplikasi manajemen tugas dengan real-time collaboration dan
+              notifikasi push.
+            </p>
+          </div>
+          <div class="project-item">
+            <div class="project-title">Portfolio Website</div>
+            <p>
+              Website portfolio dengan animasi smooth dan responsive design
+              untuk klien kreatif.
+            </p>
           </div>
         </div>
+      </div>
 
-        <!-- Experience Section -->
-        <div class="bento-item experience">
-          <h2>Experience</h2>
-          <div class="experience-item">
-            <div class="experience-date">2022 - Present</div>
-            <div class="experience-title">Senior Frontend Developer</div>
-            <div class="experience-company">Tech Company Inc.</div>
+      <!-- Stats Card -->
+      <div class="card stats-card">
+        <h2 class="card-title">Statistik</h2>
+        <div class="card-content">
+          <div class="stat-item">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Proyek Selesai</div>
           </div>
-          <div class="experience-item">
-            <div class="experience-date">2020 - 2022</div>
-            <div class="experience-title">UI/UX Designer</div>
-            <div class="experience-company">Design Studio</div>
+          <div class="stat-item">
+            <div class="stat-number">5+</div>
+            <div class="stat-label">Tahun Pengalaman</div>
           </div>
-          <div class="experience-item">
-            <div class="experience-date">2019 - 2020</div>
-            <div class="experience-title">Junior Developer</div>
-            <div class="experience-company">Startup Co.</div>
+          <div class="stat-item">
+            <div class="stat-number">30+</div>
+            <div class="stat-label">Klien Puas</div>
           </div>
         </div>
+      </div>
 
-        <!-- Projects Section -->
-        <div class="bento-item projects">
-          <h2>Featured Projects</h2>
-          <div class="projects-container">
-            <div class="project-card">
-              <h4>E-Commerce Platform</h4>
-              <p>
-                Modern e-commerce solution built with React and Node.js.
-                Features include user authentication, payment integration, and
-                admin dashboard.
-              </p>
-              <a href="#" class="project-link">View Project</a>
-            </div>
-            <div class="project-card">
-              <h4>Design System</h4>
-              <p>
-                Comprehensive design system with reusable components,
-                documentation, and guidelines for consistent user experiences.
-              </p>
-              <a href="#" class="project-link">View Project</a>
-            </div>
-            <div class="project-card">
-              <h4>Mobile App</h4>
-              <p>
-                Cross-platform mobile application built with React Native,
-                featuring real-time data synchronization and offline
-                capabilities.
-              </p>
-              <a href="#" class="project-link">View Project</a>
-            </div>
+      <!-- Social Card -->
+      <div class="card social-card">
+        <h2 class="card-title">Media Sosial</h2>
+        <div class="card-content">
+          <a href="#" class="social-link">
+            <span class="social-icon">📧</span>
+            Email
+          </a>
+          <a href="#" class="social-link">
+            <span class="social-icon">💼</span>
+            LinkedIn
+          </a>
+          <a href="#" class="social-link">
+            <span class="social-icon">🐙</span>
+            GitHub
+          </a>
+          <a href="#" class="social-link">
+            <span class="social-icon">🐦</span>
+            Twitter
+          </a>
+          <a href="#" class="social-link">
+            <span class="social-icon">📱</span>
+            Instagram
+          </a>
+        </div>
+      </div>
+
+      <!-- Contact Card -->
+      <div class="card contact-card card-wide" id="contact">
+        <h2 class="card-title">Kontak</h2>
+        <div class="card-content">
+          <div class="contact-item">
+            <span class="contact-icon">📧</span>
+            john.doe@email.com
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">📱</span>
+            +62 812-3456-7890
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">📍</span>
+            Jakarta, Indonesia
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">💼</span>
+            Tersedia untuk proyek freelance
           </div>
         </div>
+      </div>
 
-        <!-- Contact Section -->
-        <div class="bento-item contact" id="contact">
-          <div class="contact-info">
-            <h2>Let's Connect</h2>
-            <a href="mailto:hello@yourname.com" class="contact-link"
-              >hello@yourname.com</a
+      <!-- Quote Card -->
+      <div
+        class="card"
+        style="background: linear-gradient(135deg, #ffb74d, #ffcc70)"
+      >
+        <h2 class="card-title">Filosofi Kerja</h2>
+        <div class="card-content">
+          <p
+            style="
+              font-size: 1.1rem;
+              font-style: italic;
+              text-align: center;
+              color: #333;
+            "
+          >
+            "Code is like humor. When you have to explain it, it's bad."<br />
+            <span
+              style="
+                font-size: 0.9rem;
+                font-weight: bold;
+                margin-top: 10px;
+                display: block;
+              "
+              >- Cory House</span
             >
-            <a href="https://linkedin.com/in/yourname" class="contact-link"
-              >LinkedIn</a
-            >
-            <a href="https://github.com/yourname" class="contact-link"
-              >GitHub</a
-            >
-            <a href="https://dribbble.com/yourname" class="contact-link"
-              >Dribbble</a
-            >
-          </div>
+          </p>
         </div>
       </div>
     </div>
 
     <script>
-      // Smooth scrolling for internal links
+      // Smooth scrolling untuk anchor links
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener("click", function (e) {
           e.preventDefault();
@@ -511,52 +487,93 @@
           if (target) {
             target.scrollIntoView({
               behavior: "smooth",
-              block: "start",
+              block: "center",
             });
           }
         });
       });
 
-      // Add click effects to interactive elements
-      document
-        .querySelectorAll(".cta-button, .project-link")
-        .forEach((button) => {
-          button.addEventListener("click", function (e) {
-            // Create ripple effect
-            const ripple = document.createElement("span");
-            const rect = this.getBoundingClientRect();
-            const size = Math.max(rect.width, rect.height);
-            const x = e.clientX - rect.left - size / 2;
-            const y = e.clientY - rect.top - size / 2;
-
-            ripple.style.width = ripple.style.height = size + "px";
-            ripple.style.left = x + "px";
-            ripple.style.top = y + "px";
-            ripple.style.position = "absolute";
-            ripple.style.borderRadius = "50%";
-            ripple.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
-            ripple.style.pointerEvents = "none";
-            ripple.style.animation = "ripple 0.6s linear";
-
-            this.style.position = "relative";
-            this.style.overflow = "hidden";
-            this.appendChild(ripple);
-
-            setTimeout(() => {
-              ripple.remove();
-            }, 600);
-          });
+      // Efek click pada cards
+      document.querySelectorAll(".card").forEach((card) => {
+        card.addEventListener("click", function () {
+          this.classList.add("clicked");
+          setTimeout(() => {
+            this.classList.remove("clicked");
+          }, 300);
         });
+      });
 
-      // Add ripple animation
+      // Responsive grid adjustment
+      function adjustGrid() {
+        const container = document.querySelector(".container");
+        const cards = document.querySelectorAll(".card");
+
+        if (window.innerWidth <= 768) {
+          cards.forEach((card) => {
+            card.classList.remove("card-large", "card-wide", "card-tall");
+          });
+        } else {
+          // Restore original classes for larger screens
+          cards[0].classList.add("card-large"); // Profile card
+          cards[1].classList.add("card-wide"); // About card
+          cards[3].classList.add("card-tall"); // Projects card
+          cards[6].classList.add("card-wide"); // Contact card
+        }
+      }
+
+      // Call on load and resize
+      window.addEventListener("load", adjustGrid);
+      window.addEventListener("resize", adjustGrid);
+
+      // Simple typing effect for profile title
+      function typeWriter() {
+        const text = "Full Stack Developer & UI/UX Designer";
+        const element = document.querySelector(".profile-title");
+        let i = 0;
+        element.innerHTML = "";
+
+        function type() {
+          if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, 100);
+          }
+        }
+
+        setTimeout(type, 1000);
+      }
+
+      // Run typing effect on page load
+      window.addEventListener("load", typeWriter);
+
+      // Add click feedback to interactive elements
+      document.querySelectorAll(".social-link, .btn").forEach((element) => {
+        element.addEventListener("click", function (e) {
+          // Create ripple effect
+          const ripple = document.createElement("div");
+          ripple.style.position = "absolute";
+          ripple.style.borderRadius = "50%";
+          ripple.style.background = "rgba(255,255,255,0.6)";
+          ripple.style.transform = "scale(0)";
+          ripple.style.animation = "ripple 0.6s linear";
+          ripple.style.left = e.clientX - this.offsetLeft - 25 + "px";
+          ripple.style.top = e.clientY - this.offsetTop - 25 + "px";
+          ripple.style.width = ripple.style.height = "50px";
+
+          this.style.position = "relative";
+          this.appendChild(ripple);
+
+          setTimeout(() => {
+            ripple.remove();
+          }, 600);
+        });
+      });
+
+      // Add CSS for ripple animation
       const style = document.createElement("style");
       style.textContent = `
             @keyframes ripple {
-                0% {
-                    transform: scale(0);
-                    opacity: 1;
-                }
-                100% {
+                to {
                     transform: scale(2);
                     opacity: 0;
                 }
@@ -564,132 +581,15 @@
         `;
       document.head.appendChild(style);
 
-      // Dynamic typing effect for hero text (optional)
-      const heroTitle = document.querySelector(".hero h1");
-      if (heroTitle) {
-        const originalText = heroTitle.textContent;
-        let index = 0;
+      // Simple parallax effect for background (sangat subtle)
+      window.addEventListener("mousemove", (e) => {
+        const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+        const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
 
-        function typeWriter() {
-          if (index < originalText.length) {
-            heroTitle.textContent = originalText.substring(0, index + 1);
-            index++;
-            setTimeout(typeWriter, 100);
-          }
-        }
-
-        // Uncomment to enable typing effect
-        // heroTitle.textContent = '';
-        // typeWriter();
-      }
-
-      // Add hover sound effects (optional)
-      function playHoverSound() {
-        // Create audio context for hover sounds
-        const audioContext = new (window.AudioContext ||
-          window.webkitAudioContext)();
-
-        function createHoverSound(frequency = 800, duration = 0.1) {
-          const oscillator = audioContext.createOscillator();
-          const gainNode = audioContext.createGain();
-
-          oscillator.connect(gainNode);
-          gainNode.connect(audioContext.destination);
-
-          oscillator.frequency.setValueAtTime(
-            frequency,
-            audioContext.currentTime
-          );
-          oscillator.type = "sine";
-
-          gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-          gainNode.gain.exponentialRampToValueAtTime(
-            0.01,
-            audioContext.currentTime + duration
-          );
-
-          oscillator.start(audioContext.currentTime);
-          oscillator.stop(audioContext.currentTime + duration);
-        }
-
-        // Add sound to buttons (uncomment to enable)
-        // document.querySelectorAll('.cta-button, .project-link').forEach(button => {
-        //     button.addEventListener('mouseenter', () => createHoverSound(1000, 0.05));
-        // });
-      }
-
-      // Initialize hover sounds after user interaction
-      document.addEventListener("click", playHoverSound, { once: true });
-
-      // Parallax effect for decorative elements (subtle)
-      window.addEventListener("scroll", () => {
-        const scrolled = window.pageYOffset;
-        const parallaxElements = document.querySelectorAll(
-          ".bento-item::before"
-        );
-
-        // Very subtle parallax - just for visual interest
-        parallaxElements.forEach((element, index) => {
-          const rate = scrolled * 0.1 * (index % 2 === 0 ? 1 : -1);
-          // Minimal effect to avoid disrupting UX
-        });
+        document.body.style.backgroundPosition = `${50 + moveX}% ${
+          50 + moveY
+        }%`;
       });
-
-      // Dark mode toggle (bonus feature)
-      function toggleDarkMode() {
-        document.body.classList.toggle("dark-mode");
-        localStorage.setItem(
-          "darkMode",
-          document.body.classList.contains("dark-mode")
-        );
-      }
-
-      // Check for saved dark mode preference
-      if (localStorage.getItem("darkMode") === "true") {
-        document.body.classList.add("dark-mode");
-      }
-
-      // Add dark mode styles
-      const darkModeStyles = `
-            .dark-mode {
-                --white: #1a1a1a;
-                --black: #ffffff;
-                --gray: #2a2a2a;
-                --shadow: rgba(255, 255, 255, 0.1);
-            }
-            
-            .dark-mode .bento-item {
-                background: var(--white);
-                color: var(--black);
-            }
-            
-            .dark-mode .project-card {
-                background: #333;
-                color: var(--black);
-            }
-        `;
-
-      const darkModeStyleSheet = document.createElement("style");
-      darkModeStyleSheet.textContent = darkModeStyles;
-      document.head.appendChild(darkModeStyleSheet);
-
-      // Performance optimization - lazy loading for images
-      if ("IntersectionObserver" in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const img = entry.target;
-              img.src = img.dataset.src;
-              img.classList.remove("lazy");
-              observer.unobserve(img);
-            }
-          });
-        });
-
-        document.querySelectorAll("img[data-src]").forEach((img) => {
-          imageObserver.observe(img);
-        });
-      }
     </script>
   </body>
 </html>
