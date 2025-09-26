@@ -1,894 +1,267 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio - Bento Grid Design</title>
+    <link rel="stylesheet" href="styles.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      :root {
-        --ts-blue: #3178c6;
-        --ts-blue-light: #4a90e2;
-        --ts-blue-dark: #235a87;
-        --ts-white: #ffffff;
-        --ts-light-gray: #f8f9fa;
-        --ts-gray: #e1e4e8;
-        --ts-dark-gray: #586069;
-        --ts-black: #24292e;
-        --ts-accent: #007acc;
-        --gradient-primary: linear-gradient(
-          135deg,
-          var(--ts-blue) 0%,
-          var(--ts-blue-light) 100%
-        );
-        --gradient-secondary: linear-gradient(
-          135deg,
-          var(--ts-blue-dark) 0%,
-          var(--ts-blue) 100%
-        );
-        --shadow-light: 0 2px 8px rgba(49, 120, 198, 0.1);
-        --shadow-medium: 0 4px 16px rgba(49, 120, 198, 0.15);
-        --shadow-heavy: 0 8px 32px rgba(49, 120, 198, 0.2);
-      }
-
-      body {
-        font-family: "Inter", sans-serif;
-        background: var(--ts-light-gray);
-        color: var(--ts-black);
-        line-height: 1.6;
-        overflow-x: hidden;
-      }
-
-      .container {
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: 2rem;
-      }
-
-      .header {
-        text-align: center;
-        margin-bottom: 3rem;
-        animation: fadeInUp 0.8s ease-out;
-      }
-
-      .header h1 {
-        font-size: clamp(2.5rem, 5vw, 4rem);
-        font-weight: 700;
-        background: var(--gradient-primary);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        margin-bottom: 1rem;
-      }
-
-      .header p {
-        font-size: 1.2rem;
-        color: var(--ts-dark-gray);
-        font-weight: 400;
-      }
-
-      .bento-grid {
-        display: grid;
-        grid-template-columns: repeat(12, 1fr);
-        grid-template-rows: repeat(8, 120px);
-        gap: 1.5rem;
-        margin-bottom: 3rem;
-      }
-
-      .bento-item {
-        background: var(--ts-white);
-        border-radius: 20px;
-        box-shadow: var(--shadow-light);
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-        cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        padding: 2rem;
-      }
-
-      .bento-item:hover {
-        transform: translateY(-8px);
-        box-shadow: var(--shadow-heavy);
-      }
-
-      .bento-item::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: var(--gradient-primary);
-        transform: scaleX(0);
-        transition: transform 0.3s ease;
-      }
-
-      .bento-item:hover::before {
-        transform: scaleX(1);
-      }
-
-      /* Grid positioning for different items */
-      .hero-card {
-        grid-column: 1 / 8;
-        grid-row: 1 / 4;
-        background: var(--gradient-primary);
-        color: var(--ts-white);
-        justify-content: flex-start;
-        align-items: flex-start;
-        text-align: left;
-      }
-
-      .profile-image {
-        grid-column: 8 / 13;
-        grid-row: 1 / 4;
-        padding: 1rem;
-      }
-
-      .skills-card {
-        grid-column: 1 / 5;
-        grid-row: 4 / 6;
-        background: var(--ts-white);
-      }
-
-      .experience-card {
-        grid-column: 5 / 9;
-        grid-row: 4 / 6;
-        background: var(--gradient-secondary);
-        color: var(--ts-white);
-      }
-
-      .projects-card {
-        grid-column: 9 / 13;
-        grid-row: 4 / 6;
-        background: var(--ts-white);
-      }
-
-      .about-card {
-        grid-column: 1 / 6;
-        grid-row: 6 / 8;
-        background: var(--ts-white);
-        text-align: left;
-        justify-content: flex-start;
-        align-items: flex-start;
-      }
-
-      .contact-card {
-        grid-column: 6 / 10;
-        grid-row: 6 / 8;
-        background: var(--ts-accent);
-        color: var(--ts-white);
-      }
-
-      .social-card {
-        grid-column: 10 / 13;
-        grid-row: 6 / 8;
-        background: var(--ts-white);
-      }
-
-      .location-card {
-        grid-column: 1 / 4;
-        grid-row: 8 / 9;
-        background: var(--ts-white);
-      }
-
-      .status-card {
-        grid-column: 4 / 8;
-        grid-row: 8 / 9;
-        background: var(--gradient-primary);
-        color: var(--ts-white);
-      }
-
-      .theme-card {
-        grid-column: 8 / 11;
-        grid-row: 8 / 9;
-        background: var(--ts-white);
-      }
-
-      .download-card {
-        grid-column: 11 / 13;
-        grid-row: 8 / 9;
-        background: var(--ts-blue-dark);
-        color: var(--ts-white);
-      }
-
-      /* Content styling */
-      .hero-card h2 {
-        font-size: 2.5rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        line-height: 1.2;
-      }
-
-      .hero-card p {
-        font-size: 1.1rem;
-        opacity: 0.9;
-        font-weight: 300;
-      }
-
-      .profile-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 16px;
-      }
-
-      .card-title {
-        font-size: 1.5rem;
-        font-weight: 600;
-        margin-bottom: 1rem;
-        color: inherit;
-      }
-
-      .card-subtitle {
-        font-size: 0.9rem;
-        opacity: 0.8;
-        margin-bottom: 0.5rem;
-      }
-
-      .card-content {
-        font-size: 1rem;
-        font-weight: 400;
-      }
-
-      .skills-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        justify-content: center;
-      }
-
-      .skill-tag {
-        background: var(--ts-blue);
-        color: var(--ts-white);
-        padding: 0.3rem 0.8rem;
-        border-radius: 20px;
-        font-size: 0.8rem;
-        font-weight: 500;
-      }
-
-      .social-links {
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-
-      .social-link {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        background: var(--ts-blue);
-        color: var(--ts-white);
-        border-radius: 10px;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        font-weight: 600;
-      }
-
-      .social-link:hover {
-        transform: scale(1.1);
-        background: var(--ts-blue-dark);
-      }
-
-      .status-indicator {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin-top: 0.5rem;
-      }
-
-      .status-dot {
-        width: 8px;
-        height: 8px;
-        background: #00ff88;
-        border-radius: 50%;
-        animation: pulse 2s infinite;
-      }
-
-      @keyframes pulse {
-        0% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.5;
-        }
-        100% {
-          opacity: 1;
-        }
-      }
-
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .bento-item {
-        animation: fadeInUp 0.8s ease-out;
-      }
-
-      .bento-item:nth-child(1) {
-        animation-delay: 0.1s;
-      }
-      .bento-item:nth-child(2) {
-        animation-delay: 0.2s;
-      }
-      .bento-item:nth-child(3) {
-        animation-delay: 0.3s;
-      }
-      .bento-item:nth-child(4) {
-        animation-delay: 0.4s;
-      }
-      .bento-item:nth-child(5) {
-        animation-delay: 0.5s;
-      }
-      .bento-item:nth-child(6) {
-        animation-delay: 0.6s;
-      }
-      .bento-item:nth-child(7) {
-        animation-delay: 0.7s;
-      }
-      .bento-item:nth-child(8) {
-        animation-delay: 0.8s;
-      }
-      .bento-item:nth-child(9) {
-        animation-delay: 0.9s;
-      }
-      .bento-item:nth-child(10) {
-        animation-delay: 1s;
-      }
-
-      /* Responsive Design */
-      @media (max-width: 1200px) {
-        .bento-grid {
-          grid-template-columns: repeat(8, 1fr);
-          grid-template-rows: repeat(12, 100px);
-        }
-
-        .hero-card {
-          grid-column: 1 / 6;
-          grid-row: 1 / 4;
-        }
-
-        .profile-image {
-          grid-column: 6 / 9;
-          grid-row: 1 / 4;
-        }
-
-        .skills-card {
-          grid-column: 1 / 5;
-          grid-row: 4 / 6;
-        }
-
-        .experience-card {
-          grid-column: 5 / 9;
-          grid-row: 4 / 6;
-        }
-
-        .projects-card {
-          grid-column: 1 / 5;
-          grid-row: 6 / 8;
-        }
-
-        .about-card {
-          grid-column: 5 / 9;
-          grid-row: 6 / 8;
-        }
-
-        .contact-card {
-          grid-column: 1 / 5;
-          grid-row: 8 / 10;
-        }
-
-        .social-card {
-          grid-column: 5 / 9;
-          grid-row: 8 / 10;
-        }
-
-        .location-card {
-          grid-column: 1 / 3;
-          grid-row: 10 / 12;
-        }
-
-        .status-card {
-          grid-column: 3 / 6;
-          grid-row: 10 / 12;
-        }
-
-        .theme-card {
-          grid-column: 6 / 8;
-          grid-row: 10 / 12;
-        }
-
-        .download-card {
-          grid-column: 8 / 9;
-          grid-row: 10 / 12;
-        }
-      }
-
-      @media (max-width: 768px) {
-        .container {
-          padding: 1rem;
-        }
-
-        .bento-grid {
-          grid-template-columns: repeat(4, 1fr);
-          grid-template-rows: repeat(20, 80px);
-          gap: 1rem;
-        }
-
-        .bento-item {
-          padding: 1.5rem;
-        }
-
-        .hero-card {
-          grid-column: 1 / 5;
-          grid-row: 1 / 4;
-        }
-
-        .profile-image {
-          grid-column: 1 / 5;
-          grid-row: 4 / 7;
-        }
-
-        .skills-card {
-          grid-column: 1 / 5;
-          grid-row: 7 / 9;
-        }
-
-        .experience-card {
-          grid-column: 1 / 5;
-          grid-row: 9 / 11;
-        }
-
-        .projects-card {
-          grid-column: 1 / 5;
-          grid-row: 11 / 13;
-        }
-
-        .about-card {
-          grid-column: 1 / 5;
-          grid-row: 13 / 16;
-        }
-
-        .contact-card {
-          grid-column: 1 / 5;
-          grid-row: 16 / 18;
-        }
-
-        .social-card {
-          grid-column: 1 / 5;
-          grid-row: 18 / 20;
-        }
-
-        .location-card {
-          grid-column: 1 / 3;
-          grid-row: 20 / 21;
-        }
-
-        .status-card {
-          grid-column: 3 / 5;
-          grid-row: 20 / 21;
-        }
-
-        .theme-card {
-          grid-column: 1 / 3;
-          grid-row: 21 / 22;
-        }
-
-        .download-card {
-          grid-column: 3 / 5;
-          grid-row: 21 / 22;
-        }
-
-        .hero-card h2 {
-          font-size: 2rem;
-        }
-
-        .card-title {
-          font-size: 1.2rem;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .hero-card h2 {
-          font-size: 1.8rem;
-        }
-
-        .bento-item {
-          padding: 1rem;
-        }
-
-        .social-links {
-          gap: 0.5rem;
-        }
-
-        .social-link {
-          width: 35px;
-          height: 35px;
-        }
-      }
-
-      /* Interactive elements */
-      .interactive-card {
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-
-      .interactive-card:active {
-        transform: scale(0.98);
-      }
-
-      /* Loading animation */
-      .loading {
-        opacity: 0;
-        animation: fadeIn 0.5s ease-out 0.2s forwards;
-      }
-
-      @keyframes fadeIn {
-        to {
-          opacity: 1;
-        }
-      }
-    </style>
   </head>
   <body>
-    <div class="container">
-      <header class="header">
-        <h1>John Developer</h1>
-        <p>Full Stack TypeScript Developer & UI/UX Designer</p>
-      </header>
-
-      <div class="bento-grid">
-        <!-- Hero Card -->
-        <div class="bento-item hero-card interactive-card loading">
-          <h2>Creative Developer</h2>
-          <p>
-            Passionate about creating beautiful, functional web experiences with
-            modern technologies like TypeScript, React, and Node.js.
-          </p>
+    <!-- Header -->
+    <header class="header">
+      <nav class="nav">
+        <div class="nav-brand">
+          <span class="logo">JD</span>
         </div>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="nav-toggle" aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </nav>
+    </header>
 
-        <!-- Profile Image -->
-        <div class="bento-item profile-image loading">
-          <img
-            src="https://placeholder-image-service.onrender.com/image/300x300?prompt=Professional headshot of a modern software developer with friendly smile in business casual attire&id=7ecedd17-5a03-4306-a2bb-7b60f212a2e4&customer_id=cus_SZOmLuajy19nfC"
-            alt="Professional headshot of John Developer showing a friendly smile in business casual attire"
-          />
-        </div>
+    <!-- Main Content -->
+    <main class="main">
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="container">
+          <div class="bento-grid">
+            <!-- Profile Card -->
+            <div class="bento-item profile-card" data-aos="fade-up">
+              <div class="profile-content">
+                <div class="profile-image">
+                  <img
+                    src="https://placeholder-image-service.onrender.com/image/200x200?prompt=Professional headshot of a web developer with modern attire and confident expression&id=7ecedd17-5a03-4306-a2bb-7b60f212a2e4&customer_id=cus_SZOmLuajy19nfC"
+                    alt="Professional headshot of John Doe, web developer with modern attire"
+                  />
+                </div>
+                <div class="profile-info">
+                  <h1 class="profile-name">John Doe</h1>
+                  <p class="profile-title">Full Stack Developer</p>
+                  <p class="profile-location">Jakarta, Indonesia</p>
+                </div>
+              </div>
+              <div class="profile-stats">
+                <div class="stat">
+                  <span class="stat-number">5+</span>
+                  <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-number">50+</span>
+                  <span class="stat-label">Projects Done</span>
+                </div>
+              </div>
+            </div>
 
-        <!-- Skills Card -->
-        <div class="bento-item skills-card interactive-card loading">
-          <h3 class="card-title">Skills</h3>
-          <div class="skills-list">
-            <span class="skill-tag">TypeScript</span>
-            <span class="skill-tag">React</span>
-            <span class="skill-tag">Node.js</span>
-            <span class="skill-tag">Next.js</span>
-            <span class="skill-tag">GraphQL</span>
+            <!-- About Card -->
+            <div
+              class="bento-item about-card"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <h2 class="card-title">About Me</h2>
+              <p class="card-description">
+                Passionate full stack developer with 5+ years of experience
+                creating digital solutions. I specialize in modern web
+                technologies and love turning complex problems into simple,
+                beautiful designs.
+              </p>
+              <div class="about-highlights">
+                <div class="highlight">
+                  <span class="highlight-icon">🚀</span>
+                  <span>Performance Focused</span>
+                </div>
+                <div class="highlight">
+                  <span class="highlight-icon">💡</span>
+                  <span>Creative Solutions</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Skills Card -->
+            <div
+              class="bento-item skills-card"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <h2 class="card-title">Tech Stack</h2>
+              <div class="skills-grid">
+                <div class="skill-item">
+                  <div class="skill-icon">⚛️</div>
+                  <span>React</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-icon">📘</div>
+                  <span>TypeScript</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-icon">🟢</div>
+                  <span>Node.js</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-icon">🍃</div>
+                  <span>MongoDB</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-icon">🎨</div>
+                  <span>CSS</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-icon">🔧</div>
+                  <span>Git</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Featured Project -->
+            <div
+              class="bento-item project-featured"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <div class="project-image">
+                <img
+                  src="https://placeholder-image-service.onrender.com/image/400x250?prompt=Modern e-commerce website interface with clean design and product grid layout&id=7ecedd17-5a03-4306-a2bb-7b60f212a2e4&customer_id=cus_SZOmLuajy19nfC"
+                  alt="Screenshot of modern e-commerce website with clean interface and product grid"
+                />
+              </div>
+              <div class="project-content">
+                <h3 class="project-title">E-Commerce Platform</h3>
+                <p class="project-description">
+                  Full-stack e-commerce solution with React, Node.js, and
+                  MongoDB
+                </p>
+                <div class="project-tags">
+                  <span class="tag">React</span>
+                  <span class="tag">Node.js</span>
+                  <span class="tag">MongoDB</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Status Card -->
+            <div
+              class="bento-item status-card"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
+              <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span class="status-text">Available for work</span>
+              </div>
+              <h3 class="status-title">Let's Work Together</h3>
+              <p class="status-description">
+                Currently open for new opportunities and exciting projects.
+              </p>
+              <button class="cta-button">Get in touch</button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div
+              class="bento-item projects-grid"
+              data-aos="fade-up"
+              data-aos-delay="500"
+            >
+              <h2 class="card-title">Recent Projects</h2>
+              <div class="projects-list">
+                <div class="project-item">
+                  <div class="project-preview">
+                    <img
+                      src="https://placeholder-image-service.onrender.com/image/100x80?prompt=Mobile app interface showing task management dashboard with modern UI elements&id=7ecedd17-5a03-4306-a2bb-7b60f212a2e4&customer_id=cus_SZOmLuajy19nfC"
+                      alt="Mobile task management app interface with modern dashboard"
+                    />
+                  </div>
+                  <div class="project-info">
+                    <h4>Task Manager App</h4>
+                    <p>React Native</p>
+                  </div>
+                </div>
+                <div class="project-item">
+                  <div class="project-preview">
+                    <img
+                      src="https://placeholder-image-service.onrender.com/image/100x80?prompt=Analytics dashboard with charts and graphs showing data visualization in modern interface&id=7ecedd17-5a03-4306-a2bb-7b60f212a2e4&customer_id=cus_SZOmLuajy19nfC"
+                      alt="Analytics dashboard showing charts and data visualization with modern design"
+                    />
+                  </div>
+                  <div class="project-info">
+                    <h4>Analytics Dashboard</h4>
+                    <p>Vue.js</p>
+                  </div>
+                </div>
+                <div class="project-item">
+                  <div class="project-preview">
+                    <img
+                      src="https://placeholder-image-service.onrender.com/image/100x80?prompt=Social media platform interface with feed layout and modern social networking design&id=7ecedd17-5a03-4306-a2bb-7b60f212a2e4&customer_id=cus_SZOmLuajy19nfC"
+                      alt="Social media platform interface with modern feed layout and networking features"
+                    />
+                  </div>
+                  <div class="project-info">
+                    <h4>Social Platform</h4>
+                    <p>Next.js</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact Card -->
+            <div
+              class="bento-item contact-card"
+              data-aos="fade-up"
+              data-aos-delay="600"
+            >
+              <h2 class="card-title">Get In Touch</h2>
+              <div class="contact-links">
+                <a href="mailto:john@example.com" class="contact-link">
+                  <span class="contact-icon">✉️</span>
+                  <span>john@example.com</span>
+                </a>
+                <a href="https://linkedin.com/in/johndoe" class="contact-link">
+                  <span class="contact-icon">💼</span>
+                  <span>LinkedIn</span>
+                </a>
+                <a href="https://github.com/johndoe" class="contact-link">
+                  <span class="contact-icon">🐱</span>
+                  <span>GitHub</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Quote Card -->
+            <div
+              class="bento-item quote-card"
+              data-aos="fade-up"
+              data-aos-delay="700"
+            >
+              <blockquote class="quote">
+                <p>
+                  "Code is like humor. When you have to explain it, it's bad."
+                </p>
+                <cite>- Cory House</cite>
+              </blockquote>
+            </div>
           </div>
         </div>
+      </section>
+    </main>
 
-        <!-- Experience Card -->
-        <div class="bento-item experience-card interactive-card loading">
-          <h3 class="card-title">Experience</h3>
-          <p class="card-subtitle">5+ Years</p>
-          <p class="card-content">Senior Developer</p>
-        </div>
-
-        <!-- Projects Card -->
-        <div class="bento-item projects-card interactive-card loading">
-          <h3 class="card-title">Projects</h3>
-          <p class="card-subtitle">50+ Completed</p>
-          <p class="card-content">Web Applications</p>
-        </div>
-
-        <!-- About Card -->
-        <div class="bento-item about-card interactive-card loading">
-          <h3 class="card-title">About Me</h3>
-          <p class="card-content">
-            I'm a passionate developer who loves building scalable applications
-            with TypeScript. I focus on creating clean, maintainable code and
-            exceptional user experiences.
-          </p>
-        </div>
-
-        <!-- Contact Card -->
-        <div class="bento-item contact-card interactive-card loading">
-          <h3 class="card-title">Get In Touch</h3>
-          <p class="card-content">john@example.com</p>
-          <p class="card-content">+1 (555) 123-4567</p>
-        </div>
-
-        <!-- Social Card -->
-        <div class="bento-item social-card interactive-card loading">
-          <h3 class="card-title">Connect</h3>
-          <div class="social-links">
-            <a href="#" class="social-link" title="GitHub">GH</a>
-            <a href="#" class="social-link" title="LinkedIn">LI</a>
-            <a href="#" class="social-link" title="Twitter">TW</a>
-          </div>
-        </div>
-
-        <!-- Location Card -->
-        <div class="bento-item location-card interactive-card loading">
-          <p class="card-subtitle">Based in</p>
-          <p class="card-content">San Francisco</p>
-        </div>
-
-        <!-- Status Card -->
-        <div class="bento-item status-card interactive-card loading">
-          <p class="card-content">Available for Work</p>
-          <div class="status-indicator">
-            <div class="status-dot"></div>
-            <span>Online</span>
-          </div>
-        </div>
-
-        <!-- Theme Card -->
-        <div
-          class="bento-item theme-card interactive-card loading"
-          id="theme-toggle"
-        >
-          <p class="card-content">🌙 Theme</p>
-        </div>
-
-        <!-- Download Card -->
-        <div
-          class="bento-item download-card interactive-card loading"
-          id="download-cv"
-        >
-          <p class="card-content">📄 CV</p>
-        </div>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2024 John Doe. All rights reserved.</p>
       </div>
-    </div>
+    </footer>
 
-    <script>
-      // Smooth scrolling and interactive elements
-      document.addEventListener("DOMContentLoaded", function () {
-        // Add loading animation to all cards
-        const cards = document.querySelectorAll(".bento-item");
-        cards.forEach((card, index) => {
-          setTimeout(() => {
-            card.classList.add("loaded");
-          }, index * 100);
-        });
-
-        // Interactive card hover effects
-        cards.forEach((card) => {
-          card.addEventListener("mouseenter", function () {
-            this.style.transform = "translateY(-8px) scale(1.02)";
-          });
-
-          card.addEventListener("mouseleave", function () {
-            this.style.transform = "translateY(0) scale(1)";
-          });
-        });
-
-        // Theme toggle functionality
-        const themeToggle = document.getElementById("theme-toggle");
-        let isDark = false;
-
-        themeToggle.addEventListener("click", function () {
-          isDark = !isDark;
-
-          if (isDark) {
-            document.documentElement.style.setProperty(
-              "--ts-light-gray",
-              "#1a1a1a"
-            );
-            document.documentElement.style.setProperty("--ts-white", "#2d2d2d");
-            document.documentElement.style.setProperty("--ts-black", "#ffffff");
-            document.documentElement.style.setProperty(
-              "--ts-dark-gray",
-              "#cccccc"
-            );
-            this.innerHTML = '<p class="card-content">☀️ Theme</p>';
-          } else {
-            document.documentElement.style.setProperty(
-              "--ts-light-gray",
-              "#F8F9FA"
-            );
-            document.documentElement.style.setProperty("--ts-white", "#FFFFFF");
-            document.documentElement.style.setProperty("--ts-black", "#24292E");
-            document.documentElement.style.setProperty(
-              "--ts-dark-gray",
-              "#586069"
-            );
-            this.innerHTML = '<p class="card-content">🌙 Theme</p>';
-          }
-        });
-
-        // Download CV functionality
-        const downloadCV = document.getElementById("download-cv");
-        downloadCV.addEventListener("click", function () {
-          // Create a temporary link to download a sample CV
-          const link = document.createElement("a");
-          link.href =
-            "data:text/plain;charset=utf-8,John Developer - Full Stack TypeScript Developer\n\nExperience: 5+ Years\nSkills: TypeScript, React, Node.js, Next.js, GraphQL\nEmail: john@example.com\nPhone: +1 (555) 123-4567\nLocation: San Francisco";
-          link.download = "John_Developer_CV.txt";
-          link.click();
-
-          // Visual feedback
-          this.style.transform = "scale(0.95)";
-          setTimeout(() => {
-            this.style.transform = "scale(1)";
-          }, 150);
-        });
-
-        // Parallax effect on scroll
-        window.addEventListener("scroll", function () {
-          const scrolled = window.pageYOffset;
-          const rate = scrolled * -0.5;
-
-          cards.forEach((card, index) => {
-            const speed = ((index % 3) + 1) * 0.1;
-            card.style.transform = `translateY(${rate * speed}px)`;
-          });
-        });
-
-        // Contact card click functionality
-        const contactCard = document.querySelector(".contact-card");
-        contactCard.addEventListener("click", function () {
-          const email = "john@example.com";
-          const subject = "Hello from your portfolio!";
-          const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(
-            subject
-          )}`;
-          window.open(mailtoLink);
-        });
-
-        // Social links functionality
-        const socialLinks = document.querySelectorAll(".social-link");
-        socialLinks.forEach((link) => {
-          link.addEventListener("click", function (e) {
-            e.preventDefault();
-
-            // Add click animation
-            this.style.transform = "scale(0.9)";
-            setTimeout(() => {
-              this.style.transform = "scale(1.1)";
-              setTimeout(() => {
-                this.style.transform = "scale(1)";
-              }, 150);
-            }, 150);
-
-            // Here you would normally navigate to social profiles
-            console.log("Navigate to social profile:", this.title);
-          });
-        });
-
-        // Add typing effect to hero card
-        const heroCard = document.querySelector(".hero-card p");
-        const originalText = heroCard.textContent;
-        heroCard.textContent = "";
-
-        let i = 0;
-        const typeWriter = () => {
-          if (i < originalText.length) {
-            heroCard.textContent += originalText.charAt(i);
-            i++;
-            setTimeout(typeWriter, 50);
-          }
-        };
-
-        setTimeout(typeWriter, 1000);
-
-        // Skills card animation
-        const skillsCard = document.querySelector(".skills-card");
-        const skillTags = skillsCard.querySelectorAll(".skill-tag");
-
-        skillsCard.addEventListener("mouseenter", function () {
-          skillTags.forEach((tag, index) => {
-            setTimeout(() => {
-              tag.style.transform = "translateY(-5px) rotate(2deg)";
-            }, index * 100);
-          });
-        });
-
-        skillsCard.addEventListener("mouseleave", function () {
-          skillTags.forEach((tag) => {
-            tag.style.transform = "translateY(0) rotate(0deg)";
-          });
-        });
-
-        // Responsive menu for mobile (if needed)
-        const isMobile = window.innerWidth <= 768;
-        if (isMobile) {
-          // Add mobile-specific interactions
-          cards.forEach((card) => {
-            card.addEventListener("touchstart", function () {
-              this.style.transform = "scale(0.98)";
-            });
-
-            card.addEventListener("touchend", function () {
-              setTimeout(() => {
-                this.style.transform = "scale(1)";
-              }, 150);
-            });
-          });
-        }
-
-        // Performance optimization: Intersection Observer for animations
-        const observerOptions = {
-          threshold: 0.1,
-          rootMargin: "0px 0px -50px 0px",
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.style.opacity = "1";
-              entry.target.style.transform = "translateY(0)";
-            }
-          });
-        }, observerOptions);
-
-        cards.forEach((card) => {
-          observer.observe(card);
-        });
-      });
-
-      // Utility function for smooth animations
-      function animateElement(element, property, from, to, duration = 300) {
-        const startTime = performance.now();
-        const startValue = from;
-        const endValue = to;
-
-        function animate(currentTime) {
-          const elapsedTime = currentTime - startTime;
-          const progress = Math.min(elapsedTime / duration, 1);
-
-          const currentValue =
-            startValue + (endValue - startValue) * easeOutCubic(progress);
-          element.style[property] =
-            currentValue + (property.includes("transform") ? "" : "px");
-
-          if (progress < 1) {
-            requestAnimationFrame(animate);
-          }
-        }
-
-        requestAnimationFrame(animate);
-      }
-
-      function easeOutCubic(t) {
-        return 1 - Math.pow(1 - t, 3);
-      }
-
-      // Console welcome message
-      console.log(`
-    ╔═══════════════════════════════════════╗
-    ║         TypeScript Portfolio          ║
-    ║     Built with vanilla HTML/CSS/JS    ║
-    ║                                       ║
-    ║  🚀 Modern Bento Grid Design          ║
-    ║  📱 Fully Responsive                  ║
-    ║  ⚡ Smooth Animations                 ║
-    ║  🎨 TypeScript Color Scheme           ║
-    ╚═══════════════════════════════════════╝
-        `);
-    </script>
+    <script src="main.js"></script>
   </body>
 </html>
