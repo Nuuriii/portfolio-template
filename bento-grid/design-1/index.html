@@ -1,444 +1,806 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio - Material Design</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>Portfolio - Bento Grid Design</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        color: #f8fafc;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 3rem;
+        animation: fadeInUp 0.6s ease-out;
+      }
+
+      .header h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        background: linear-gradient(
+          135deg,
+          #3ecf8e 0%,
+          #2dd4bf 50%,
+          #06b6d4 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1rem;
+      }
+
+      .header p {
+        font-size: 1.25rem;
+        color: #94a3b8;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .bento-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: repeat(6, 200px);
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+      }
+
+      .bento-item {
+        border-radius: 20px;
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .bento-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(62, 207, 142, 0.2);
+      }
+
+      .bento-item::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(62, 207, 142, 0.1) 0%,
+          rgba(6, 182, 212, 0.05) 100%
+        );
+        z-index: -1;
+      }
+
+      .profile {
+        grid-column: span 4;
+        grid-row: span 2;
+        background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        text-align: center;
+      }
+
+      .profile-image {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin: 0 auto 1rem;
+        background: linear-gradient(135deg, #3ecf8e 0%, #06b6d4 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        font-weight: bold;
+        color: #0f172a;
+      }
+
+      .about {
+        grid-column: span 8;
+        grid-row: span 2;
+        background: linear-gradient(135deg, #334155 0%, #475569 100%);
+      }
+
+      .about h2 {
+        color: #3ecf8e;
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+      }
+
+      .skills {
+        grid-column: span 6;
+        grid-row: span 2;
+        background: linear-gradient(135deg, #475569 0%, #64748b 100%);
+      }
+
+      .skills h3 {
+        color: #2dd4bf;
+        margin-bottom: 1rem;
+        font-size: 1.25rem;
+      }
+
+      .skill-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+
+      .skill-tag {
+        background: rgba(62, 207, 142, 0.2);
+        color: #3ecf8e;
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        font-size: 0.875rem;
+        border: 1px solid rgba(62, 207, 142, 0.3);
+      }
+
+      .projects {
+        grid-column: span 6;
+        grid-row: span 2;
+        background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+      }
+
+      .projects h3 {
+        color: #06b6d4;
+        margin-bottom: 1rem;
+        font-size: 1.25rem;
+      }
+
+      .project-item {
+        background: rgba(15, 23, 42, 0.3);
+        padding: 1rem;
+        border-radius: 10px;
+        margin-bottom: 0.5rem;
+        border-left: 3px solid #3ecf8e;
+      }
+
+      .project-item h4 {
+        color: #f8fafc;
+        margin-bottom: 0.5rem;
+      }
+
+      .project-item p {
+        color: #94a3b8;
+        font-size: 0.875rem;
+      }
+
+      .experience {
+        grid-column: span 8;
+        grid-row: span 2;
+        background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+      }
+
+      .experience h3 {
+        color: #2dd4bf;
+        margin-bottom: 1rem;
+        font-size: 1.25rem;
+      }
+
+      .exp-item {
+        background: rgba(15, 23, 42, 0.3);
+        padding: 1.5rem;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+        border-left: 3px solid #06b6d4;
+      }
+
+      .exp-item h4 {
+        color: #f8fafc;
+        margin-bottom: 0.5rem;
+      }
+
+      .exp-item .company {
+        color: #3ecf8e;
+        font-size: 0.875rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .exp-item p {
+        color: #94a3b8;
+        font-size: 0.875rem;
+      }
+
+      .contact {
+        grid-column: span 4;
+        grid-row: span 2;
+        background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+        text-align: center;
+      }
+
+      .contact h3 {
+        color: #3ecf8e;
+        margin-bottom: 1rem;
+        font-size: 1.25rem;
+      }
+
+      .contact-links {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .contact-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem;
+        background: rgba(62, 207, 142, 0.1);
+        color: #3ecf8e;
+        text-decoration: none;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(62, 207, 142, 0.3);
+      }
+
+      .contact-link:hover {
+        background: rgba(62, 207, 142, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .stats {
+        grid-column: span 12;
+        background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+        display: flex;
+        justify-content: space-around;
+        text-align: center;
+      }
+
+      .stat-item {
+        padding: 1rem;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #3ecf8e;
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-label {
+        color: #94a3b8;
+        font-size: 0.875rem;
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .bento-item {
+        animation: fadeInUp 0.6s ease-out backwards;
+      }
+
+      .bento-item:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .bento-item:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .bento-item:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .bento-item:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+      .bento-item:nth-child(5) {
+        animation-delay: 0.5s;
+      }
+      .bento-item:nth-child(6) {
+        animation-delay: 0.6s;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        .bento-grid {
+          grid-template-columns: repeat(8, 1fr);
+          grid-template-rows: repeat(8, 180px);
+        }
+
+        .profile {
+          grid-column: span 8;
+          grid-row: span 1;
+        }
+
+        .about {
+          grid-column: span 8;
+          grid-row: span 2;
+        }
+
+        .skills {
+          grid-column: span 4;
+          grid-row: span 2;
+        }
+
+        .projects {
+          grid-column: span 4;
+          grid-row: span 2;
+        }
+
+        .experience {
+          grid-column: span 8;
+          grid-row: span 2;
+        }
+
+        .contact {
+          grid-column: span 8;
+          grid-row: span 1;
+        }
+
+        .stats {
+          grid-column: span 8;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 1rem;
+        }
+
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .header p {
+          font-size: 1rem;
+        }
+
+        .bento-grid {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto;
+          gap: 1rem;
+        }
+
+        .bento-item {
+          grid-column: span 1 !important;
+          grid-row: span 1 !important;
+          min-height: 200px;
+          padding: 1.5rem;
+        }
+
+        .profile {
+          min-height: 250px;
+        }
+
+        .about {
+          min-height: 200px;
+        }
+
+        .skills {
+          min-height: 250px;
+        }
+
+        .projects {
+          min-height: 300px;
+        }
+
+        .experience {
+          min-height: 350px;
+        }
+
+        .contact {
+          min-height: 200px;
+        }
+
+        .stats {
+          min-height: 150px;
+          flex-wrap: wrap;
+          gap: 1rem;
+        }
+
+        .stat-item {
+          flex: 1;
+          min-width: 100px;
+        }
+
+        .profile-image {
+          width: 100px;
+          height: 100px;
+          font-size: 2.5rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .bento-item {
+          padding: 1rem;
+        }
+
+        .header h1 {
+          font-size: 1.75rem;
+        }
+
+        .skill-tags {
+          justify-content: center;
+        }
+
+        .contact-links {
+          gap: 0.75rem;
+        }
+
+        .stats {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+      }
+
+      /* Dark mode toggle */
+      .theme-toggle {
+        position: fixed;
+        top: 2rem;
+        right: 2rem;
+        background: rgba(62, 207, 142, 0.2);
+        border: 1px solid rgba(62, 207, 142, 0.3);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        z-index: 1000;
+      }
+
+      .theme-toggle:hover {
+        background: rgba(62, 207, 142, 0.3);
+        transform: scale(1.1);
+      }
+    </style>
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-      <div class="nav-container">
-        <div class="nav-brand">
-          <h2>Portfolio</h2>
-        </div>
-        <div class="nav-menu" id="nav-menu">
-          <a href="#home" class="nav-link">Home</a>
-          <a href="#about" class="nav-link">About</a>
-          <a href="#skills" class="nav-link">Skills</a>
-          <a href="#projects" class="nav-link">Projects</a>
-          <a href="#contact" class="nav-link">Contact</a>
-        </div>
-        <div class="nav-toggle" id="nav-toggle">
-          <span class="material-icons">menu</span>
-        </div>
-      </div>
-    </nav>
+    <div class="theme-toggle" onclick="toggleTheme()">🌙</div>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-      <div class="hero-container">
-        <div class="hero-content">
-          <div class="hero-text">
-            <h1 class="hero-title">
-              Hi, Saya <span class="text-primary">John Doe</span>
-            </h1>
-            <p class="hero-subtitle">Full Stack Developer & UI/UX Designer</p>
-            <p class="hero-description">
-              Passionate developer yang mencintai teknologi modern dan design
-              yang elegan. Berpengalaman dalam mengembangkan aplikasi web dan
-              mobile.
+    <div class="container">
+      <header class="header">
+        <h1>John Doe</h1>
+        <p>
+          Full-Stack Developer & UI/UX Designer passionate about creating
+          amazing digital experiences
+        </p>
+      </header>
+
+      <div class="bento-grid">
+        <!-- Profile Section -->
+        <div class="bento-item profile">
+          <div class="profile-image">JD</div>
+          <h2>John Doe</h2>
+          <p>Full-Stack Developer</p>
+          <p style="color: #94a3b8; font-size: 0.875rem; margin-top: 0.5rem">
+            Based in Jakarta, Indonesia
+          </p>
+        </div>
+
+        <!-- About Section -->
+        <div class="bento-item about">
+          <h2>About Me</h2>
+          <p>
+            I'm a passionate full-stack developer with 5+ years of experience
+            creating modern web applications. I love working with cutting-edge
+            technologies and turning complex problems into simple, beautiful
+            solutions.
+          </p>
+          <p style="margin-top: 1rem; color: #94a3b8">
+            I specialize in React, Node.js, and cloud technologies, with a
+            strong focus on user experience and performance optimization.
+          </p>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="bento-item skills">
+          <h3>Skills & Technologies</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">TypeScript</span>
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">Next.js</span>
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">PostgreSQL</span>
+            <span class="skill-tag">MongoDB</span>
+            <span class="skill-tag">AWS</span>
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">Figma</span>
+          </div>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="bento-item projects">
+          <h3>Featured Projects</h3>
+          <div class="project-item">
+            <h4>E-Commerce Platform</h4>
+            <p>Full-stack e-commerce solution with React and Node.js</p>
+          </div>
+          <div class="project-item">
+            <h4>Task Management App</h4>
+            <p>Real-time collaboration tool built with Next.js and Supabase</p>
+          </div>
+          <div class="project-item">
+            <h4>Analytics Dashboard</h4>
+            <p>Data visualization platform using D3.js and Python</p>
+          </div>
+        </div>
+
+        <!-- Experience Section -->
+        <div class="bento-item experience">
+          <h3>Experience</h3>
+          <div class="exp-item">
+            <h4>Senior Full-Stack Developer</h4>
+            <div class="company">TechCorp Inc. • 2021 - Present</div>
+            <p>
+              Led development of scalable web applications serving 100k+ users.
+              Implemented CI/CD pipelines and mentored junior developers.
             </p>
-            <div class="hero-buttons">
-              <button
-                class="btn btn-primary ripple"
-                onclick="scrollToSection('projects')"
-              >
-                <span class="material-icons">work</span>
-                Lihat Karya
-              </button>
-              <button
-                class="btn btn-secondary ripple"
-                onclick="scrollToSection('contact')"
-              >
-                <span class="material-icons">contact_mail</span>
-                Hubungi Saya
-              </button>
-            </div>
           </div>
-          <div class="hero-image">
-            <div class="avatar-container">
-              <img
-                src="https://placeholder-image-service.onrender.com/image/300x300?prompt=Professional headshot of a friendly software developer with warm lighting and modern background&id=7ecedd17-5a03-4306-a2bb-7b60f212a2e4&customer_id=cus_SZOmLuajy19nfC"
-                alt="Professional headshot of a friendly software developer with modern lighting"
-                class="avatar"
-              />
-            </div>
+          <div class="exp-item">
+            <h4>Frontend Developer</h4>
+            <div class="company">StartupXYZ • 2019 - 2021</div>
+            <p>
+              Built responsive web applications using React and modern CSS
+              frameworks. Collaborated with design team to implement
+              pixel-perfect UIs.
+            </p>
           </div>
         </div>
-      </div>
-      <div class="floating-elements">
-        <div class="floating-card card-1">
-          <span class="material-icons">code</span>
-        </div>
-        <div class="floating-card card-2">
-          <span class="material-icons">design_services</span>
-        </div>
-        <div class="floating-card card-3">
-          <span class="material-icons">smartphone</span>
-        </div>
-      </div>
-    </section>
 
-    <!-- About Section -->
-    <section id="about" class="section">
-      <div class="container">
-        <h2 class="section-title">Tentang Saya</h2>
-        <div class="about-content">
-          <div class="about-text">
-            <div class="card">
-              <div class="card-content">
-                <h3>Passion for Technology</h3>
-                <p>
-                  Saya adalah seorang developer yang passionate dengan teknologi
-                  terbaru. Dengan pengalaman 5+ tahun di industri IT, saya telah
-                  mengembangkan berbagai aplikasi web dan mobile yang inovatif.
-                </p>
-                <p>
-                  Keahlian saya meliputi frontend development dengan React,
-                  Vue.js, dan backend development dengan Laravel, Node.js. Saya
-                  juga memiliki pengalaman dalam UI/UX design dan mobile
-                  development.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="about-stats">
-            <div class="stat-card card ripple">
-              <div class="stat-number">50+</div>
-              <div class="stat-label">Projects</div>
-            </div>
-            <div class="stat-card card ripple">
-              <div class="stat-number">30+</div>
-              <div class="stat-label">Happy Clients</div>
-            </div>
-            <div class="stat-card card ripple">
-              <div class="stat-number">5+</div>
-              <div class="stat-label">Years Experience</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="section section-bg">
-      <div class="container">
-        <h2 class="section-title">Keahlian</h2>
-        <div class="skills-grid">
-          <div class="skill-category card">
-            <div class="skill-header">
-              <span class="material-icons">web</span>
-              <h3>Frontend Development</h3>
-            </div>
-            <div class="skills-list">
-              <div class="skill-item">
-                <span>HTML/CSS/JavaScript</span>
-                <div class="skill-progress">
-                  <div class="progress-bar" data-width="95"></div>
-                </div>
-              </div>
-              <div class="skill-item">
-                <span>React.js</span>
-                <div class="skill-progress">
-                  <div class="progress-bar" data-width="90"></div>
-                </div>
-              </div>
-              <div class="skill-item">
-                <span>Vue.js</span>
-                <div class="skill-progress">
-                  <div class="progress-bar" data-width="85"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="skill-category card">
-            <div class="skill-header">
-              <span class="material-icons">storage</span>
-              <h3>Backend Development</h3>
-            </div>
-            <div class="skills-list">
-              <div class="skill-item">
-                <span>Laravel/PHP</span>
-                <div class="skill-progress">
-                  <div class="progress-bar" data-width="92"></div>
-                </div>
-              </div>
-              <div class="skill-item">
-                <span>Node.js</span>
-                <div class="skill-progress">
-                  <div class="progress-bar" data-width="88"></div>
-                </div>
-              </div>
-              <div class="skill-item">
-                <span>MySQL/PostgreSQL</span>
-                <div class="skill-progress">
-                  <div class="progress-bar" data-width="85"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="skill-category card">
-            <div class="skill-header">
-              <span class="material-icons">design_services</span>
-              <h3>Design & Tools</h3>
-            </div>
-            <div class="skills-list">
-              <div class="skill-item">
-                <span>UI/UX Design</span>
-                <div class="skill-progress">
-                  <div class="progress-bar" data-width="87"></div>
-                </div>
-              </div>
-              <div class="skill-item">
-                <span>Figma/Adobe XD</span>
-                <div class="skill-progress">
-                  <div class="progress-bar" data-width="90"></div>
-                </div>
-              </div>
-              <div class="skill-item">
-                <span>Git/GitHub</span>
-                <div class="skill-progress">
-                  <div class="progress-bar" data-width="93"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="section">
-      <div class="container">
-        <h2 class="section-title">Portfolio Projects</h2>
-        <div class="projects-grid">
-          <div class="project-card card ripple">
-            <div class="project-image">
-              <img
-                src="https://placeholder-image-service.onrender.com/image/400x250?prompt=Modern e-commerce website interface with clean design and product showcase&id=7ecedd17-5a03-4306-a2bb-7b60f212a2e4&customer_id=cus_SZOmLuajy19nfC"
-                alt="Modern e-commerce website interface with clean design and product showcase"
-              />
-              <div class="project-overlay">
-                <button class="btn btn-primary btn-icon ripple">
-                  <span class="material-icons">launch</span>
-                </button>
-                <button class="btn btn-secondary btn-icon ripple">
-                  <span class="material-icons">code</span>
-                </button>
-              </div>
-            </div>
-            <div class="project-content">
-              <h3>E-Commerce Platform</h3>
-              <p>
-                Modern e-commerce platform dengan Laravel backend dan React
-                frontend. Fitur lengkap termasuk payment gateway dan admin
-                dashboard.
-              </p>
-              <div class="project-tags">
-                <span class="tag">Laravel</span>
-                <span class="tag">React</span>
-                <span class="tag">MySQL</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-card card ripple">
-            <div class="project-image">
-              <img
-                src="https://placeholder-image-service.onrender.com/image/400x250?prompt=Mobile task management app interface with clean material design and colorful elements&id=7ecedd17-5a03-4306-a2bb-7b60f212a2e4&customer_id=cus_SZOmLuajy19nfC"
-                alt="Mobile task management app interface with clean material design and colorful elements"
-              />
-              <div class="project-overlay">
-                <button class="btn btn-primary btn-icon ripple">
-                  <span class="material-icons">launch</span>
-                </button>
-                <button class="btn btn-secondary btn-icon ripple">
-                  <span class="material-icons">code</span>
-                </button>
-              </div>
-            </div>
-            <div class="project-content">
-              <h3>Task Management App</h3>
-              <p>
-                Aplikasi mobile untuk manajemen tugas dengan real-time sync.
-                Dibuat menggunakan React Native dengan backend Node.js.
-              </p>
-              <div class="project-tags">
-                <span class="tag">React Native</span>
-                <span class="tag">Node.js</span>
-                <span class="tag">MongoDB</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-card card ripple">
-            <div class="project-image">
-              <img
-                src="https://placeholder-image-service.onrender.com/image/400x250?prompt=Corporate dashboard interface with charts, graphs and analytics in modern design&id=7ecedd17-5a03-4306-a2bb-7b60f212a2e4&customer_id=cus_SZOmLuajy19nfC"
-                alt="Corporate dashboard interface with charts, graphs and analytics in modern design"
-              />
-              <div class="project-overlay">
-                <button class="btn btn-primary btn-icon ripple">
-                  <span class="material-icons">launch</span>
-                </button>
-                <button class="btn btn-secondary btn-icon ripple">
-                  <span class="material-icons">code</span>
-                </button>
-              </div>
-            </div>
-            <div class="project-content">
-              <h3>Analytics Dashboard</h3>
-              <p>
-                Dashboard analytics untuk perusahaan dengan visualisasi data
-                real-time. Menggunakan Vue.js dan Chart.js untuk visualisasi.
-              </p>
-              <div class="project-tags">
-                <span class="tag">Vue.js</span>
-                <span class="tag">Chart.js</span>
-                <span class="tag">PHP</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-card card ripple">
-            <div class="project-image">
-              <img
-                src="https://placeholder-image-service.onrender.com/image/400x250?prompt=Social media platform interface with posts, comments and user profiles in modern design&id=7ecedd17-5a03-4306-a2bb-7b60f212a2e4&customer_id=cus_SZOmLuajy19nfC"
-                alt="Social media platform interface with posts, comments and user profiles in modern design"
-              />
-              <div class="project-overlay">
-                <button class="btn btn-primary btn-icon ripple">
-                  <span class="material-icons">launch</span>
-                </button>
-                <button class="btn btn-secondary btn-icon ripple">
-                  <span class="material-icons">code</span>
-                </button>
-              </div>
-            </div>
-            <div class="project-content">
-              <h3>Social Platform</h3>
-              <p>
-                Platform media sosial dengan fitur real-time messaging, post
-                sharing, dan community features. Full-stack dengan Laravel dan
-                React.
-              </p>
-              <div class="project-tags">
-                <span class="tag">Laravel</span>
-                <span class="tag">React</span>
-                <span class="tag">WebSocket</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section section-bg">
-      <div class="container">
-        <h2 class="section-title">Hubungi Saya</h2>
-        <div class="contact-content">
-          <div class="contact-info">
-            <div class="contact-card card">
-              <div class="contact-icon">
-                <span class="material-icons">email</span>
-              </div>
-              <div class="contact-details">
-                <h3>Email</h3>
-                <p>john.doe@example.com</p>
-              </div>
-            </div>
-            <div class="contact-card card">
-              <div class="contact-icon">
-                <span class="material-icons">phone</span>
-              </div>
-              <div class="contact-details">
-                <h3>Phone</h3>
-                <p>+62 812-3456-7890</p>
-              </div>
-            </div>
-            <div class="contact-card card">
-              <div class="contact-icon">
-                <span class="material-icons">location_on</span>
-              </div>
-              <div class="contact-details">
-                <h3>Location</h3>
-                <p>Jakarta, Indonesia</p>
-              </div>
-            </div>
-          </div>
-          <div class="contact-form">
-            <div class="card">
-              <form id="contact-form">
-                <div class="form-group">
-                  <label for="name">Nama</label>
-                  <input type="text" id="name" name="name" required />
-                </div>
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="email" id="email" name="email" required />
-                </div>
-                <div class="form-group">
-                  <label for="subject">Subject</label>
-                  <input type="text" id="subject" name="subject" required />
-                </div>
-                <div class="form-group">
-                  <label for="message">Message</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows="5"
-                    required
-                  ></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary btn-full ripple">
-                  <span class="material-icons">send</span>
-                  Kirim Pesan
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-content">
-          <div class="footer-text">
-            <p>&copy; 2024 Portfolio. Made with ❤️ using Material Design</p>
-          </div>
-          <div class="social-links">
-            <a href="#" class="social-link ripple">
-              <span class="material-icons">facebook</span>
+        <!-- Contact Section -->
+        <div class="bento-item contact">
+          <h3>Let's Connect</h3>
+          <div class="contact-links">
+            <a href="mailto:john@example.com" class="contact-link">
+              📧 Email
             </a>
-            <a href="#" class="social-link ripple">
-              <span class="material-icons">twitter</span>
+            <a href="https://linkedin.com/in/johndoe" class="contact-link">
+              💼 LinkedIn
             </a>
-            <a href="#" class="social-link ripple">
-              <span class="material-icons">linkedin</span>
+            <a href="https://github.com/johndoe" class="contact-link">
+              🐱 GitHub
             </a>
-            <a href="#" class="social-link ripple">
-              <span class="material-icons">github</span>
+            <a href="https://twitter.com/johndoe" class="contact-link">
+              🐦 Twitter
             </a>
           </div>
         </div>
-      </div>
-    </footer>
 
-    <script src="main.js"></script>
+        <!-- Stats Section -->
+        <div class="bento-item stats">
+          <div class="stat-item">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Projects Completed</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">5+</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">20+</div>
+            <div class="stat-label">Happy Clients</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">100k+</div>
+            <div class="stat-label">Lines of Code</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Smooth scroll for internal links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
+
+      // Intersection Observer for animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      // Observe all bento items
+      document.querySelectorAll(".bento-item").forEach((item) => {
+        observer.observe(item);
+      });
+
+      // Theme toggle functionality
+      let isDarkMode = true;
+
+      function toggleTheme() {
+        const body = document.body;
+        const toggle = document.querySelector(".theme-toggle");
+
+        if (isDarkMode) {
+          // Switch to light mode
+          body.style.background =
+            "linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%)";
+          body.style.color = "#1e293b";
+          toggle.innerHTML = "☀️";
+
+          // Update bento item backgrounds for light mode
+          document.querySelectorAll(".bento-item").forEach((item) => {
+            item.style.border = "1px solid rgba(30, 41, 59, 0.1)";
+          });
+
+          isDarkMode = false;
+        } else {
+          // Switch back to dark mode
+          body.style.background =
+            "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)";
+          body.style.color = "#f8fafc";
+          toggle.innerHTML = "🌙";
+
+          // Reset bento item backgrounds for dark mode
+          document.querySelectorAll(".bento-item").forEach((item) => {
+            item.style.border = "1px solid rgba(255, 255, 255, 0.1)";
+          });
+
+          isDarkMode = true;
+        }
+      }
+
+      // Add hover effects to bento items
+      document.querySelectorAll(".bento-item").forEach((item) => {
+        item.addEventListener("mouseenter", function () {
+          this.style.transform = "translateY(-5px) scale(1.02)";
+        });
+
+        item.addEventListener("mouseleave", function () {
+          this.style.transform = "translateY(0) scale(1)";
+        });
+      });
+
+      // Typing effect for header
+      function typeWriter(element, text, speed = 100) {
+        let i = 0;
+        element.innerHTML = "";
+
+        function type() {
+          if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+          }
+        }
+
+        type();
+      }
+
+      // Initialize typing effect on page load
+      window.addEventListener("load", () => {
+        const headerText = document.querySelector(".header p");
+        const originalText = headerText.textContent;
+        typeWriter(headerText, originalText, 50);
+      });
+
+      // Add click effects to contact links
+      document.querySelectorAll(".contact-link").forEach((link) => {
+        link.addEventListener("click", function (e) {
+          // Create ripple effect
+          const ripple = document.createElement("span");
+          const rect = this.getBoundingClientRect();
+          const size = Math.max(rect.height, rect.width);
+          const x = e.clientX - rect.left - size / 2;
+          const y = e.clientY - rect.top - size / 2;
+
+          ripple.style.width = ripple.style.height = size + "px";
+          ripple.style.left = x + "px";
+          ripple.style.top = y + "px";
+          ripple.classList.add("ripple");
+
+          this.appendChild(ripple);
+
+          setTimeout(() => {
+            ripple.remove();
+          }, 600);
+        });
+      });
+
+      // Add CSS for ripple effect
+      const rippleStyle = document.createElement("style");
+      rippleStyle.textContent = `
+            .ripple {
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(62, 207, 142, 0.6);
+                transform: scale(0);
+                animation: ripple-animation 0.6s linear;
+                pointer-events: none;
+            }
+            
+            @keyframes ripple-animation {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+      document.head.appendChild(rippleStyle);
+
+      // Counter animation for stats
+      function animateCounter(element, target, duration = 2000) {
+        let start = 0;
+        const increment = target / (duration / 16);
+
+        function updateCounter() {
+          start += increment;
+          if (start < target) {
+            element.textContent =
+              Math.floor(start) + (target > 999 ? "k" : "") + "+";
+            requestAnimationFrame(updateCounter);
+          } else {
+            element.textContent = target + (target > 999 ? "k" : "") + "+";
+          }
+        }
+
+        updateCounter();
+      }
+
+      // Animate counters when stats section is visible
+      const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const statNumbers = entry.target.querySelectorAll(".stat-number");
+            statNumbers.forEach((num, index) => {
+              const targets = [50, 5, 20, 100];
+              setTimeout(() => {
+                animateCounter(num, targets[index]);
+              }, index * 200);
+            });
+            statsObserver.unobserve(entry.target);
+          }
+        });
+      });
+
+      const statsSection = document.querySelector(".stats");
+      if (statsSection) {
+        statsObserver.observe(statsSection);
+      }
+    </script>
   </body>
 </html>
