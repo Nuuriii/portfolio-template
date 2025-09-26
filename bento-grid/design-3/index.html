@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>John Doe - Portfolio</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
+        <div class="nav-brand">
+          <h2>Portfolio</h2>
+        </div>
+        <ul class="nav-menu" id="nav-menu">
+          <li class="nav-item">
+            <a href="#home" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="#about" class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="#skills" class="nav-link">Skills</a>
+          </li>
+          <li class="nav-item">
+            <a href="#projects" class="nav-link">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a href="#contact" class="nav-link">Contact</a>
+          </li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="hero-title">
+            Hi, I'm <span class="accent-text">John Doe</span>
+          </h1>
+          <h2 class="hero-subtitle">Full Stack Developer</h2>
+          <p class="hero-description">
+            Passionate about creating innovative digital solutions with modern
+            technologies. I love turning complex problems into simple, beautiful
+            designs.
+          </p>
+          <div class="hero-buttons">
+            <button
+              class="btn btn-primary ripple"
+              onclick="scrollToSection('projects')"
+            >
+              <span class="material-icons">work</span>
+              View My Work
+            </button>
+            <button
+              class="btn btn-secondary ripple"
+              onclick="scrollToSection('contact')"
+            >
+              <span class="material-icons">email</span>
+              Get In Touch
+            </button>
+          </div>
+        </div>
+        <div class="hero-image">
+          <div class="profile-card">
+            <div class="profile-avatar">
+              <span class="material-icons">person</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <span class="material-icons">keyboard_arrow_down</span>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+      <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+          <div class="about-text">
+            <div class="card">
+              <div class="card-content">
+                <h3>Hello! I'm John Doe</h3>
+                <p>
+                  I'm a passionate Full Stack Developer with over 3 years of
+                  experience creating digital experiences that make a
+                  difference. I specialize in modern web technologies and love
+                  bringing ideas to life through code.
+                </p>
+                <p>
+                  My journey in tech started with a curiosity for how things
+                  work, and it has evolved into a career where I get to build
+                  solutions that impact real users every day.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="about-stats">
+            <div class="stat-card">
+              <div class="stat-icon">
+                <span class="material-icons">code</span>
+              </div>
+              <div class="stat-content">
+                <h3>50+</h3>
+                <p>Projects Completed</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">
+                <span class="material-icons">groups</span>
+              </div>
+              <div class="stat-content">
+                <h3>30+</h3>
+                <p>Happy Clients</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">
+                <span class="material-icons">schedule</span>
+              </div>
+              <div class="stat-content">
+                <h3>3+</h3>
+                <p>Years Experience</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title">Skills & Technologies</h2>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3>Frontend</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">HTML5</span>
+              <span class="skill-tag">CSS3</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">React</span>
+              <span class="skill-tag">Vue.js</span>
+              <span class="skill-tag">TypeScript</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3>Backend</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Node.js</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">Express</span>
+              <span class="skill-tag">Django</span>
+              <span class="skill-tag">MongoDB</span>
+              <span class="skill-tag">PostgreSQL</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3>Tools & Others</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Git</span>
+              <span class="skill-tag">Docker</span>
+              <span class="skill-tag">AWS</span>
+              <span class="skill-tag">Figma</span>
+              <span class="skill-tag">Photoshop</span>
+              <span class="skill-tag">Linux</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+          <div class="project-card">
+            <div class="project-image">
+              <div class="project-placeholder">
+                <span class="material-icons">web</span>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3>E-Commerce Platform</h3>
+              <p>
+                Modern e-commerce solution built with React and Node.js
+                featuring real-time inventory, payment integration, and admin
+                dashboard.
+              </p>
+              <div class="project-tags">
+                <span class="tag">React</span>
+                <span class="tag">Node.js</span>
+                <span class="tag">MongoDB</span>
+              </div>
+              <div class="project-actions">
+                <button class="btn-icon ripple" title="View Live">
+                  <span class="material-icons">launch</span>
+                </button>
+                <button class="btn-icon ripple" title="View Code">
+                  <span class="material-icons">code</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-image">
+              <div class="project-placeholder">
+                <span class="material-icons">dashboard</span>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3>Analytics Dashboard</h3>
+              <p>
+                Comprehensive analytics dashboard with real-time data
+                visualization, custom charts, and advanced filtering
+                capabilities.
+              </p>
+              <div class="project-tags">
+                <span class="tag">Vue.js</span>
+                <span class="tag">D3.js</span>
+                <span class="tag">Python</span>
+              </div>
+              <div class="project-actions">
+                <button class="btn-icon ripple" title="View Live">
+                  <span class="material-icons">launch</span>
+                </button>
+                <button class="btn-icon ripple" title="View Code">
+                  <span class="material-icons">code</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-image">
+              <div class="project-placeholder">
+                <span class="material-icons">phone_android</span>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3>Mobile Task Manager</h3>
+              <p>
+                Cross-platform mobile app for task management with offline sync,
+                push notifications, and collaborative features.
+              </p>
+              <div class="project-tags">
+                <span class="tag">React Native</span>
+                <span class="tag">Firebase</span>
+                <span class="tag">Redux</span>
+              </div>
+              <div class="project-actions">
+                <button class="btn-icon ripple" title="View Live">
+                  <span class="material-icons">launch</span>
+                </button>
+                <button class="btn-icon ripple" title="View Code">
+                  <span class="material-icons">code</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-content">
+          <div class="contact-info">
+            <h3>Let's work together!</h3>
+            <p>
+              I'm always interested in new opportunities and exciting projects.
+              Feel free to reach out if you'd like to collaborate!
+            </p>
+
+            <div class="contact-item">
+              <span class="material-icons">email</span>
+              <span>john.doe@example.com</span>
+            </div>
+            <div class="contact-item">
+              <span class="material-icons">phone</span>
+              <span>+62 812 3456 7890</span>
+            </div>
+            <div class="contact-item">
+              <span class="material-icons">location_on</span>
+              <span>Jakarta, Indonesia</span>
+            </div>
+
+            <div class="social-links">
+              <a href="#" class="social-link ripple">
+                <span class="material-icons">link</span>
+              </a>
+              <a href="#" class="social-link ripple">
+                <span class="material-icons">code</span>
+              </a>
+              <a href="#" class="social-link ripple">
+                <span class="material-icons">business_center</span>
+              </a>
+            </div>
+          </div>
+
+          <form class="contact-form" id="contact-form">
+            <div class="form-group">
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="form-input"
+                required
+              />
+              <label for="name" class="form-label">Name</label>
+            </div>
+
+            <div class="form-group">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-input"
+                required
+              />
+              <label for="email" class="form-label">Email</label>
+            </div>
+
+            <div class="form-group">
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                class="form-input"
+                required
+              />
+              <label for="subject" class="form-label">Subject</label>
+            </div>
+
+            <div class="form-group">
+              <textarea
+                id="message"
+                name="message"
+                class="form-input"
+                rows="5"
+                required
+              ></textarea>
+              <label for="message" class="form-label">Message</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary ripple">
+              <span class="material-icons">send</span>
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <p>&copy; 2024 John Doe. All rights reserved.</p>
+          <p>Built with ❤️ using Material Design</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="main.js"></script>
+  </body>
+</html>
