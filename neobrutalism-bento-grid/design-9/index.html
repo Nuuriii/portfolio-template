@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alex Johnson - Creative Designer</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+        background: linear-gradient(
+          135deg,
+          #ff6b9d 0%,
+          #c44569 50%,
+          #f8b500 100%
+        );
+        min-height: 100vh;
+        padding: 20px;
+        color: #1a1a1a;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 16px;
+        grid-auto-rows: minmax(120px, auto);
+      }
+
+      .card {
+        background: white;
+        border-radius: 24px;
+        padding: 24px;
+        box-shadow: 8px 8px 0px #000;
+        border: 4px solid #000;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .card:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 12px 12px 0px #000;
+      }
+
+      .card-header {
+        background: #ff6b9d;
+        border-radius: 16px;
+        padding: 16px;
+        margin: -24px -24px 16px -24px;
+        border: 3px solid #000;
+      }
+
+      .card-purple {
+        background: #a29bfe;
+      }
+      .card-yellow {
+        background: #fdcb6e;
+      }
+      .card-mint {
+        background: #55efc4;
+      }
+      .card-coral {
+        background: #fd79a8;
+      }
+      .card-blue {
+        background: #74b9ff;
+      }
+      .card-orange {
+        background: #e17055;
+      }
+
+      /* Grid Layout */
+      .profile-main {
+        grid-column: span 4;
+        grid-row: span 3;
+        text-align: center;
+      }
+
+      .about-text {
+        grid-column: span 4;
+        grid-row: span 2;
+      }
+
+      .skills {
+        grid-column: span 4;
+        grid-row: span 2;
+      }
+
+      .project-1 {
+        grid-column: span 3;
+        grid-row: span 2;
+      }
+
+      .project-2 {
+        grid-column: span 3;
+        grid-row: span 2;
+      }
+
+      .project-3 {
+        grid-column: span 3;
+        grid-row: span 2;
+      }
+
+      .contact-info {
+        grid-column: span 3;
+        grid-row: span 2;
+      }
+
+      .social-links {
+        grid-column: span 6;
+        grid-row: span 1;
+      }
+
+      .experience {
+        grid-column: span 6;
+        grid-row: span 2;
+      }
+
+      /* Profile Styles */
+      .profile-image {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 6px solid #000;
+        margin: 0 auto 20px;
+        background: linear-gradient(45deg, #ff6b9d, #c44569);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
+        color: white;
+        font-weight: bold;
+      }
+
+      .profile-name {
+        font-size: 28px;
+        font-weight: 900;
+        margin-bottom: 8px;
+        color: #1a1a1a;
+      }
+
+      .profile-title {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 16px;
+      }
+
+      .status-badge {
+        background: #55efc4;
+        color: #000;
+        padding: 8px 16px;
+        border-radius: 20px;
+        border: 3px solid #000;
+        font-weight: 700;
+        font-size: 14px;
+        display: inline-block;
+      }
+
+      /* Typography */
+      h2 {
+        font-size: 24px;
+        font-weight: 900;
+        margin-bottom: 16px;
+        color: #1a1a1a;
+      }
+
+      h3 {
+        font-size: 20px;
+        font-weight: 800;
+        margin-bottom: 12px;
+        color: #1a1a1a;
+      }
+
+      p {
+        line-height: 1.6;
+        color: #333;
+        margin-bottom: 12px;
+      }
+
+      /* Skills */
+      .skill-tag {
+        background: #000;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 14px;
+        display: inline-block;
+        margin: 4px 8px 4px 0;
+      }
+
+      /* Project Cards */
+      .project-preview {
+        width: 100%;
+        height: 120px;
+        background: linear-gradient(45deg, #74b9ff, #0984e3);
+        border-radius: 16px;
+        border: 3px solid #000;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        color: white;
+        font-weight: bold;
+      }
+
+      .project-title {
+        font-size: 18px;
+        font-weight: 800;
+        margin-bottom: 8px;
+      }
+
+      .project-desc {
+        font-size: 14px;
+        color: #666;
+      }
+
+      /* Social Links */
+      .social-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+      }
+
+      .social-btn {
+        background: #000;
+        color: white;
+        padding: 16px;
+        border-radius: 16px;
+        text-decoration: none;
+        text-align: center;
+        font-weight: 700;
+        transition: transform 0.2s ease;
+        border: 3px solid #000;
+      }
+
+      .social-btn:hover {
+        transform: scale(1.05);
+      }
+
+      .social-btn.dribbble {
+        background: #ea4c89;
+      }
+      .social-btn.github {
+        background: #333;
+      }
+      .social-btn.linkedin {
+        background: #0077b5;
+      }
+      .social-btn.twitter {
+        background: #1da1f2;
+      }
+
+      /* Experience */
+      .experience-item {
+        margin-bottom: 20px;
+        padding: 16px;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 16px;
+        border: 2px solid #000;
+      }
+
+      .exp-company {
+        font-weight: 800;
+        font-size: 16px;
+        color: #1a1a1a;
+      }
+
+      .exp-role {
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 8px;
+      }
+
+      .exp-duration {
+        background: #fdcb6e;
+        color: #000;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 700;
+        display: inline-block;
+      }
+
+      /* Contact Info */
+      .contact-item {
+        margin-bottom: 16px;
+        padding: 12px;
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 12px;
+        border: 2px solid #000;
+      }
+
+      .contact-label {
+        font-weight: 700;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 4px;
+        color: #666;
+      }
+
+      .contact-value {
+        font-weight: 600;
+        color: #1a1a1a;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1200px) {
+        .container {
+          grid-template-columns: repeat(8, 1fr);
+        }
+
+        .profile-main {
+          grid-column: span 4;
+        }
+        .about-text {
+          grid-column: span 4;
+        }
+        .skills {
+          grid-column: span 4;
+        }
+        .contact-info {
+          grid-column: span 4;
+        }
+        .project-1,
+        .project-2,
+        .project-3 {
+          grid-column: span 4;
+        }
+        .social-links {
+          grid-column: span 8;
+        }
+        .experience {
+          grid-column: span 8;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          grid-template-columns: repeat(4, 1fr);
+          gap: 12px;
+        }
+
+        body {
+          padding: 12px;
+        }
+        .card {
+          padding: 16px;
+        }
+
+        .profile-main,
+        .about-text,
+        .skills,
+        .contact-info,
+        .project-1,
+        .project-2,
+        .project-3,
+        .social-links,
+        .experience {
+          grid-column: span 4;
+        }
+
+        .social-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .profile-name {
+          font-size: 24px;
+        }
+        h2 {
+          font-size: 20px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          grid-template-columns: 1fr;
+        }
+
+        .profile-main,
+        .about-text,
+        .skills,
+        .contact-info,
+        .project-1,
+        .project-2,
+        .project-3,
+        .social-links,
+        .experience {
+          grid-column: span 1;
+        }
+      }
+
+      /* Interactive Elements */
+      .card.clickable {
+        cursor: pointer;
+      }
+
+      .card.clickable:active {
+        transform: translate(2px, 2px);
+        box-shadow: 4px 4px 0px #000;
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 12px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #000;
+        border-radius: 10px;
+        border: 2px solid #f1f1f1;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Profile Main Card -->
+      <div class="card profile-main">
+        <div class="profile-image">AJ</div>
+        <h1 class="profile-name">Alex Johnson</h1>
+        <p class="profile-title">Creative UI/UX Designer</p>
+        <div class="status-badge">🟢 Available for work</div>
+      </div>
+
+      <!-- About Text -->
+      <div class="card about-text">
+        <h2>About Me</h2>
+        <p>
+          I'm a passionate creative designer with 5+ years of experience
+          crafting beautiful digital experiences. I specialize in modern web
+          design, mobile apps, and brand identity.
+        </p>
+        <p>
+          Currently based in Jakarta, I love experimenting with bold colors and
+          innovative layouts that push creative boundaries.
+        </p>
+      </div>
+
+      <!-- Skills -->
+      <div class="card skills card-purple">
+        <div class="card-header">
+          <h2 style="color: white">Skills & Tools</h2>
+        </div>
+        <div class="skill-tag">Figma</div>
+        <div class="skill-tag">Adobe Creative Suite</div>
+        <div class="skill-tag">HTML/CSS</div>
+        <div class="skill-tag">JavaScript</div>
+        <div class="skill-tag">React</div>
+        <div class="skill-tag">UI Design</div>
+        <div class="skill-tag">UX Research</div>
+        <div class="skill-tag">Prototyping</div>
+        <div class="skill-tag">Branding</div>
+      </div>
+
+      <!-- Project 1 -->
+      <div
+        class="card project-1 card-yellow clickable"
+        onclick="openProject('project1')"
+      >
+        <div class="project-preview">🎨</div>
+        <h3 class="project-title">Brand Identity Design</h3>
+        <p class="project-desc">
+          Complete rebrand for a tech startup including logo, colors, and
+          guidelines.
+        </p>
+      </div>
+
+      <!-- Project 2 -->
+      <div
+        class="card project-2 card-mint clickable"
+        onclick="openProject('project2')"
+      >
+        <div class="project-preview">📱</div>
+        <h3 class="project-title">Mobile App UI</h3>
+        <p class="project-desc">
+          Modern e-commerce app with intuitive navigation and smooth
+          interactions.
+        </p>
+      </div>
+
+      <!-- Project 3 -->
+      <div
+        class="card project-3 card-coral clickable"
+        onclick="openProject('project3')"
+      >
+        <div class="project-preview">🌐</div>
+        <h3 class="project-title">Website Redesign</h3>
+        <p class="project-desc">
+          Complete website overhaul focusing on user experience and conversion.
+        </p>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="card contact-info card-blue">
+        <div class="card-header">
+          <h2 style="color: white">Let's Connect</h2>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">Email</div>
+          <div class="contact-value">alex@example.com</div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">Location</div>
+          <div class="contact-value">Jakarta, Indonesia</div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">Phone</div>
+          <div class="contact-value">+62 812 3456 7890</div>
+        </div>
+      </div>
+
+      <!-- Social Links -->
+      <div class="card social-links">
+        <h2>Follow Me</h2>
+        <div class="social-grid">
+          <a href="#" class="social-btn dribbble">Dribbble</a>
+          <a href="#" class="social-btn github">GitHub</a>
+          <a href="#" class="social-btn linkedin">LinkedIn</a>
+          <a href="#" class="social-btn twitter">Twitter</a>
+        </div>
+      </div>
+
+      <!-- Experience -->
+      <div class="card experience card-orange">
+        <div class="card-header">
+          <h2 style="color: white">Experience</h2>
+        </div>
+        <div class="experience-item">
+          <div class="exp-company">Creative Agency Co.</div>
+          <div class="exp-role">Senior UI/UX Designer</div>
+          <div class="exp-duration">2021 - Present</div>
+        </div>
+        <div class="experience-item">
+          <div class="exp-company">Tech Startup Inc.</div>
+          <div class="exp-role">Product Designer</div>
+          <div class="exp-duration">2019 - 2021</div>
+        </div>
+        <div class="experience-item">
+          <div class="exp-company">Design Studio</div>
+          <div class="exp-role">Junior Designer</div>
+          <div class="exp-duration">2018 - 2019</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Simple JavaScript for interactions
+      function openProject(projectId) {
+        alert(
+          `Opening ${projectId} - In a real implementation, this would open a modal or navigate to project details.`
+        );
+      }
+
+      // Add some interactive hover effects
+      document.addEventListener("DOMContentLoaded", function () {
+        const cards = document.querySelectorAll(".card");
+
+        cards.forEach((card) => {
+          card.addEventListener("mouseenter", function () {
+            this.style.transform = "translate(-2px, -2px)";
+          });
+
+          card.addEventListener("mouseleave", function () {
+            this.style.transform = "translate(0, 0)";
+          });
+        });
+
+        // Simple click feedback for clickable cards
+        const clickableCards = document.querySelectorAll(".card.clickable");
+        clickableCards.forEach((card) => {
+          card.addEventListener("mousedown", function () {
+            this.style.transform = "translate(2px, 2px)";
+            this.style.boxShadow = "4px 4px 0px #000";
+          });
+
+          card.addEventListener("mouseup", function () {
+            this.style.transform = "translate(-2px, -2px)";
+            this.style.boxShadow = "12px 12px 0px #000";
+          });
+        });
+      });
+
+      // Responsive grid adjustment
+      function adjustGrid() {
+        const container = document.querySelector(".container");
+        const width = window.innerWidth;
+
+        if (width <= 480) {
+          container.style.gridTemplateColumns = "1fr";
+        } else if (width <= 768) {
+          container.style.gridTemplateColumns = "repeat(4, 1fr)";
+        } else if (width <= 1200) {
+          container.style.gridTemplateColumns = "repeat(8, 1fr)";
+        } else {
+          container.style.gridTemplateColumns = "repeat(12, 1fr)";
+        }
+      }
+
+      window.addEventListener("resize", adjustGrid);
+      adjustGrid(); // Call on load
+    </script>
+  </body>
+</html>
