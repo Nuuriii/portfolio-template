@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio - Neobrutalism Bento</title>
+    <style>
+      :root {
+        --primary-green: #00ff88;
+        --secondary-green: #00cc66;
+        --dark-green: #00aa55;
+        --light-green: #e8fff4;
+        --accent-pink: #ff6b9d;
+        --accent-yellow: #ffd93d;
+        --accent-blue: #6bcf7f;
+        --black: #1a1a1a;
+        --white: #ffffff;
+        --gray: #f0f0f0;
+        --shadow: #000000;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+        background: linear-gradient(
+          135deg,
+          var(--light-green) 0%,
+          #ffeef8 50%,
+          #e8f4ff 100%
+        );
+        min-height: 100vh;
+        padding: 20px;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      /* Bento Grid Layout */
+      .bento-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-auto-rows: minmax(100px, auto);
+        gap: 20px;
+        margin-bottom: 40px;
+      }
+
+      /* Neobrutalism Card Styles */
+      .bento-card {
+        background: var(--white);
+        border: 4px solid var(--black);
+        border-radius: 20px;
+        padding: 30px;
+        position: relative;
+        transition: transform 0.2s ease;
+        box-shadow: 8px 8px 0 var(--shadow);
+      }
+
+      .bento-card:hover {
+        transform: translate(-4px, -4px);
+        box-shadow: 12px 12px 0 var(--shadow);
+      }
+
+      /* Profile Card */
+      .profile-card {
+        grid-column: span 12;
+        background: var(--primary-green);
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        flex-wrap: wrap;
+      }
+
+      .profile-image {
+        width: 150px;
+        height: 150px;
+        background: var(--white);
+        border: 4px solid var(--black);
+        border-radius: 50%;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+
+      .profile-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .profile-info h1 {
+        font-size: 3rem;
+        font-weight: 900;
+        color: var(--black);
+        margin-bottom: 10px;
+        text-shadow: 3px 3px 0 var(--white);
+      }
+
+      .profile-info .title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--black);
+        background: var(--accent-yellow);
+        display: inline-block;
+        padding: 5px 15px;
+        border: 3px solid var(--black);
+        border-radius: 10px;
+        transform: rotate(-2deg);
+      }
+
+      /* About Card */
+      .about-card {
+        grid-column: span 7;
+        background: var(--accent-pink);
+      }
+
+      .about-card h2 {
+        font-size: 2rem;
+        font-weight: 900;
+        color: var(--black);
+        margin-bottom: 20px;
+        display: inline-block;
+        background: var(--white);
+        padding: 5px 15px;
+        border: 3px solid var(--black);
+        border-radius: 10px;
+      }
+
+      .about-card p {
+        font-size: 1.1rem;
+        color: var(--black);
+        font-weight: 600;
+      }
+
+      /* Skills Card */
+      .skills-card {
+        grid-column: span 5;
+        background: var(--accent-yellow);
+      }
+
+      .skills-card h2 {
+        font-size: 1.8rem;
+        font-weight: 900;
+        color: var(--black);
+        margin-bottom: 20px;
+      }
+
+      .skill-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .skill-tag {
+        background: var(--white);
+        border: 3px solid var(--black);
+        border-radius: 50px;
+        padding: 8px 20px;
+        font-weight: 700;
+        color: var(--black);
+        font-size: 0.9rem;
+        transform: rotate(-2deg);
+      }
+
+      .skill-tag:nth-child(even) {
+        transform: rotate(2deg);
+        background: var(--primary-green);
+      }
+
+      /* Projects Grid */
+      .projects-section {
+        grid-column: span 12;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+      }
+
+      .projects-section h2 {
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: var(--black);
+        margin-bottom: 30px;
+        text-align: center;
+        background: var(--primary-green);
+        display: inline-block;
+        padding: 10px 30px;
+        border: 4px solid var(--black);
+        border-radius: 15px;
+        box-shadow: 6px 6px 0 var(--shadow);
+        transform: rotate(-1deg);
+        width: 100%;
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+      }
+
+      .project-card {
+        background: var(--white);
+        border: 4px solid var(--black);
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 6px 6px 0 var(--shadow);
+        transition: all 0.2s ease;
+      }
+
+      .project-card:hover {
+        transform: translate(-3px, -3px);
+        box-shadow: 9px 9px 0 var(--shadow);
+      }
+
+      .project-card:nth-child(odd) {
+        background: var(--light-green);
+      }
+
+      .project-card:nth-child(even) {
+        background: #ffe8f3;
+      }
+
+      .project-card h3 {
+        font-size: 1.5rem;
+        font-weight: 900;
+        color: var(--black);
+        margin-bottom: 15px;
+      }
+
+      .project-card p {
+        color: var(--black);
+        font-weight: 500;
+        margin-bottom: 20px;
+      }
+
+      .project-link {
+        display: inline-block;
+        background: var(--black);
+        color: var(--white);
+        padding: 10px 20px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 700;
+        transition: all 0.2s ease;
+      }
+
+      .project-link:hover {
+        background: var(--primary-green);
+        color: var(--black);
+        transform: rotate(-2deg) scale(1.05);
+      }
+
+      /* Contact Card */
+      .contact-card {
+        grid-column: span 6;
+        background: var(--accent-blue);
+      }
+
+      .contact-card h2 {
+        font-size: 2rem;
+        font-weight: 900;
+        color: var(--black);
+        margin-bottom: 20px;
+      }
+
+      .contact-links {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .contact-link {
+        background: var(--white);
+        border: 3px solid var(--black);
+        border-radius: 10px;
+        padding: 12px 20px;
+        text-decoration: none;
+        color: var(--black);
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.2s ease;
+      }
+
+      .contact-link:hover {
+        background: var(--primary-green);
+        transform: translateX(5px);
+      }
+
+      /* Experience Card */
+      .experience-card {
+        grid-column: span 6;
+        background: #ffd4e5;
+      }
+
+      .experience-card h2 {
+        font-size: 2rem;
+        font-weight: 900;
+        color: var(--black);
+        margin-bottom: 20px;
+      }
+
+      .experience-item {
+        background: var(--white);
+        border: 3px solid var(--black);
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 15px;
+      }
+
+      .experience-item h3 {
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--black);
+        margin-bottom: 5px;
+      }
+
+      .experience-item .company {
+        color: var(--dark-green);
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+
+      .experience-item .period {
+        background: var(--accent-yellow);
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 5px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        border: 2px solid var(--black);
+      }
+
+      /* Social Card */
+      .social-card {
+        grid-column: span 12;
+        background: var(--primary-green);
+        text-align: center;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .social-link {
+        background: var(--white);
+        border: 3px solid var(--black);
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: var(--black);
+        font-weight: 900;
+        font-size: 1.5rem;
+        transition: all 0.2s ease;
+      }
+
+      .social-link:hover {
+        background: var(--accent-yellow);
+        transform: rotate(15deg) scale(1.1);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .bento-grid {
+          grid-template-columns: 1fr;
+          gap: 15px;
+        }
+
+        .profile-card,
+        .about-card,
+        .skills-card,
+        .projects-section,
+        .contact-card,
+        .experience-card,
+        .social-card {
+          grid-column: span 1;
+        }
+
+        .profile-card {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .profile-info h1 {
+          font-size: 2rem;
+        }
+
+        .profile-info .title {
+          font-size: 1.2rem;
+        }
+
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .bento-card {
+          padding: 20px;
+          box-shadow: 6px 6px 0 var(--shadow);
+        }
+
+        .bento-card:hover {
+          transform: translate(-2px, -2px);
+          box-shadow: 8px 8px 0 var(--shadow);
+        }
+
+        body {
+          padding: 10px;
+        }
+
+        .projects-section h2 {
+          font-size: 1.8rem;
+          transform: rotate(0deg);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .profile-info h1 {
+          font-size: 1.5rem;
+        }
+
+        .profile-image {
+          width: 100px;
+          height: 100px;
+        }
+
+        .about-card h2,
+        .skills-card h2,
+        .contact-card h2,
+        .experience-card h2 {
+          font-size: 1.5rem;
+        }
+
+        .skill-tag {
+          font-size: 0.8rem;
+          padding: 6px 15px;
+        }
+
+        .social-link {
+          width: 50px;
+          height: 50px;
+          font-size: 1.2rem;
+        }
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 12px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--gray);
+        border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--primary-green);
+        border-radius: 10px;
+        border: 2px solid var(--black);
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--dark-green);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="bento-grid">
+        <!-- Profile Card -->
+        <div class="bento-card profile-card">
+          <div class="profile-image">
+            <img
+              src="https://placeholder-image-service.onrender.com/image/150x150?prompt=professional%20headshot%20portrait%20of%20young%20creative%20developer%20smiling%20with%20modern%20studio%20lighting&id=7ecedd17-5a03-4306-a2bb-7b60f212a2e4&customer_id=cus_SZOmLuajy19nfC"
+              alt="Profile photo of a professional developer"
+            />
+          </div>
+          <div class="profile-info">
+            <h1>John Doe</h1>
+            <div class="title">Creative Developer</div>
+          </div>
+        </div>
+
+        <!-- About Card -->
+        <div class="bento-card about-card">
+          <h2>About Me</h2>
+          <p>
+            Passionate full-stack developer with 5+ years of experience creating
+            beautiful, functional web applications. I love turning complex
+            problems into simple, beautiful designs. When I'm not coding, you'll
+            find me exploring new technologies or contributing to open-source
+            projects.
+          </p>
+        </div>
+
+        <!-- Skills Card -->
+        <div class="bento-card skills-card">
+          <h2>Skills</h2>
+          <div class="skill-tags">
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">TypeScript</span>
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">UI/UX</span>
+            <span class="skill-tag">MongoDB</span>
+          </div>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="projects-section">
+          <h2>Featured Projects</h2>
+          <div class="projects-grid">
+            <div class="project-card">
+              <h3>E-Commerce Platform</h3>
+              <p>
+                Modern online shopping experience with React and Node.js,
+                featuring real-time inventory and secure payments.
+              </p>
+              <a href="#" class="project-link">View Project →</a>
+            </div>
+            <div class="project-card">
+              <h3>Task Manager App</h3>
+              <p>
+                Collaborative project management tool with drag-and-drop
+                interface and team collaboration features.
+              </p>
+              <a href="#" class="project-link">View Project →</a>
+            </div>
+            <div class="project-card">
+              <h3>Weather Dashboard</h3>
+              <p>
+                Beautiful weather application with detailed forecasts,
+                interactive maps, and location-based alerts.
+              </p>
+              <a href="#" class="project-link">View Project →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Card -->
+        <div class="bento-card contact-card">
+          <h2>Get In Touch</h2>
+          <div class="contact-links">
+            <a href="mailto:john@example.com" class="contact-link">
+              <span>✉</span> john@example.com
+            </a>
+            <a href="tel:+1234567890" class="contact-link">
+              <span>☎</span> +123 456 7890
+            </a>
+            <a href="#" class="contact-link">
+              <span>📍</span> San Francisco, CA
+            </a>
+          </div>
+        </div>
+
+        <!-- Experience Card -->
+        <div class="bento-card experience-card">
+          <h2>Experience</h2>
+          <div class="experience-item">
+            <h3>Senior Developer</h3>
+            <div class="company">Tech Corp Inc.</div>
+            <span class="period">2021 - Present</span>
+          </div>
+          <div class="experience-item">
+            <h3>Full Stack Developer</h3>
+            <div class="company">StartUp Labs</div>
+            <span class="period">2019 - 2021</span>
+          </div>
+        </div>
+
+        <!-- Social Card -->
+        <div class="bento-card social-card">
+          <div class="social-links">
+            <a href="#" class="social-link" title="GitHub">GH</a>
+            <a href="#" class="social-link" title="LinkedIn">LI</a>
+            <a href="#" class="social-link" title="Twitter">TW</a>
+            <a href="#" class="social-link" title="Instagram">IG</a>
+            <a href="#" class="social-link" title="Dribbble">DR</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Theme Toggle (optional enhancement)
+      document.addEventListener("DOMContentLoaded", function () {
+        // Add click interactivity to project cards
+        const projectCards = document.querySelectorAll(".project-card");
+        projectCards.forEach((card) => {
+          card.addEventListener("click", function (e) {
+            if (!e.target.classList.contains("project-link")) {
+              const link = this.querySelector(".project-link");
+              if (link) {
+                link.click();
+              }
+            }
+          });
+        });
+
+        // Add hover effect for skill tags
+        const skillTags = document.querySelectorAll(".skill-tag");
+        skillTags.forEach((tag) => {
+          tag.addEventListener("mouseenter", function () {
+            this.style.transform = "rotate(0deg) scale(1.1)";
+          });
+          tag.addEventListener("mouseleave", function () {
+            const index = Array.from(skillTags).indexOf(this);
+            this.style.transform =
+              index % 2 === 0 ? "rotate(-2deg)" : "rotate(2deg)";
+          });
+        });
+
+        // Dynamic year for copyright (if needed)
+        const currentYear = new Date().getFullYear();
+
+        // Smooth color transitions on hover
+        const bentoCards = document.querySelectorAll(".bento-card");
+        bentoCards.forEach((card) => {
+          card.addEventListener("mouseenter", function () {
+            this.style.transition = "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)";
+          });
+        });
+
+        // Mobile menu toggle (if needed for future enhancements)
+        let touchStartX = null;
+        let touchEndX = null;
+
+        document.addEventListener("touchstart", function (e) {
+          touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener("touchend", function (e) {
+          touchEndX = e.changedTouches[0].screenX;
+          handleSwipe();
+        });
+
+        function handleSwipe() {
+          if (touchEndX < touchStartX - 50) {
+            // Swipe left - can be used for navigation
+          }
+          if (touchEndX > touchStartX + 50) {
+            // Swipe right - can be used for navigation
+          }
+        }
+
+        // Form validation for contact (if form is added)
+        function validateEmail(email) {
+          const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          return re.test(email);
+        }
+
+        // Clipboard functionality for contact info
+        const contactLinks = document.querySelectorAll(".contact-link");
+        contactLinks.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            if (
+              this.href.startsWith("mailto:") ||
+              this.href.startsWith("tel:")
+            ) {
+              return; // Allow default behavior for email and phone
+            }
+            e.preventDefault();
+            // Add custom behavior here if needed
+          });
+        });
+
+        // Lazy loading for images (performance optimization)
+        if ("IntersectionObserver" in window) {
+          const imageObserver = new IntersectionObserver(
+            (entries, observer) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  const img = entry.target;
+                  img.src = img.dataset.src || img.src;
+                  observer.unobserve(img);
+                }
+              });
+            }
+          );
+
+          document.querySelectorAll("img").forEach((img) => {
+            imageObserver.observe(img);
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
